@@ -1,0 +1,3 @@
+peewee
+pymysql
+beautifulsoup4
