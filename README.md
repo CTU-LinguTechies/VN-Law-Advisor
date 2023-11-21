@@ -10,16 +10,16 @@ Dự án được thực hiện trong cuộc thi [Phần Mềm Nguồn Mở-Olym
 
 Project tập trung vào các chức năng chính như sau:
 
-- Trả lời các câu hỏi về pháp luật của người dùng.
-- Hệ thống tra cứu các pháp điển, văn bản quy phạm pháp luật (chỉ mục, liên kết các điều mục).
-- Tóm tắt văn bản, hỗ trợ người dùng trong lúc tra cứu
-- Mô hình gợi ý các điều mục có liên quan trong pháp điển, nhận feedback từ người dùng để cải thiện gợi ý
+-   Trả lời các câu hỏi về pháp luật của người dùng.
+-   Hệ thống tra cứu các pháp điển, văn bản quy phạm pháp luật (chỉ mục, liên kết các điều mục).
+-   Tóm tắt văn bản, hỗ trợ người dùng trong lúc tra cứu
+-   Mô hình gợi ý các điều mục có liên quan trong pháp điển, nhận feedback từ người dùng để cải thiện gợi ý
 
 ## Getting Started - Hướng Dẫn
 
-- [Crawler](./law-crawler/README.md) - Crawl vào CSDL từ nguồn pháp điển Việt Nam.
-- [Backend](./backend/README.md) - Chứa các mô hình, services, API Gateway cho hệ thống
-- [Web](./web/README.md) - Giao diện người dùng
+-   [Crawler](./law-crawler/README.md) - Crawl vào CSDL từ nguồn pháp điển Việt Nam.
+-   [Backend](./backend/README.md) - Chứa các mô hình, services, API Gateway cho hệ thống
+-   [Web](./web/README.md) - Giao diện người dùng
 
 ## Contributing - Đóng góp cho dự án
 
