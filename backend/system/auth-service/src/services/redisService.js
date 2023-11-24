@@ -1,11 +1,11 @@
-const redis = require("redis");
+const redis = require('redis');
 const client = redis.createClient({
-    legacyMode: true ,
+    legacyMode: true,
     url: 'redis://redis:6379',
 });
 
 (async () => {
-  client.connect();
+    client.connect();
 })();
 
 module.exports = client;
