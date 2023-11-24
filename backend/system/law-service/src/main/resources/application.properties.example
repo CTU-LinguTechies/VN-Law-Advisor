@@ -5,8 +5,8 @@ app.cors.allowed-domain=*
 logging.level.org.springframework.security.web.FilterChainProxy=DEBUG
 spring.web.resources.add-mappings=false
 jwt.access-token-validity=900000
-jwt.secret-key=5368566D597133743677397A24432646294A404E635166546A576E5A72347537
-jwt.secret-refresh-key=ES8SNaJqxSQ16RvVsDkMDuZrbjLiSfZMsAePtFS9edjbY37920suNnQ5nSe7uKDJ
+jwt.secret-key=
+jwt.secret-refresh-key=
 
 
 # ===============================

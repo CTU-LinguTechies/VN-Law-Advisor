@@ -6,17 +6,21 @@ name: Node.js CI
 on:
     push:
         branches: ['auth-service']
-        paths: ['backend/system/auth-service/**']
+        paths:
+            - './backend/system/auth-service/**'
     pull_request:
         branches: ['main']
 
 jobs:
     build:
         runs-on: ubuntu-latest
-
+        defaults:
+            run:
+                shell: bash
+                working-directory: ./backend/system/auth-service
         strategy:
             matrix:
-                node-version: [14.x, 16.x, 18.x]
+                node-version: [16.x]
         steps:
             - uses: actions/checkout@v3
             - name: Use Node.js ${{ matrix.node-version }}
