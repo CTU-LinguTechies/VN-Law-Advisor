@@ -5,8 +5,8 @@ name: Node.js CI
 
 on:
     push:
-        - branches: ['auth-service']
-        - paths: ['backend/system/auth-service/**']
+        branches: ['auth-service']
+        paths: ['backend/system/auth-service/**']
     pull_request:
         branches: ['main']
 
