@@ -28,7 +28,7 @@ import uuid
 # db.drop_tables([PDMucLienQuan ,PDTable, PDFile , PDDieu, PDChuong, PDDeMuc, PDChuDe])
 # db.create_tables([PDMucLienQuan ,PDTable, PDFile, PDDieu, PDChuong , PDDeMuc, PDChuDe])
 
-checkpoint = None
+checkpoint = "d8e4a3a0-254c-4593-967c-214ae12bcb0f.html"
 
 # Đọc Chủ đề
 print("Load Chủ Đề Từ File ...")
