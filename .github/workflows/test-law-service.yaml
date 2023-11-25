@@ -14,6 +14,7 @@ on:
         paths: ['backend/system/law-service/**']
     pull_request:
         branches: ['main']
+        paths: ['backend/system/law-service/**']
 
 jobs:
     build:
@@ -33,10 +34,10 @@ jobs:
                 working-directory: ./backend/system/law-service
         steps:
             - uses: actions/checkout@v3
-            - name: Set up JDK 17
+            - name: Set up JDK 19
               uses: actions/setup-java@v3
               with:
-                  java-version: '17'
+                  java-version: '19'
                   distribution: 'temurin'
                   cache: maven
             - name: Build with Maven
