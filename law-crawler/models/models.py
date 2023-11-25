@@ -51,6 +51,7 @@ class PDDieu(BaseModel):
     ten = TextField()
     demuc_id = ForeignKeyField(PDDeMuc, backref="dieus")
     chuong_id = ForeignKeyField(PDChuong, backref="dieus")
+    chude_id = ForeignKeyField(PDChuDe, backref="dieus")
     mapc = CharField(max_length=128, primary_key=True)
     noidung = TextField()
     chimuc = IntegerField()
