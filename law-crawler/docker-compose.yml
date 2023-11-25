@@ -16,11 +16,12 @@ services:
         ports:
             - 8081:80
         depends_on:
-            - main-mysql
+            - law-mysql
         networks:
             - app-network
         environment:
-            PMA_HOST: main-mysql
+            PMA_HOST: law-mysql
+            UPLOAD_LIMIT: 300M
 networks:
     app-network:
         driver: bridge
