@@ -1,0 +1,4 @@
+law-crawler/phap-dien/
+venv/
+node_modules/
+docker-compose.yml

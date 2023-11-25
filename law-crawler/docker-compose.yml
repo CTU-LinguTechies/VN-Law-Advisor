@@ -1,26 +1,27 @@
 services:
-  main-mysql:
-    image: mysql:latest
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456789
-      MYSQL_DATABASE: law
-      MYSQL_PASSWORD: 123456789
-    networks:
-      - app-network
+    main-mysql:
+        image: mysql:latest
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456789
+            MYSQL_DATABASE: law
+            MYSQL_PASSWORD: 123456789
+        networks:
+            - app-network
 
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    ports:
-      - 8081:80
-    depends_on:
-      - main-mysql
-    networks:
-      - app-network
-    environment:
-      PMA_HOST: main-mysql
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - 8081:80
+        depends_on:
+            - law-mysql
+        networks:
+            - app-network
+        environment:
+            PMA_HOST: law-mysql
+            UPLOAD_LIMIT: 300M
 networks:
-  app-network:
-    driver: bridge
+    app-network:
+        driver: bridge
