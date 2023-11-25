@@ -1,5 +1,6 @@
 package lingutechies.vnlawadvisor.lawservice.PDChuong;
 
+import lingutechies.vnlawadvisor.lawservice.PDChuong.DTO.PureChuongProjection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PDChuongService {
     private final PDChuongRepository pdChuongRepository;
-    public List<PDChuong> getChuongByDeMuc(String deMucId){
+    public List<PureChuongProjection> getChuongByDeMuc(String deMucId){
         return pdChuongRepository.findAllByDeMucIdOrderByStt(deMucId);
     }
 }

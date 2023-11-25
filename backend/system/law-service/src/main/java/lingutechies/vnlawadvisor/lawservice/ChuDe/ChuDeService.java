@@ -11,6 +11,6 @@ public class ChuDeService {
     private final ChuDeRepository chuDeRepository;
 
     public List<ChuDe> getAllChuDe(){
-        return chuDeRepository.findAll();
+        return chuDeRepository.findAllSortByStt();
     }
 }

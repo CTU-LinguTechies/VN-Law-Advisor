@@ -1,5 +1,6 @@
 package lingutechies.vnlawadvisor.lawservice.PDDeMuc;
 
+import lingutechies.vnlawadvisor.lawservice.PDDeMuc.DTO.PureDeMuc;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PDDeMucService {
     private final DeMucRepository pdDeMucRepository;
-    public List<PDDeMuc> getDeMucByChuDe(String chudeId){
+    public List<PureDeMuc> getDeMucByChuDe(String chudeId){
         return pdDeMucRepository.findAllByChuDeId(chudeId);
     }
     public Page<PDDeMuc> getAllDeMuc(Optional<Integer> pageNo, Optional<Integer> pageSize){

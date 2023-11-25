@@ -15,7 +15,7 @@ public class PDChuong {
     @Column(nullable = false)
     private String ten;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "demuc_id", nullable = false)
     private PDDeMuc deMuc;
 
