@@ -29,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
     private final AuthorizationFilterChain authorizationFilterChain;
     private final UserDetailsService userDetailsService;
+    private final AuthenticationConfiguration authenticationConfiguration;
 
     @Value("${app.cors.allowed-domain}")
     private String allowedDomain;
@@ -60,7 +61,7 @@ public class SecurityConfig {
                                         .anyRequest().permitAll()
                 )
                 .userDetailsService(userDetailsService)
-                .authenticationManager(authenticationManager(new AuthenticationConfiguration()))
+                .authenticationManager(authenticationManager(authenticationConfiguration))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authorizationFilterChain, UsernamePasswordAuthenticationFilter.class)
                 .build();
