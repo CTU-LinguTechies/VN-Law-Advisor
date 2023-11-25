@@ -20,11 +20,15 @@ public class PDDieu {
     @Column(nullable = false)
     private Integer stt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "demuc_id", nullable = false)
     private PDDeMuc deMuc;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chude_id", nullable = false)
+    private ChuDe chuDe;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chuong_id", nullable = false)
     private PDChuong chuong;
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface DeMucRepository extends JpaRepository<PDDeMuc, String> {
-    List<PDDeMuc> getPDDeMucsByChuDeIdOrderByStt(String chudeId);
+    List<PDDeMuc> findAllByChuDeId(String chudeId);
 
-    Page<PDDeMuc> getAllDemucs(Pageable pageable);
+    Page<PDDeMuc> findAll(Pageable pageable);
 }
