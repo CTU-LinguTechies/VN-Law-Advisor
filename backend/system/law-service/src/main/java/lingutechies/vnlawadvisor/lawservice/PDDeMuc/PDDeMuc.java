@@ -18,7 +18,7 @@ public class PDDeMuc {
     @Column(nullable = false)
     private Integer stt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chude_id", nullable = false)
     private ChuDe chuDe;
 }
