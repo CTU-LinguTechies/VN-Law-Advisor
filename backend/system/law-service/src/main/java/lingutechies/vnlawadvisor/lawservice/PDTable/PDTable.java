@@ -12,9 +12,9 @@ public class PDTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dieu_id", nullable = false)
-    private PDDieu dieu;
+    private PDDieu bangOfDieu;
 
     @Column(nullable = false)
     private String html;

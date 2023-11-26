@@ -12,9 +12,9 @@ public class PDFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "dieu_id", nullable = false)
-    private PDDieu dieu;
+    private PDDieu fileOfDieu;
 
     @Column(nullable = false)
     private String link;
