@@ -27,7 +27,10 @@ export default function Home() {
                 </Row>
             </div>
             <main className="flex min-h-screen flex-col items-center justify-between p-24">
-                <Row justify="center"></Row>
+                <div></div>
+                <Row justify="center">
+                    <Col span={8}></Col>
+                </Row>
             </main>
         </>
     );

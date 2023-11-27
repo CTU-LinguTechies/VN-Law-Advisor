@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@ant-design/cssinjs": "^1.18.0-alpha.5",
+        "animate.css": "^4.1.1",
         "antd": "^5.11.4",
         "lottie-react": "^2.4.0",
         "next": "14.0.3",

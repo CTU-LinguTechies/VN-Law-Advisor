@@ -1,6 +1,6 @@
 ## Ứng Dụng Web
 
-![Kiến trúc hệ thống](./banner.png)
+![Kiến trúc hệ thống](./assets/images/banner.png)
 
 ## Getting Started
 
