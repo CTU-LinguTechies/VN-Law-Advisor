@@ -3,25 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
+        rgb(var(--background-start-rgb));
+}
+
+.wavy {
+    background-image: url('../../assets/images/stacked-waves-haikei.svg');
+    background-repeat: no-repeat;
+    width: 100%;
+    object-fit: cover;
+    box-shadow: rgba(237, 239, 240, 0.25) 0px 25px 50px -12px;
+    box-shadow:
+        rgba(237, 239, 240, 0.25) 0px 2px 1px,
+        rgba(237, 239, 240, 0.25) 0px 4px 2px,
+        rgba(237, 239, 240, 0.25) 0px 8px 4px,
+        rgba(237, 239, 240, 0.25) 0px 16px 8px,
+        rgba(237, 239, 240, 0.25) 0px 32px 16px;
 }
