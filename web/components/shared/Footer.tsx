@@ -7,7 +7,7 @@ export default function Footer() {
             <div
                 style={{
                     backgroundColor: 'black',
-                    padding: 6,
+                    padding: 10,
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',

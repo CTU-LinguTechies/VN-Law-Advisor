@@ -1,9 +1,10 @@
 'use client';
 import law from '@/assets/lottie/law.json';
 import HomeNavigationCard from '@/components/home/HomeNavigationCard';
-import { Col, Row, Skeleton, Spin } from 'antd';
+import { Col, Row, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
+import { Fade } from 'react-awesome-reveal';
 export default function Home() {
     const [animationData, setAnimationData] = useState<any>(null);
     useEffect(() => {
@@ -12,11 +13,15 @@ export default function Home() {
         });
     }, []);
     if (!animationData) {
-        return <Spin />;
+        return (
+            <div className="w-full p-5 flex justify-center">
+                <Spin size="large"></Spin>
+            </div>
+        );
     }
     return (
         <>
-            <div>
+            <Fade>
                 <Row className="wavy h-[450px] w-full" justify="center" align="middle">
                     <Col span={8}>
                         <Lottie animationData={law} className="w-[450px]" />
@@ -36,9 +41,9 @@ export default function Home() {
                         </ul>
                     </Col>
                 </Row>
-            </div>
+            </Fade>
             <main className="flex flex-col items-center justify-between mt-5 p-x-24">
-                <h1 className="text-3xl">Nổi Bật</h1>
+                <h1 className="text-3xl my-5">Nổi Bật</h1>
                 <div className="max-w-[80%]">
                     <Row justify="center" gutter={[16, 16]}>
                         <Col span={6}>

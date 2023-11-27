@@ -2,6 +2,9 @@
 import Link from 'next/link';
 import './navbar.scss';
 import { usePathname } from 'next/navigation';
+import { selectUser } from '@/store/userSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 function formatPathname(pathname: string) {
     const parts = pathname.split('/');
@@ -10,7 +13,7 @@ function formatPathname(pathname: string) {
 
 export default function Navbar() {
     const pathname = formatPathname(usePathname());
-    console.log(pathname);
+    const user = useSelector((state: RootState) => state.user);
     return (
         <nav className="navbar">
             <div className="container">
@@ -37,6 +40,13 @@ export default function Navbar() {
                         </li>
                         <li className={pathname == 'law' ? 'active' : ''}>
                             <Link href="/law">Luật</Link>
+                        </li>
+                        <li
+                            className={
+                                pathname == 'login' || pathname == 'register' ? 'active' : ''
+                            }
+                        >
+                            <Link href="/auth/login">Đăng nhập</Link>
                         </li>
                     </ul>
                 </div>

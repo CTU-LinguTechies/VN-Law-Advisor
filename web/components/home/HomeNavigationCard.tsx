@@ -2,7 +2,6 @@
 import { Button, Card, Skeleton } from 'antd';
 import Lottie from 'lottie-react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 interface HomeNavigationCardProps {
     title: string;
     description: string;
@@ -17,15 +16,6 @@ export default function HomeNavigationCard(props: HomeNavigationCardProps) {
     const handleNavigation = () => {
         router.push(link);
     };
-    const [animationData, setAnimationData] = useState<any>(null);
-    useEffect(() => {
-        import(`@/assets/lottie/${icon}.json`).then((data) => {
-            setAnimationData(data.default);
-        });
-    }, []);
-    if (!animationData) {
-        return <Skeleton active />;
-    }
     return (
         <Bounce>
             <Card
@@ -37,7 +27,10 @@ export default function HomeNavigationCard(props: HomeNavigationCardProps) {
                     </h1>
                 }
             >
-                <Lottie style={{ width: 200, height: 150 }} animationData={animationData} />
+                <Lottie
+                    style={{ width: 200, height: 150 }}
+                    animationData={require(`@/assets/lottie/${icon}.json`)}
+                />
                 <p style={{ height: 50 }}>{description}</p>
                 <div style={{ justifyContent: 'center' }} className="flex">
                     <Button className="mt-2" type="primary">

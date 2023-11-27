@@ -6,7 +6,6 @@ $base-color: #66f;
 $text-dark: #3c4250;
 $border-color: #eceef3;
 
-$navbar-body-color: #fff;
 // $navbar-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.035);
 $navbar-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 $navbar-padding-y: 1rem;
@@ -70,7 +69,7 @@ a {
 
 .navbar {
     box-shadow: $navbar-shadow;
-    background-color: $navbar-body-color;
+    background-color: rgba(240, 240, 240, 0.5);
     padding: $navbar-padding-y $navbar-padding-x;
     border-bottom: 1px solid $border-color;
 
