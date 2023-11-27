@@ -4,4 +4,6 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from langchain.document_loaders import DirectoryLoader
 
+from transformers import pipeline
+
 import torch
