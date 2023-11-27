@@ -11,13 +11,19 @@
     "dependencies": {
         "@ant-design/cssinjs": "^1.18.0-alpha.5",
         "@emotion/react": "^11.11.1",
+        "@fortawesome/fontawesome-svg-core": "^6.4.2",
+        "@fortawesome/free-brands-svg-icons": "^6.4.2",
+        "@fortawesome/free-regular-svg-icons": "^6.4.2",
+        "@fortawesome/free-solid-svg-icons": "^6.4.2",
+        "@fortawesome/react-fontawesome": "^0.2.0",
         "animate.css": "^4.1.1",
         "antd": "^5.11.4",
         "lottie-react": "^2.4.0",
         "next": "14.0.3",
         "react": "^18",
         "react-awesome-reveal": "^4.2.7",
-        "react-dom": "^18"
+        "react-dom": "^18",
+        "sass": "^1.69.5"
     },
     "devDependencies": {
         "@types/node": "^20",
