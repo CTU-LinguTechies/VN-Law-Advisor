@@ -2,7 +2,6 @@ from flask import *
 from flask_cors import CORS, cross_origin
 from importer import *
 from directory import *
-import json
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -13,9 +12,11 @@ if torch.cuda.is_available():
     current_device="cuda"
 
 
-embeddings = HuggingFaceEmbeddings(model_name=model_path, model_kwargs={"device": current_device})
+embeddings = HuggingFaceEmbeddings(model_name=st_model_path, model_kwargs={"device": current_device})
 vectordb = Chroma(embedding_function=embeddings,
-                  persist_directory=persist_directory)
+                  persist_directory=chroma_db_persist_directory)
+pipeline = pipeline(task="question-answering", model=qa_model_path, local_files_only=True)
+
 
 @app.route('/', methods=['GET'])
 def init():
@@ -27,25 +28,47 @@ def init():
         
         return result
 @app.route('/get-response', methods=['POST'])
-def uploadFile():
+def get_response():
     if request.method == 'POST':
-        req = request.json
-        print(req["question"])
+        req = request.get_json()
         if req:
             try:
                 question = req["question"]
             except:
-                return{
+                return {
                     "status": "error",
                     "response": "Question is required",
                 }, 400
-            output = vectordb.similarity_search_with_score(question, k=2)
-            result = [{"context": context.page_content, "score": score} for context, score in output]
+            
+            output = vectordb.similarity_search(question, k=2)
+
+            context = ""
+            ciation = []
+            topic_ids = []
+            for doc in output:
+                result_string = doc.page_content
+                topic_id = doc.metadata["source"].split("/")[-1].split(".")[0]
+                index = result_string.find("content: ")
+
+                if index != -1:
+                    result_string = result_string[index + len("content: "):].strip()
+                if topic_id and topic_id not in topic_ids:
+                    topic_ids.append(topic_id)
+                
+                context += f"{result_string} "
+                ciation.append(result_string)
+            
+            context = context.strip()
+            response = pipeline(question=question, context=context)["answer"]
+
             return {
                     "status": "success",
-                    "response": result,
+                    "question": question,
+                    "ciation": ciation,
+                    "response": response,
+                    "topic_ids": topic_ids,
                 }, 200
-
+            
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='3000')
