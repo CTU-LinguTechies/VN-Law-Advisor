@@ -2,6 +2,7 @@ from flask import *
 from flask_cors import CORS, cross_origin
 from importer import *
 from directory import *
+import json
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -28,7 +29,8 @@ def init():
 @app.route('/get-response', methods=['POST'])
 def uploadFile():
     if request.method == 'POST':
-        req = request.get_json()
+        req = request.json
+        print(req["question"])
         if req:
             try:
                 question = req["question"]
@@ -37,12 +39,13 @@ def uploadFile():
                     "status": "error",
                     "response": "Question is required",
                 }, 400
-            output = vectordb.similarity_search(question, k=2)
+            output = vectordb.similarity_search_with_score(question, k=2)
+            result = [{"context": context.page_content, "score": score} for context, score in output]
             return {
                     "status": "success",
-                    "response": output,
+                    "response": result,
                 }, 200
-            
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='3000')

@@ -1,3 +1,5 @@
 langchain
 chromadb
 sentence-transformers
+flask
+flask_cors
