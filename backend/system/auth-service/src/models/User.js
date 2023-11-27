@@ -12,7 +12,6 @@ const User = sequelize.define(
     },
     name: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false,
     },
     email: {
@@ -25,9 +24,9 @@ const User = sequelize.define(
       allowNull: false,
     },
     phonenum: {
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
+      defaultValue: NULL,
     },
     role: {
       type: DataTypes.STRING,

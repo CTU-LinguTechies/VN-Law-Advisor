@@ -17,9 +17,9 @@ require("../models/User");
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || "8181");
+var port = normalizePort(process.env.PORT || "8000");
 app.set("port", port);
-
+console.log("App run in port ", port)
 /**
  * Create HTTP server.
  */

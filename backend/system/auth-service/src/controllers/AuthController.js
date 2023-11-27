@@ -17,6 +17,7 @@ class AuthController {
         const transaction = await sequelize.transaction();
         try {
             const newUserInfo = req.body;
+            console.log(newUserInfo);
             const existingUser = await User.findOne({
                 where: {
                     email: newUserInfo.email,
@@ -25,6 +26,8 @@ class AuthController {
             if (existingUser) throw new CustomError('Email already existed', 409);
             const newUser = await User.create(
                 {
+                    name: newUserInfo.name,
+                    phonenum: newUserInfo.phonenum,
                     email: newUserInfo.email,
                     password: passwordService.hash(newUserInfo.password),
                 },

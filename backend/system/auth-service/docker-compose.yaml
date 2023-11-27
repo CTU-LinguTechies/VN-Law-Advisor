@@ -5,12 +5,11 @@ services:
     working_dir: /usr/src/app
     command: bash -c "npm install && npm run dev"
     ports:
-      - 8000:8000
+      - "8000:8000"
     depends_on:
       - redis
       - mysql
     environment:
-      NODE_ENV: development
       ENVIRONMENT: development
       DB_HOST: mysql
       DB_PORT: 3306
@@ -20,18 +19,15 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: root
-    links:
-      - mysql
-      - redis
+      ACCESS_TOKEN_KEY: VN-Law-Advisor
+      REFRESH_TOKEN_KEY: auth-service
     volumes:
       - ./src:/usr/src/app
       - /usr/src/app/node_modules
-
   redis:
     image: redis:latest
     ports:
-      - 6379:6379
-    command: redis-server --save 20 1 --loglevel warning --requirepass root
+      - "6379:6379"
     volumes:
       - redis:/var/lib/redis
   mysql:
@@ -39,16 +35,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3307:3307
+      - "3307:3307"
     volumes:
       - mysql_data:/var/lib/mysql
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
 volumes:
   mysql_data:
-    driver: local
   redis:
-    driver: local
