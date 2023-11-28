@@ -8,7 +8,7 @@ module.exports = {
         port: process.env.DB_PORT || 3306,
     },
     security: {
-        accessKey: process.env.ACCESS_TOKEN_KEY,
-        refreshKey: process.env.REFRESH_TOKEN_KEY,
+        accessKey: process.env.ACCESS_TOKEN_KEY || 'super_secret_access_key',
+        refreshKey: process.env.REFRESH_TOKEN_KEY || 'super_secret_refresh_key',
     },
 };
