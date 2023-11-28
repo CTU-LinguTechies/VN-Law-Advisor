@@ -34,13 +34,13 @@ services:
         image: mysql:latest
         environment:
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: auth
         ports:
-            - '3307:3307'
+            - '3307:3306'
         volumes:
             - mysql_data:/var/lib/mysql
     adminer:
         image: adminer
-        restart: always
         ports:
             - '8080:8080'
 volumes:

@@ -49,6 +49,7 @@ class AuthController {
                 status: 200,
             });
         } catch (error) {
+            console.log(error);
             await transaction.rollback();
             return handleError(res, error);
         }
@@ -75,7 +76,7 @@ class AuthController {
                         throw new CustomError('You are not allowed to do this.', 403);
 
                     return res.status(200).json({
-                        data: {},
+                        data: adminUser,
                         message: 'Valid Token',
                         status: 200,
                     });
@@ -85,7 +86,7 @@ class AuthController {
                         throw new CustomError('Permission denied', 401);
 
                     return res.status(200).json({
-                        data: {},
+                        data: user,
                         message: 'Valid Token',
                         status: 200,
                     });
@@ -108,12 +109,13 @@ class AuthController {
     async loginUser(req, res) {
         try {
             const { email, password } = req.body;
-            const existUser = await User.findOne({
+            let existUser = await User.findOne({
                 where: {
                     email,
                 },
-            }).then((data) => data.toJSON());
+            });
             if (!existUser) throw new CustomError('No user found with email ' + email, 404);
+            existUser = existUser.toJSON();
             const isValidPassword = passwordService.compare(password, existUser.password);
             if (!isValidPassword) throw new CustomError('Wrong password', 401);
             const accessToken = TokenUtil.generateAccessToken(existUser);
