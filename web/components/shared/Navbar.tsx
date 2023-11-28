@@ -46,7 +46,7 @@ export default function Navbar() {
                                 pathname == 'login' || pathname == 'register' ? 'active' : ''
                             }
                         >
-                            <Link href="/auth/login">Đăng nhập</Link>
+                            <Link href="/auth">Đăng nhập</Link>
                         </li>
                     </ul>
                 </div>

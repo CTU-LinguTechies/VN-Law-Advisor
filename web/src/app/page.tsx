@@ -42,7 +42,7 @@ export default function Home() {
                     </Col>
                 </Row>
             </Fade>
-            <main className="flex flex-col items-center justify-between mt-5 p-x-24">
+            <main className="flex flex-col items-center justify-between my-5 p-x-24">
                 <h1 className="text-3xl my-5">Nổi Bật</h1>
                 <div className="max-w-[80%]">
                     <Row justify="center" gutter={[16, 16]}>
