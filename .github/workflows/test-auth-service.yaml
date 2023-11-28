@@ -21,6 +21,10 @@ jobs:
                 env:
                     MYSQL_ROOT_PASSWORD: root
                     MYSQL_DATABASE: auth
+            redis:
+                image: redis:latest
+                ports:
+                    - 6379:6379
         defaults:
             run:
                 shell: bash

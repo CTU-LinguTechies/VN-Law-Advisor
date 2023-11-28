@@ -6,6 +6,7 @@ module.exports = {
         database: process.env.DB_NAME || 'auth',
         host: process.env.DB_HOST || 'localhost',
         port: process.env.DB_PORT || 3306,
+        redisHost: process.env.REDIS_HOST || 'localhost',
     },
     security: {
         accessKey: process.env.ACCESS_TOKEN_KEY || 'super_secret_access_key',
