@@ -6,14 +6,21 @@ name: Node.js CI
 on:
     push:
         branches: ['auth-service']
-        paths:
-            - './backend/system/auth-service/**'
+        paths: ['backend/system/auth-service/**']
     pull_request:
         branches: ['main']
 
 jobs:
     build:
         runs-on: ubuntu-latest
+        services:
+            mysql:
+                image: mysql:latest
+                ports:
+                    - 3306:3306
+                env:
+                    MYSQL_ROOT_PASSWORD: root
+                    MYSQL_DATABASE: auth
         defaults:
             run:
                 shell: bash
