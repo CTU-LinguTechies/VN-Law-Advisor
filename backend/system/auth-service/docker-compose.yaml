@@ -1,6 +1,6 @@
 version: '3'
 services:
-    app:
+    auth-service:
         image: node:latest
         working_dir: /usr/src/app
         command: bash -c "npm install && npm run dev"
@@ -22,7 +22,7 @@ services:
             ACCESS_TOKEN_KEY: VN-Law-Advisor
             REFRESH_TOKEN_KEY: auth-service
         volumes:
-            - ./src:/usr/src/app
+            - ./:/usr/src/app
             - /usr/src/app/node_modules
     redis:
         image: redis:latest
@@ -30,7 +30,7 @@ services:
             - '6379:6379'
         volumes:
             - redis:/var/lib/redis
-    mysql:
+    auth-mysql:
         image: mysql:latest
         environment:
             MYSQL_ROOT_PASSWORD: root
@@ -42,7 +42,7 @@ services:
     adminer:
         image: adminer
         ports:
-            - '8080:8080'
+            - '8082:8080'
 volumes:
     mysql_data:
     redis:

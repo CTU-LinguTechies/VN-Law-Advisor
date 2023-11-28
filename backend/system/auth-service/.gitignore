@@ -1,2 +1,2 @@
-./src/node_modules
-./src/coverage/
+node_modules
+coverage/
