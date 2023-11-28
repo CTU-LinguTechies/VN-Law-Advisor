@@ -6,7 +6,7 @@
         "start": "node ./bin/www",
         "dev": "nodemon ./bin/www",
         "sync": "node ./services/dbSync",
-        "test": "jest"
+        "test": "jest --detectOpenHandles"
     },
     "dependencies": {
         "bcrypt": "^5.1.1",
