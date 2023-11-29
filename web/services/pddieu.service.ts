@@ -8,8 +8,12 @@ class PDDieuService {
         this.client = createHttpClient('law/api/v1');
     }
 
-    async getAllByChuongId(chuongId: string) {
-        return (await this.client.get(`/dieu/${chuongId}`)) as any;
+    async getAllByChuongId(chuongId: string, page?: number, size?: number) {
+        return (await this.client.get(`/dieu/${chuongId}`, {
+            params: {
+                pageNo: page,
+            },
+        })) as any;
     }
 }
 

@@ -18,6 +18,7 @@
 body {
     overflow-x: hidden;
     width: 100vw;
+    scroll-behavior: smooth;
 }
 
 .wavy {
