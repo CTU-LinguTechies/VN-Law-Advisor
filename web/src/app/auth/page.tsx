@@ -42,7 +42,7 @@ const AuthPage: React.FC = () => {
                             items={items}
                         />
                     </div>
-                    <div className="flex justify-center align-middle" ref={autoAnimateParent}>
+                    <div className="flex justify-center align-middle mt-5" ref={autoAnimateParent}>
                         {modalType == 'login' ? (
                             <LoginCard setKey={setModalType} />
                         ) : (

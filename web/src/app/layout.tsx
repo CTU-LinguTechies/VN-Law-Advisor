@@ -5,7 +5,6 @@ import './globals.css';
 import 'animate.css';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
-import { Suspense } from 'react';
 import Providers from './providers';
 
 const inter = Inter({ subsets: ['latin'] });

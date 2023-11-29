@@ -3,20 +3,17 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Footer() {
     return (
-        <div style={{ overflow: 'hidden' }}>
+        <div style={{ overflow: 'hidden', opacity: 0.5 }}>
             <div
                 style={{
-                    backgroundColor: 'black',
+                    backgroundColor: '#EBE3D5',
                     padding: 10,
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
                 }}
             >
-                <h1
-                    style={{ textAlign: 'center', color: 'white', fontWeight: 400 }}
-                    className="text-lg"
-                >
+                <h1 style={{ textAlign: 'center', color: 'black', fontWeight: 400, fontSize: 14 }}>
                     @CTU.LinguTechies - GPL V3 License - 2023
                 </h1>
                 <a
@@ -30,7 +27,7 @@ export default function Footer() {
                     }}
                     href="https://github.com/CTU-LinguTechies/VN-Law-Advisor"
                 >
-                    <FontAwesomeIcon icon={faGithub} color="white" />
+                    <FontAwesomeIcon icon={faGithub} color="black" />
                 </a>
             </div>
         </div>
