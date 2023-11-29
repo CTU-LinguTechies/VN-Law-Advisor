@@ -27,11 +27,13 @@ export default function Home() {
                         <Lottie animationData={law} className="w-[450px]" />
                     </Col>
                     <Col span={10}>
-                        <h1 className="text-5xl font-bold">VN Law Advisor</h1>
-                        <p className="text-2xl italic mt-2">
+                        <h1 style={{ color: 'white' }} className="text-5xl font-bold">
+                            VN Law Advisor
+                        </h1>
+                        <p style={{ color: 'white' }} className="text-2xl italic mt-2">
                             Hệ thống hỏi đáp tri thức pháp luật Việt Nam
                         </p>
-                        <ul className="mt-3">
+                        <ul style={{ color: 'white' }} className="mt-3">
                             <li className="italic text-lg list-disc">
                                 Dựa trên mô hình ngôn ngữ lớn.
                             </li>
@@ -44,9 +46,9 @@ export default function Home() {
             </Fade>
             <main className="flex flex-col items-center justify-between my-5 p-x-24">
                 <h1 className="text-3xl my-5">Nổi Bật</h1>
-                <div className="max-w-[80%]">
+                <div className="">
                     <Row justify="center" gutter={[16, 16]}>
-                        <Col span={6}>
+                        <Col span={4}>
                             <HomeNavigationCard
                                 link="/chat"
                                 title="Hỏi đáp Pháp Luật"
@@ -54,15 +56,23 @@ export default function Home() {
                                 icon="chatbot"
                             />
                         </Col>
-                        <Col span={6}>
+                        <Col span={4}>
                             <HomeNavigationCard
-                                link="/chat"
-                                title="Tra cứu Pháp Luật"
-                                description="Tra cứu các điều luật từ pháp điển và VBQPPL Việt Nam."
+                                link="/phapdien"
+                                title="Tra cứu Pháp Điển"
+                                description="Tra cứu Pháp Điển Việt Nam hiện hành."
                                 icon="law2"
                             />
                         </Col>
-                        <Col span={6}>
+                        <Col span={4}>
+                            <HomeNavigationCard
+                                link="/chat"
+                                title="Tra cứu các VBQPPL"
+                                description="Tra cứu các điều luật từ VBQPPL Việt Nam."
+                                icon="law"
+                            />
+                        </Col>
+                        <Col span={4}>
                             <HomeNavigationCard
                                 link="/chat"
                                 title="Các bảng, biểu mẫu"
@@ -70,7 +80,7 @@ export default function Home() {
                                 icon="form"
                             />
                         </Col>
-                        <Col span={6}>
+                        <Col span={4}>
                             <HomeNavigationCard
                                 link="/chat"
                                 title="Đánh giá, góp ý"

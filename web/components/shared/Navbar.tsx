@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import './navbar.scss';
 import { usePathname } from 'next/navigation';
-import { selectUser } from '@/store/userSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 

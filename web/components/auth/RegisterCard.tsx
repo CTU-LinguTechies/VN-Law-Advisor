@@ -108,7 +108,7 @@ export default function RegisterCard({ setKey }: RegisterCardProps) {
                                     <Button htmlType="submit" type="primary">
                                         Đăng Ký
                                     </Button>
-                                    <Button onClick={() => setKey('register')} type="link">
+                                    <Button onClick={() => setKey('login')} type="link">
                                         Hoặc đăng nhập
                                     </Button>
                                 </div>
