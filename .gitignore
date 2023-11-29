@@ -1,6 +1,6 @@
 .env
 ./law-crawler/.gitignore
 node_modules/
-./backend/system/law-service/.gitignore
-./backend/system/auth-service/.gitignore
+./backend/law-service/.gitignore
+./backend/auth-service/.gitignore
 ./backend/rag/.gitignore

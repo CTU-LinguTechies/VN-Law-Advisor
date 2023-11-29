@@ -162,3 +162,5 @@ cython_debug/
 ## DB and Model
 sentence_transformers_model/
 chroma_db/
+qa_model/
+directory.py
