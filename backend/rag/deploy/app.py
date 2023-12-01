@@ -9,10 +9,10 @@ current_device = "cpu"
 if torch.cuda.is_available():
     current_device="cuda"
     
-embeddings = HuggingFaceEmbeddings(model_name=st_model_path, model_kwargs={"device": current_device})
+embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
 vectordb = Chroma(embedding_function=embeddings,
-                  persist_directory=chroma_db_persist_directory)
-pipeline = pipeline(task="question-answering", model=qa_model_path, local_files_only=True)
+                  persist_directory=TOPIC_DB_PATH)
+pipeline = pipeline(task="question-answering", model=QA_MODEL_PATH, local_files_only=True)
 
 app = Flask(__name__)
 CORS(app)
