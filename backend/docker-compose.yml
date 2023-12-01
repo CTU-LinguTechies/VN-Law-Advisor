@@ -1,0 +1,81 @@
+name: vnlawadvisor-backend
+services:
+  law-mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+        - 3306:3306
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456789
+        MYSQL_DATABASE: law
+        MYSQL_PASSWORD: 123456789
+    networks:
+        - app-network
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8081:80
+    depends_on:
+      - law-mysql
+    networks:
+      - app-network
+    environment:
+      PMA_HOST: law-mysql
+      UPLOAD_LIMIT: 300M
+  law-service:
+    build: ./law-service
+    depends_on:
+      - law-mysql
+    ports:
+      - 8080:8080
+    volumes:
+      - ./law-service:/app
+    networks:
+      - app-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://law-mysql:3306/law?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456789
+  auth-service:
+    build: ./auth-service
+    depends_on:
+      - auth-mysql
+    ports: 
+      - 5000:5000
+    volumes:
+      - ./auth-service:/app
+      - ./auth-service/node_modules:/app/node_modules
+    networks:
+      - app-network
+    environment:
+      ENVIRONMENT: development
+      PORT: 5000
+      DB_HOST: auth-mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: auth
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: root
+      ACCESS_TOKEN_KEY: VN-Law-Advisor
+      REFRESH_TOKEN_KEY: auth-service
+  redis:
+      image: redis:latest
+      ports:
+          - '6379:6379'
+      networks:
+          - app-network
+  auth-mysql:
+      image: mysql:latest
+      restart: always
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: auth
+      ports:
+          - '3307:3306'
+      networks:
+          - app-network
+networks:
+    app-network:
+        driver: bridge

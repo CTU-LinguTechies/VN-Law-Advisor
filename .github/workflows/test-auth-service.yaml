@@ -6,7 +6,7 @@ name: Node.js CI
 on:
     push:
         branches: ['auth-service']
-        paths: ['backend/system/auth-service/**']
+        paths: ['backend/auth-service/**']
     pull_request:
         branches: ['main']
 
@@ -21,10 +21,14 @@ jobs:
                 env:
                     MYSQL_ROOT_PASSWORD: root
                     MYSQL_DATABASE: auth
+            redis:
+                image: redis:latest
+                ports:
+                    - 6379:6379
         defaults:
             run:
                 shell: bash
-                working-directory: ./backend/system/auth-service
+                working-directory: ./backend/auth-service
         strategy:
             matrix:
                 node-version: [16.x]
@@ -37,4 +41,5 @@ jobs:
                   cache: 'npm'
             - run: npm ci
             - run: npm run build --if-present
+            - run: npm run sync --if-present
             - run: npm test
