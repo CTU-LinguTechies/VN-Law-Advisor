@@ -1,3 +1,4 @@
 peewee
 pymysql
 beautifulsoup4
+pandas
