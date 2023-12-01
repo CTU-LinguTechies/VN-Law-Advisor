@@ -4,3 +4,4 @@ node_modules/
 docker-compose.yml
 web/.next/
 backend/rag/
+*.yaml
