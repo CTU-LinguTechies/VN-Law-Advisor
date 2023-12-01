@@ -1,3 +1,4 @@
-chroma_db_persist_directory="" #Chroma DB Persist Directory
-st_model_path="" #Sentence Transformers Model Path
-qa_model_path="" #Question Answering Transformers Model Path
+TOPIC_DB_PATH="" #Chroma DB Persist Directory for TOPIC
+TEXT_DB_PATH="" #Chroma DB Persist Directory for PAPER
+ST_MODEL_PATH="" #Sentence Transformers Model Path
+QA_MODEL_PATH="" #Question Answering Transformers Model Path
