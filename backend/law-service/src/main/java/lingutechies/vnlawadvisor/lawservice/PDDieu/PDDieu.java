@@ -1,18 +1,25 @@
 package lingutechies.vnlawadvisor.lawservice.PDDieu;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lingutechies.vnlawadvisor.lawservice.ChuDe.ChuDe;
 import lingutechies.vnlawadvisor.lawservice.PDChuong.PDChuong;
 import lingutechies.vnlawadvisor.lawservice.PDDeMuc.PDDeMuc;
 import lingutechies.vnlawadvisor.lawservice.PDFile.PDFile;
 import lingutechies.vnlawadvisor.lawservice.PDTable.PDTable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "pddieu")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class PDDieu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,14 +31,17 @@ public class PDDieu {
     @Column(nullable = false)
     private Integer stt;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "demuc_id", nullable = false)
     private PDDeMuc deMuc;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chude_id", nullable = false)
     private ChuDe chuDe;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chuong_id", nullable = false)
     private PDChuong chuong;

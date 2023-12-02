@@ -15,6 +15,9 @@ class PDDieuService {
             },
         })) as any;
     }
+    async getDieuTreeViewByMapc(mapc: string) {
+        return (await this.client.get(`/dieu/tree/${mapc}`)) as any;
+    }
 }
 
 export default new PDDieuService() as PDDieuService;

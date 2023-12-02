@@ -6,6 +6,8 @@ import pdchuongService from '@/services/pdchuong.service';
 import pddemucService from '@/services/pddemuc.service';
 import pddieuService from '@/services/pddieu.service';
 
+import { useSearchParams } from 'next/navigation';
+
 interface TreeViewProps {
     setChuongSelected: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -39,20 +41,65 @@ export default function TreeView({ setChuongSelected }: TreeViewProps) {
     const [treeData, setTreeData] = useState([] as DataNode[]);
     const [loading, isLoading] = useState(false);
 
+    const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);
+    const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
+
+    const params = useSearchParams();
+    const dieu = params.get('id');
+
+    async function fetchAllChuDes() {
+        const pdchude = await pdchudeService.getAll();
+        const data = pdchude.map((item: any) => {
+            return {
+                title: `Chủ đề ${item.stt}: ${item.ten}`,
+                key: `chude_${item.id.toString()}`,
+                children: undefined,
+            } as DataNode;
+        });
+        setTreeData(data);
+    }
+
     useEffect(() => {
-        async function fetchAllChuDes() {
-            const pdchude = await pdchudeService.getAll();
-            const data = pdchude.map((item: any) => {
-                return {
-                    title: `Chủ đề ${item.stt}: ${item.ten}`,
-                    key: `chude_${item.id.toString()}`,
-                    children: undefined,
-                } as DataNode;
-            });
-            setTreeData(data);
-        }
         fetchAllChuDes();
     }, []);
+
+    useEffect(() => {
+        async function getDieu() {
+            if (dieu && !loading) {
+                isLoading(true);
+                const pdchude = await pdchudeService.getAll();
+                const data = pdchude.map((item: any) => {
+                    return {
+                        title: `Chủ đề ${item.stt}: ${item.ten}`,
+                        key: `chude_${item.id.toString()}`,
+                        children: undefined,
+                    } as DataNode;
+                });
+                setTreeData(data);
+                // Update tree data
+                const { chuDe, deMuc, chuong, dieus } =
+                    await pddieuService.getDieuTreeViewByMapc(dieu);
+                setChuongSelected({ mapc: chuong.mapc, ten: chuong.ten, dieus: dieus });
+                const keyChuong = `chuong_${chuong.mapc}`;
+                const keyDeMuc = `demuc_${deMuc.id}`;
+                const keyChuDe = `chude_${chuDe.id}`;
+                setExpandedKeys([keyChuDe, keyDeMuc, keyChuong]);
+                setSelectedKeys([keyChuong]);
+                await onLoadData({
+                    key: `chude_${chuDe.id}`,
+                    ten: chuDe.ten,
+                    children: undefined,
+                });
+
+                await onLoadData({
+                    key: `demuc_${deMuc.id}`,
+                    ten: deMuc.ten,
+                    children: undefined,
+                });
+            }
+        }
+        getDieu();
+    }, [dieu]);
 
     const onSelect = async (selectedKeys: React.Key[], info: any) => {
         const key = selectedKeys[0].toString().split('_')[1] as string;
@@ -105,6 +152,8 @@ export default function TreeView({ setChuongSelected }: TreeViewProps) {
                     <UnorderedListOutlined />
                 </div>
                 <Tree
+                    selectedKeys={selectedKeys}
+                    expandedKeys={expandedKeys}
                     onSelect={onSelect}
                     loadData={onLoadData}
                     treeData={treeData}

@@ -1,5 +1,6 @@
 package lingutechies.vnlawadvisor.lawservice.PDChuong;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lingutechies.vnlawadvisor.lawservice.PDDeMuc.PDDeMuc;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class PDChuong {
     @Column(nullable = false)
     private String ten;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "demuc_id", nullable = false)
     private PDDeMuc deMuc;
