@@ -25,8 +25,6 @@ services:
   law-mysql:
     image: mysql:latest
     restart: always
-    ports:
-        - 3306:3306
     environment:
         MYSQL_ROOT_PASSWORD: 123456789
         MYSQL_DATABASE: law
@@ -49,8 +47,6 @@ services:
     build: ./law-service
     depends_on:
       - law-mysql
-    ports:
-      - 8080:8080
     volumes:
       - ./law-service:/app
     networks:
@@ -95,10 +91,30 @@ services:
       environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: auth
-      ports:
-          - '3307:3306'
       networks:
           - app-network
+  qna-mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456789
+        MYSQL_DATABASE: qna
+    networks:
+        - app-network
+  qna-service:
+    build: ./rag
+    depends_on:
+      - qna-mysql
+    volumes:
+      - ./rag:/app
+    networks:
+      - app-network
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_DATABASE: qna
+      MYSQL_HOST: qna-mysql
+      ST_MODEL_PATH: keepitreal/vietnamese-sbert
+      QA_MODEL_PATH: Fsoft-AIC/videberta-xsmall
 networks:
     app-network:
         driver: bridge

@@ -6,3 +6,4 @@ flask_cors
 torch
 pyMySql[rsa]
 peewee
+python-dotenv
