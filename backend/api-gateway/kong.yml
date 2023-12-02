@@ -3,15 +3,15 @@ _transform: true
 
 services:
 - name: auth-service
-  url: https://auth-service
+  url: http://auth-service:5000
   routes:
   - name: auth-route
     paths:
-    - /auth
+      - /auth
 - name: law-service
-  url: https://law-service
+  url: http://law-service:8080
   routes:
   - name: law-route
     paths:
-    - /law
+      - /law
 

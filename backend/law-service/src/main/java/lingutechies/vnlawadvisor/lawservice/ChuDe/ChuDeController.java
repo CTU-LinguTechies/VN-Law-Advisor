@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/law/api/v1/chude")
+@RequestMapping("/api/v1/chude")
 @RequiredArgsConstructor
 public class ChuDeController {
     private final ChuDeService chuDeService;
