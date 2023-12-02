@@ -149,6 +149,7 @@ export default function ChuongReader({ selectedChuong, setSelectedChuong }: Chuo
                             }
                         >
                             <div
+                                id="defefdf"
                                 dangerouslySetInnerHTML={{ __html: md.render(dieu.noidung) }}
                             ></div>
                             {dieu.bangs?.map((bang) => {
