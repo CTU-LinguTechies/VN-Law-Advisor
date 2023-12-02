@@ -1,6 +1,10 @@
+import authService, { LoginRequestDto } from '@/services/auth.service';
+import { setUser } from '@/store/userSlice';
+import tokenService from '@/utils/tokenService';
 import { Card, Col, InputNumber, Input, Button } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 import { Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 
 import * as Yup from 'yup';
 
@@ -13,9 +17,17 @@ export default function LoginCard({ setKey }: LoginCardProps) {
         email: Yup.string().email('Email không hợp lệ').required('Email không được để trống'),
         password: Yup.string().required('Mật khẩu không được để trống'),
     });
+    const router = useRouter();
 
-    const submit = async (values: any) => {
-        console.log(values);
+    const submit = async (values: LoginRequestDto) => {
+        try {
+            const { data } = await authService.login(values);
+            tokenService.accessToken = data.accessToken;
+            tokenService.refreshToken = data.refreshToken;
+            tokenService.expiratedAt = data.expiredAt;
+            setUser(data);
+            router.push('/');
+        } catch (err) {}
     };
 
     return (
@@ -57,6 +69,7 @@ export default function LoginCard({ setKey }: LoginCardProps) {
                                     required
                                 >
                                     <Input
+                                        type="password"
                                         name="password"
                                         value={values.password}
                                         onChange={handleChange}
