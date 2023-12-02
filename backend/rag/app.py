@@ -4,6 +4,7 @@ from playhouse.shortcuts import model_to_dict
 from models import *
 from importer import *
 from directory import *
+from cache import Cache
 
 current_device = "cpu"
 if torch.cuda.is_available():
@@ -32,26 +33,30 @@ def get_question(question_id=None):
 def add_question():
     data = request.get_json()
     question = data['question']
-    output = vectordb.similarity_search(question, k=2)
-    context = ""
-    ciation = []
-    topic_ids = []
-    for doc in output:
-        result_string = doc.page_content
-        topic_id = doc.metadata["source"].split("/")[-1].split(".")[0]
-        index = result_string.find("content: ")
+    if not(Cache.get(question)):
+        output = vectordb.similarity_search(question, k=2)
+        context = ""
+        ciation = []
+        topic_ids = []
+        for doc in output:
+            result_string = doc.page_content
+            topic_id = doc.metadata["source"].split("/")[-1].split(".")[0]
+            index = result_string.find("content: ")
 
-        if index != -1:
-            result_string = result_string[index + len("content: "):].strip()
-        if topic_id and topic_id not in topic_ids:
-            topic_ids.append(topic_id)
+            if index != -1:
+                result_string = result_string[index + len("content: "):].strip()
+            if topic_id and topic_id not in topic_ids:
+                topic_ids.append(topic_id)
+            
+            context += f"{result_string} "
+            ciation.append(result_string)
         
-        context += f"{result_string} "
-        ciation.append(result_string)
-    
-    context = context.strip()
-    response = pipeline(question=question, context=context)["answer"]
-    data['answer'] = response
+        context = context.strip()
+        response = pipeline(question=question, context=context)["answer"]
+        data['answer'] = response
+        Cache.set(question, response)
+    else:
+        data['answer'] = Cache.get(question)
     QuestionModel.create(**data)
     return jsonify(answer=data['answer']), 201
 
@@ -64,33 +69,6 @@ def update_question(question_id):
 @app.route('/question/<int:question_id>', methods=['DELETE'])
 def delete_question(question_id):
     QuestionModel.delete().where(QuestionModel.id == question_id).execute()
-    return '', 204
-
-@app.route('/comment', methods=['GET'])
-@app.route('/comment/<int:comment_id>', methods=['GET'])
-def get_comment(comment_id=None):
-    if comment_id is None:
-        comment = CommentModel.select()
-        return jsonify(model_to_dict(comment)), 201
-    else:
-        comment = CommentModel.get(CommentModel.id == comment_id)
-        return jsonify(model_to_dict(comment)), 201
-        
-@app.route('/comment', methods=['POST'])
-def add_comment():
-    data = request.get_json()
-    comment = CommentModel.create(**data)
-    return jsonify(comment_id=comment.id), 201
-
-@app.route('/comment/<int:comment_id>', methods=['PUT'])
-def update_comment(comment_id):
-    data = request.get_json()
-    CommentModel.update(**data).where(CommentModel.id == comment_id).execute()
-    return '', 204
-
-@app.route('/comment/<int:comment_id>', methods=['DELETE'])
-def delete_comment(comment_id):
-    CommentModel.delete().where(CommentModel.id == comment_id).execute()
     return '', 204
 
 app.run(debug=True)

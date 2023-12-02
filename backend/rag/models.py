@@ -45,11 +45,6 @@ class QuestionModel(MySQLModel):
     email = pw.CharField(50)
     question = pw.TextField()
     answer = pw.TextField()
-    
-class CommentModel(MySQLModel): 
-    email  = pw.CharField(50)
-    question_id = pw.ForeignKeyField(QuestionModel)
-    content = pw.TextField()
 
 myDB.connect()
-myDB.create_tables([QuestionModel, CommentModel])
+myDB.create_tables([QuestionModel])
