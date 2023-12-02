@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/law/api/v1/dieu")
+@RequestMapping("/api/v1/dieu")
 @RequiredArgsConstructor
 public class PDDieuController {
     private final PDDieuService pdDieuService;

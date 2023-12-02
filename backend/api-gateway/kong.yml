@@ -1,0 +1,17 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+- name: auth-service
+  url: http://auth-service:5000
+  routes:
+  - name: auth-route
+    paths:
+      - /auth
+- name: law-service
+  url: http://law-service:8080
+  routes:
+  - name: law-route
+    paths:
+      - /law
+

@@ -1,5 +1,27 @@
 name: vnlawadvisor-backend
 services:
+  kong:
+    image: kong:latest
+    container_name: kong
+    restart: always
+    ports:
+        - '8000:8000'
+        - '8001:8001'
+        - '8002:8002'
+        - '8003:8003'
+        - '8004:8004'
+    environment:
+        KONG_DATABASE: off
+        KONG_PROXY_ACCESS_LOG: /dev/stdout
+        KONG_ADMIN_ACCESS_LOG: /dev/stdout
+        KONG_PROXY_ERROR_LOG: /dev/stderr
+        KONG_ADMIN_ERROR_LOG: /dev/stderr
+        KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+        KONG_ADMIN_LISTEN: '0.0.0.0:8001, 0.0.0.0:8444 ssl'
+    volumes:
+      - ./api-gateway/kong.yml:/usr/local/kong/declarative/kong.yml
+    networks:
+        - app-network
   law-mysql:
     image: mysql:latest
     restart: always
@@ -9,6 +31,7 @@ services:
         MYSQL_ROOT_PASSWORD: 123456789
         MYSQL_DATABASE: law
         MYSQL_PASSWORD: 123456789
+        MYSQL_USER: law
     networks:
         - app-network
   phpmyadmin:
@@ -34,7 +57,7 @@ services:
       - app-network
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://law-mysql:3306/law?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_USERNAME: law
       SPRING_DATASOURCE_PASSWORD: 123456789
   auth-service:
     build: ./auth-service
