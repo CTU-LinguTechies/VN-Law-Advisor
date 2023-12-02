@@ -1,0 +1,17 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+- name: auth-service
+  url: https://auth-service
+  routes:
+  - name: auth-route
+    paths:
+    - /auth
+- name: law-service
+  url: https://law-service
+  routes:
+  - name: law-route
+    paths:
+    - /law
+
