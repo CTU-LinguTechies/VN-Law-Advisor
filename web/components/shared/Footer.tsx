@@ -3,7 +3,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Footer() {
     return (
-        <div style={{ overflow: 'hidden', opacity: 0.5 }}>
+        <div style={{ overflow: 'hidden' }}>
             <div
                 style={{
                     backgroundColor: '#EBE3D5',

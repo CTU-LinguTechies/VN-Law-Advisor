@@ -8,6 +8,18 @@
     --background-end-rgb: 255, 255, 255;
 }
 
+::-webkit-scrollbar {
+    height: 0.1rem;
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 0.1rem;
+    width: 0.5rem;
+    border-radius: 0.1rem;
+    background: #ccc;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --foreground-rgb: 255, 255, 255;
@@ -18,6 +30,7 @@
 body {
     overflow-x: hidden;
     width: 100vw;
+    height: 100vh;
     scroll-behavior: smooth;
 }
 
@@ -25,7 +38,7 @@ body {
     background-image: url('../../assets/images/stacked-waves-haikei.svg');
     background-repeat: no-repeat;
     width: 100%;
-    object-fit: cover;
+    background-size: cover;
     box-shadow:
         rgba(136, 130, 119, 0.15) 5px 2px 1px,
         rgba(136, 130, 119, 0.15) 5px 4px 2px,

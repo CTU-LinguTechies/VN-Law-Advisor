@@ -21,17 +21,22 @@ export interface RegisterRequestDto {
 }
 
 export interface RegisterResponseDto {
-    accessToken: string;
-    refreshToken: string;
-    expirationTime: number;
-}
-
-export interface SocialLoginDto {
-    accessToken: string;
+    name: string;
+    email: string;
+    phonenum: string;
+    password: string;
 }
 
 export interface CheckUserRequestDto {
-    accessToken: string;
+    data: {
+        id: string;
+        email: string;
+        name: string;
+        phonenum: string;
+        role: string;
+        iat: number;
+        exp: number;
+    };
 }
 
 export interface CheckUserResponseDto {
@@ -54,20 +59,12 @@ class AuthService {
         this.client = createHttpClient('auth');
     }
 
-    async socialLogin(body: LoginRequestDto) {
-        return (await this.client.post('/social-login', body)) as LoginResponseDto;
-    }
-
     async register(body: RegisterRequestDto) {
         return (await this.client.post('/register', body)) as RegisterResponseDto;
     }
 
-    async checkUser(body: CheckUserRequestDto) {
-        return (await this.client.post('/check-user', body)) as CheckUserResponseDto;
-    }
-
     async identify() {
-        return (await this.client.get('/identity')) as UserState;
+        return (await this.client.get('/validate')) as CheckUserRequestDto;
     }
 
     async refreshToken(body: RefreshTokenRequestDto) {
