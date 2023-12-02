@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface PDDieuRepository extends JpaRepository<PDDieu, String> {
     Page<PureDieuProjection> findAllByChuongMapcOrderByStt(String chuongMaPc, Pageable pageable);
+    List<PureDieuProjection> findAllByChuongMapcOrderByStt(String chuongMaPc);
 }

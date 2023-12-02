@@ -18,8 +18,12 @@ export default function Navbar() {
             <div className="container">
                 <div className="navbar-header">
                     <button className="navbar-toggler" data-toggle="open-navbar1">
-                        <span></span>
-                        <span></span>
+                        <span>
+                            <Link href="/">Trang chủ</Link>
+                        </span>
+                        <span>
+                            <Link href="/phapdien">Luật</Link>
+                        </span>
                         <span></span>
                     </button>
                     <a href="#">
@@ -38,7 +42,7 @@ export default function Navbar() {
                             <Link href="/chat">Chat</Link>
                         </li>
                         <li className={pathname == 'law' ? 'active' : ''}>
-                            <Link href="/law">Luật</Link>
+                            <Link href="/phapdien">Luật</Link>
                         </li>
                         <li
                             className={

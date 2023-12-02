@@ -6,25 +6,27 @@ import peewee as pw
 from dotenv import load_dotenv
 
 load_dotenv()
+db_name = os.getenv("MYSQL_DATABASE")
+db_host = os.getenv("MYSQL_HOST")
 db_password = os.getenv("MYSQL_ROOT_PASSWORD") 
 
-conn = pymysql.connect(host='localhost', user='root', password=db_password)
+conn = pymysql.connect(host=db_host, user='root', password=db_password)
 cursor = conn.cursor()
-cursor.execute("SHOW DATABASES LIKE 'rag_service'")
+cursor.execute(f"SHOW DATABASES LIKE '${db_name}'")
 result = cursor.fetchall()
 if result:
     print("Database exists")
 else:
     print("Database not exists")
-    cursor.execute('CREATE DATABASE rag_service')
+    cursor.execute(f'CREATE DATABASE ${db_name}')
 conn.close()
 
 myDB = pw.MySQLDatabase(
-    host="localhost",
+    host=db_host,
     port=3306,
     user="root",
     passwd=db_password,
-    database="rag_service"
+    database=db_name
 )
 
 class MySQLModel(pw.Model):

@@ -1,6 +1,6 @@
 import MessageBox from '@/components/chat/MessageBox';
 import QuestionSideNav from '@/components/chat/QuestionsSidenav';
-import { Col, Input, Row } from 'antd';
+import { Card, Col, Input, Row } from 'antd';
 export default function Page() {
     return (
         <main>
@@ -29,6 +29,18 @@ export default function Page() {
                             content="Theo quy định từ bộ luật giao thông, người uống rượu bia khi lái xe sẽ bị phạt từ 500k-1tr"
                             time={new Date()}
                         />
+                        <h4 style={{ color: '#ccc' }} className="text-2xl">
+                            Trích dẫn
+                        </h4>
+                        <Row gutter={[16, 16]}>
+                            {[1, 2, 3].map((item) => (
+                                <Col key={item} xs={24} sm={12} md={12} lg={8} xl={5}>
+                                    <Card hoverable title="Điều: An ninh quốc phòng">
+                                        Điều 1.{item} Quy định chung
+                                    </Card>
+                                </Col>
+                            ))}
+                        </Row>
                     </div>
                     <div
                         style={{
