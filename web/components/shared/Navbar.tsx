@@ -44,13 +44,19 @@ export default function Navbar() {
                         <li className={pathname == 'law' ? 'active' : ''}>
                             <Link href="/phapdien">Luật</Link>
                         </li>
-                        <li
-                            className={
-                                pathname == 'login' || pathname == 'register' ? 'active' : ''
-                            }
-                        >
-                            <Link href="/auth">Đăng nhập</Link>
-                        </li>
+                        {user ? (
+                            <li>
+                                <a className="active">{user.name}</a>
+                            </li>
+                        ) : (
+                            <li
+                                className={
+                                    pathname == 'login' || pathname == 'register' ? 'active' : ''
+                                }
+                            >
+                                <Link href="/auth">Đăng nhập</Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

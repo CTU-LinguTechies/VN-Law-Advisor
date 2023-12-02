@@ -74,27 +74,28 @@ class AuthController {
                         throw new CustomError('Permission denied.', 401);
                     if (adminUser.role === ROLES.USER)
                         throw new CustomError('You are not allowed to do this.', 403);
-
+                    delete adminUser.password;
                     return res.status(200).json({
                         data: adminUser,
                         message: 'Valid Token',
                         status: 200,
                     });
                 case ROLES.USER:
-                    const user = TokenUtil.decodeToken(token);
+                    let user = TokenUtil.decodeToken(token);
                     if (user.role !== ROLES.USER && user.role !== ROLES.ADMIN)
                         throw new CustomError('Permission denied', 401);
-
+                    delete user.password;
                     return res.status(200).json({
                         data: user,
                         message: 'Valid Token',
                         status: 200,
                     });
                 default:
-                    return res.status(400).json({
-                        data: {},
-                        message: 'Unknown Roles',
-                        status: 400,
+                    const unknownUser = TokenUtil.decodeToken(token);
+                    return res.status(200).json({
+                        data: unknownUser,
+                        message: 'Valid Token',
+                        status: 200,
                     });
             }
         } catch (error) {

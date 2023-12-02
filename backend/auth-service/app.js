@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./services/dbSync');
 var indexRouter = require('./routes/index');
-
+const cors = require('cors');
 var app = express();
+
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.use(logger('dev'));
 app.use(express.json());

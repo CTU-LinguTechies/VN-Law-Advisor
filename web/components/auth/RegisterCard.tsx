@@ -1,24 +1,46 @@
+import authService, { RegisterRequestDto } from '@/services/auth.service';
+import userSlice, { setUser } from '@/store/userSlice';
+import tokenService from '@/utils/tokenService';
 import { Card, Col, InputNumber, Input, Button } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 import { Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 
 import * as Yup from 'yup';
 export interface RegisterCardProps {
     setKey: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export interface formModel {
+    email: string;
+    password: string;
+    checkPassword: string;
+    name: string;
+}
+
 export default function RegisterCard({ setKey }: RegisterCardProps) {
     const validationSchema = Yup.object({
         email: Yup.string().email('Email không hợp lệ').required('Email không được để trống'),
-        ten: Yup.string().required('Tên không được để trống'),
+        name: Yup.string().required('Tên không được để trống'),
         password: Yup.string().required('Mật khẩu không được để trống'),
         checkPassword: Yup.string()
             .required('Không được trống')
             .equals([Yup.ref('password'), null], 'Mật khẩu không khớp'),
     });
 
-    const submit = async (values: any) => {
-        console.log(values);
+    const router = useRouter();
+
+    const submit = async (values: formModel) => {
+        try {
+            const res = await authService.register(values as RegisterRequestDto);
+            const { data } = res;
+
+            tokenService.accessToken = data.accessToken;
+            tokenService.refreshToken = data.refreshToken;
+            tokenService.expiratedAt = data.expiredAt;
+            setUser(data);
+            router.push('/');
+        } catch (err) {}
     };
     return (
         <Col span={14} className="mt-5">
@@ -29,7 +51,7 @@ export default function RegisterCard({ setKey }: RegisterCardProps) {
                             email: '',
                             password: '',
                             checkPassword: '',
-                            ten: '',
+                            name: '',
                         }}
                         validationSchema={validationSchema}
                         onSubmit={submit}
@@ -57,17 +79,17 @@ export default function RegisterCard({ setKey }: RegisterCardProps) {
                                     labelCol={{ span: 8 }}
                                     labelAlign="left"
                                     label="Tên"
-                                    validateStatus={errors.ten ? 'error' : 'validating'}
+                                    validateStatus={errors.name ? 'error' : 'validating'}
                                     required
                                 >
                                     <Input
-                                        name="ten"
-                                        value={values.ten}
+                                        name="name"
+                                        value={values.name}
                                         onChange={handleChange}
                                         placeholder="Nhập tên..."
                                     />
                                     <p style={{ color: 'red', fontWeight: 300, marginTop: 2 }}>
-                                        {errors.ten}
+                                        {errors.name}
                                     </p>
                                 </FormItem>
                                 <FormItem
@@ -78,6 +100,7 @@ export default function RegisterCard({ setKey }: RegisterCardProps) {
                                     required
                                 >
                                     <Input
+                                        type="password"
                                         name="password"
                                         value={values.password}
                                         onChange={handleChange}
@@ -95,6 +118,7 @@ export default function RegisterCard({ setKey }: RegisterCardProps) {
                                     required
                                 >
                                     <Input
+                                        type="password"
                                         name="checkPassword"
                                         value={values.checkPassword}
                                         onChange={handleChange}

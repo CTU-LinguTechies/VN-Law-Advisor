@@ -3,40 +3,35 @@ import createHttpClient from '@/utils/createHttpClient';
 import { AxiosInstance } from 'axios';
 
 export interface LoginRequestDto {
-    accessToken: string;
-}
-
-export interface LoginResponseDto {
-    accessToken: string;
-    refreshToken: string;
-    expirationTime: number;
-}
-export interface RegisterRequestDto {
-    userRole: 'APPLICANT' | 'RECRUITER';
-    fullName: string;
-    phoneNumber: string;
-    accessToken: string;
-    dob: string;
-    gender: 'MALE' | 'FEMALE' | 'OTHER';
-}
-
-export interface RegisterResponseDto {
-    name: string;
     email: string;
-    phonenum: string;
     password: string;
 }
 
-export interface CheckUserRequestDto {
-    data: {
-        id: string;
-        email: string;
-        name: string;
-        phonenum: string;
-        role: string;
-        iat: number;
-        exp: number;
+export interface LoginResponseDto {
+    data: UserState & {
+        accessToken: string;
+        refreshToken: string;
+        expiredAt: number;
     };
+    message: string;
+}
+export interface RegisterRequestDto {
+    name: string;
+    email: string;
+    password: string;
+}
+
+export interface RegisterResponseDto {
+    data: UserState & {
+        accessToken: string;
+        refreshToken: string;
+        expiredAt: number;
+    };
+    message: string;
+}
+
+export interface CheckUserRequestDto {
+    data: UserState;
 }
 
 export interface CheckUserResponseDto {
@@ -56,15 +51,19 @@ class AuthService {
     private client: AxiosInstance;
 
     constructor() {
-        this.client = createHttpClient('auth');
+        this.client = createHttpClient('auth/api/v1');
     }
 
     async register(body: RegisterRequestDto) {
         return (await this.client.post('/register', body)) as RegisterResponseDto;
     }
 
+    async login(body: LoginRequestDto) {
+        return (await this.client.post('/login', body)) as LoginResponseDto;
+    }
+
     async identify() {
-        return (await this.client.get('/validate')) as CheckUserRequestDto;
+        return (await this.client.post('/validate')) as CheckUserRequestDto;
     }
 
     async refreshToken(body: RefreshTokenRequestDto) {
