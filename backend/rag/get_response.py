@@ -15,8 +15,6 @@ if torch.cuda.is_available():
 embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
 topic_vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
-text_vectordb = Chroma(embedding_function=embeddings,
-                  persist_directory=TEXT_DB_PATH)
 pipeline = pipeline(task="question-answering", model=QA_MODEL_PATH, local_files_only=True)
 
 
@@ -70,41 +68,6 @@ def get_response():
                     "response": response,
                     "topic_ids": topic_ids,
                 }, 200
-@app.route('/get-relevant-texts', methods=['POST'])
-def get_relevant_texts():
-    if request.method == 'POST':
-        req = request.get_json()
-        if req:
-            try:
-                keyword = req["keyword"]
-                num_of_relevant_texts = int(req["num_of_relevant_texts"])
-            except ValueError:
-                return {
-                    "status": "error",
-                    "response": "num_of_relevant_texts must be an integer",
-                }, 400
-            except:
-                return {
-                    "status": "error",
-                    "response": "Error while retrieving data from get_relevant_texts payload",
-                }, 400
-            
-            output = text_vectordb.similarity_search(keyword, k=num_of_relevant_texts)
-
-            result = []
-            for doc in output:
-                result_string = doc.page_content
-                index = result_string.find("noi_dung: ")
-                if index != -1:
-                    result_string = result_string[index + len("noi_dung: "):].strip()
-                result.append({
-                    "id": doc.metadata["id"],
-                    "id_vb": doc.metadata["id_vb"],
-                    "chi_muc_cha": doc.metadata["chi_muc_cha"],
-                    "ciation": result_string,
-                })
-
-            return result, 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='3000')
