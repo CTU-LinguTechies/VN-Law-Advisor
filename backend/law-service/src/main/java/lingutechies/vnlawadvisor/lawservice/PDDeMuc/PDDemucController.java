@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/law/api/v1/demuc")
+@RequestMapping("/api/v1/demuc")
 public class PDDemucController {
     private final PDDeMucService pdDeMucService;
 
