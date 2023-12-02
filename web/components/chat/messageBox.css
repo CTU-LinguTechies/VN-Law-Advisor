@@ -1,0 +1,40 @@
+.message-box {
+    max-width: 600px;
+    width: 100%;
+}
+.message {
+    padding: 20px;
+    color: white;
+    border-radius: 12px;
+    width: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.message.bot {
+    background: rgb(96, 168, 246);
+    background: linear-gradient(
+        90deg,
+        rgba(96, 168, 246, 1) 17%,
+        rgba(94, 167, 246, 1) 19%,
+        rgba(47, 140, 243, 1) 64%
+    );
+}
+.message.user {
+    background-color: white;
+}
+.message-box p {
+    font-size: 20px;
+}
+.message-box .message.user p {
+    color: black;
+}
+.message-box .time {
+    font-size: 14px;
+    opacity: 0.8;
+    padding: 7px 14px;
+}
+.items-end {
+    align-items: flex-end;
+}
+.items-start {
+    align-items: flex-start;
+}

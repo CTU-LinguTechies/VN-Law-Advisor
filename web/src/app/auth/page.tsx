@@ -29,9 +29,9 @@ const AuthPage: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="h-full">
             <div className="flex justify-center w-full"></div>
-            <Row className="flex justify-center overflow-hidden" gutter={[16, 16]}>
+            <Row className="flex justify-center overflow-hidden h-full" gutter={[16, 16]}>
                 <Col span={16}>
                     <div className="max-w-[100%]">
                         <Menu
@@ -51,7 +51,7 @@ const AuthPage: React.FC = () => {
                     </div>
                 </Col>
                 <Col span={8}>
-                    <div className="side-wavy h-[700px]"></div>
+                    <div className="side-wavy h-full"></div>
                 </Col>
             </Row>
         </div>
