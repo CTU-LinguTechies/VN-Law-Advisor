@@ -66,7 +66,7 @@ export default function Home() {
                         </Col>
                         <Col span={4}>
                             <HomeNavigationCard
-                                link="/chat"
+                                link="/vbqppl"
                                 title="Tra cứu các VBQPPL"
                                 description="Tra cứu các điều luật từ VBQPPL Việt Nam."
                                 icon="law"
