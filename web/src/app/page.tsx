@@ -74,7 +74,7 @@ export default function Home() {
                         </Col>
                         <Col span={4}>
                             <HomeNavigationCard
-                                link="/chat"
+                                link="/form"
                                 title="Các bảng, biểu mẫu"
                                 description="Tra cứu các bảng và biểu mẫu từ VBQPPL."
                                 icon="form"

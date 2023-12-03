@@ -1,14 +1,12 @@
 package lingutechies.vnlawadvisor.lawservice.PDDieu;
 
 import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.ListDieuTreeViewDTO;
+import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.ListTableAndFormDTO;
 import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.PureDieuProjectionImpl;
 import lingutechies.vnlawadvisor.lawservice.config.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -25,6 +23,21 @@ public class PDDieuController {
     @GetMapping("/tree/{mapc}")
     public ListDieuTreeViewDTO getDieuTreeViewByMapc(@PathVariable String mapc) throws CustomException {
         return pdDieuService.getDieuTreeViewByMapc(mapc);
+    }
+
+    @GetMapping("/filter")
+    Page<PureDieuProjectionImpl> getDieuByFilter(
+            @RequestParam(name = "pageNo", value = "pageNo", defaultValue = "") Optional<Integer> pageNo,
+            @RequestParam(name = "pageSize", value = "pageSize", defaultValue = "") Optional<Integer> pageSize,
+            @RequestParam(name= "deMucId", value = "deMucId", defaultValue = "") Optional<String> demucId,
+            @RequestParam(name="name", value = "name", defaultValue = "") Optional<String> name
+    ){
+        return pdDieuService.getDieuByFilter(demucId, name, pageNo, pageSize);
+    }
+
+    @GetMapping("/form/{mapc}")
+    public ListTableAndFormDTO getListTableFormByMapc(@PathVariable String mapc) throws CustomException {
+        return pdDieuService.getListTableFormByMapc(mapc);
     }
 
 }
