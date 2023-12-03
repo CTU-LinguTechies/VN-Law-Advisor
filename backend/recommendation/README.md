@@ -2,6 +2,14 @@
 
 Đây sẽ là hướng dẫn để giúp bạn khởi chạy Service nằm trong thư mục `/recommendation/`.
 
+## Hệ thống lưu trữ các văn bản Pháp luật
+Thiết kế Hệ thống lưu trữ các văn bản Pháp luật như hình vẽ bên dưới:
+![Kiến trúc hệ thống lưu trữ các văn bản Pháp luật](./rag_flow.png)
+
+## Hệ thống Gợi ý các văn bản pháp luật
+Thiết kế Hệ thống Gợi ý các văn bản pháp luật như hình vẽ bên dưới:
+![Kiến trúc hệ thống Gợi ý các văn bản pháp luật](./recommendations.png)
+
 ### Cài đặt các thư viện cần thiết
 
 Để cài đặt các thư viện cần thiết, hãy chạy câu lệnh bên dưới:

@@ -2,6 +2,15 @@
 
 Đây sẽ là hướng dẫn để giúp bạn khởi chạy Service nằm trong thư mục `/rag/`.
 
+
+## Hệ thống lưu trữ các văn bản Pháp luật
+Thiết kế Hệ thống lưu trữ các văn bản Pháp luật như hình vẽ bên dưới:
+![Kiến trúc hệ thống lưu trữ các văn bản Pháp luật](./rag_flow.png)
+
+## Hệ thống hỏi đáp
+Thiết kế Hệ thống hỏi đáp như hình vẽ bên dưới:
+![Kiến trúc hệ thống hỏi đáp](./qa.png)
+
 ### Cài đặt các thư viện cần thiết
 Để cài đặt các thư viện cần thiết, hãy chạy câu lệnh bên dưới:
 ```bash
