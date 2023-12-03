@@ -11,7 +11,8 @@ export default function Page() {
                 </Col>
                 <Col
                     style={{
-                        backgroundColor: '#fafafa',
+                        background:
+                            'radial-gradient(circle, rgba(240,242,244,1) 0%, rgba(232,241,252,1) 100%)',
                     }}
                     xs={24}
                     sm={8}
@@ -19,22 +20,6 @@ export default function Page() {
                     lg={18}
                     xl={19}
                 >
-                    <div className="my-5 ms-5 flex-col w-[80%] border-underline">
-                        <div className="flex items-center">
-                            <img
-                                style={{
-                                    width: 100,
-                                    height: 100,
-                                    borderRadius: '50%',
-                                }}
-                                src="/LinguTechies.svg"
-                                alt="logo"
-                            />
-                            <h3 style={{ fontWeight: 400 }} className="text-3xl ms-4">
-                                Hỏi Đáp Pháp Luật
-                            </h3>
-                        </div>
-                    </div>
                     <div style={{ margin: 12 }}>
                         <MessageBox
                             isUser={true}
@@ -62,10 +47,10 @@ export default function Page() {
                     <div
                         style={{
                             position: 'absolute',
-                            bottom: 12,
+                            bottom: 0,
                             left: 0,
                             right: 0,
-                            padding: 12,
+                            padding: '6px 12px',
                         }}
                     >
                         <Input

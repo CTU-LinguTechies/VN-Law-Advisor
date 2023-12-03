@@ -45,6 +45,7 @@ services:
       UPLOAD_LIMIT: 300M
   law-service:
     build: ./law-service
+    restart: always
     depends_on:
       - law-mysql
     volumes:
@@ -57,6 +58,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: 123456789
   auth-service:
     build: ./auth-service
+    restart: always
     depends_on:
       - auth-mysql
     ports: 
@@ -105,8 +107,10 @@ services:
         - app-network
   qna-service:
     build: ./rag
+    restart: always
     depends_on:
       - qna-mysql
+      - redis
     volumes:
       - ./rag:/app
     networks:

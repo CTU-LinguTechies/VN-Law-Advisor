@@ -1,5 +1,6 @@
 'use client';
 import FormListSearch from '@/components/form/FormListSearch';
+import ListTable from '@/components/form/ListTable';
 import { Col, Row } from 'antd';
 import FormList from 'antd/es/form/FormList';
 import Lottie from 'lottie-react';
@@ -30,6 +31,7 @@ export default function FormPage() {
                 </Fade>
             </div>
             <div className="max-w-[1440px] w-[95%] mx-auto my-5">
+                <ListTable />
                 <FormListSearch />
             </div>
         </main>
