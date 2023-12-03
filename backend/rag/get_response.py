@@ -12,10 +12,10 @@ if torch.cuda.is_available():
     current_device="cuda"
 
 
-embeddings = HuggingFaceEmbeddings(model_name=st_model_path, model_kwargs={"device": current_device})
-vectordb = Chroma(embedding_function=embeddings,
-                  persist_directory=chroma_db_persist_directory)
-pipeline = pipeline(task="question-answering", model=qa_model_path, local_files_only=True)
+embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
+topic_vectordb = Chroma(embedding_function=embeddings,
+                  persist_directory=TOPIC_DB_PATH)
+pipeline = pipeline(task="question-answering", model=QA_MODEL_PATH, local_files_only=True)
 
 
 @app.route('/', methods=['GET'])
@@ -40,7 +40,7 @@ def get_response():
                     "response": "Question is required",
                 }, 400
             
-            output = vectordb.similarity_search(question, k=2)
+            output = topic_vectordb.similarity_search(question, k=2)
 
             context = ""
             ciation = []
@@ -68,7 +68,6 @@ def get_response():
                     "response": response,
                     "topic_ids": topic_ids,
                 }, 200
-            
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='3000')

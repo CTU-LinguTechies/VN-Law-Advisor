@@ -17,4 +17,6 @@ public interface DeMucRepository extends JpaRepository<PDDeMuc, String> {
     List<PureDeMuc> findAllByChuDeId(String chudeId);
 
     Page<PDDeMuc> findAll(Pageable pageable);
+
+
 }

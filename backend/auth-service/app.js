@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./services/dbSync');
 var indexRouter = require('./routes/index');
-
+const cors = require('cors');
 var app = express();
+
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -14,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/auth/api/v1', indexRouter);
+app.use('/api/v1', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

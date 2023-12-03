@@ -18,8 +18,12 @@ export default function Navbar() {
             <div className="container">
                 <div className="navbar-header">
                     <button className="navbar-toggler" data-toggle="open-navbar1">
-                        <span></span>
-                        <span></span>
+                        <span>
+                            <Link href="/">Trang chủ</Link>
+                        </span>
+                        <span>
+                            <Link href="/phapdien">Luật</Link>
+                        </span>
                         <span></span>
                     </button>
                     <a href="#">
@@ -38,15 +42,21 @@ export default function Navbar() {
                             <Link href="/chat">Chat</Link>
                         </li>
                         <li className={pathname == 'law' ? 'active' : ''}>
-                            <Link href="/law">Luật</Link>
+                            <Link href="/phapdien">Luật</Link>
                         </li>
-                        <li
-                            className={
-                                pathname == 'login' || pathname == 'register' ? 'active' : ''
-                            }
-                        >
-                            <Link href="/auth">Đăng nhập</Link>
-                        </li>
+                        {user ? (
+                            <li>
+                                <a className="active">{user.name}</a>
+                            </li>
+                        ) : (
+                            <li
+                                className={
+                                    pathname == 'login' || pathname == 'register' ? 'active' : ''
+                                }
+                            >
+                                <Link href="/auth">Đăng nhập</Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

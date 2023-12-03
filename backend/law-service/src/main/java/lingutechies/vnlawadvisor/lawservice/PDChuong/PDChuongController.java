@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/law/api/v1/chuong")
+@RequestMapping("/api/v1/chuong")
 @RequiredArgsConstructor
 public class PDChuongController {
     private final PDChuongService pdChuongService;
