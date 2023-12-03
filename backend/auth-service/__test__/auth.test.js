@@ -21,7 +21,7 @@ describe('user registration', () => {
     describe('given the email is valid', () => {
         it('should return the user payload', async () => {
             const { statusCode, body } = await supertest(app)
-                .post('/auth/api/v1/register')
+                .post('/api/v1/register')
                 .send(userInput);
 
             expect(statusCode).toEqual(200);
@@ -41,7 +41,7 @@ describe('user login', () => {
                 password: '123456789',
             };
             const { statusCode, body } = await supertest(app)
-                .post('/auth/api/v1/login')
+                .post('/api/v1/login')
                 .send(loginCredential);
             expect(statusCode).toEqual(404);
         });
@@ -53,7 +53,7 @@ describe('user login', () => {
                 password: 'random',
             };
             const { statusCode, body } = await supertest(app)
-                .post('/auth/api/v1/login')
+                .post('/api/v1/login')
                 .send(loginCredential);
             expect(statusCode).toEqual(401);
             expect((res) => {
@@ -67,7 +67,7 @@ describe('user login', () => {
                 password: userInput.password,
             };
             const { statusCode, body } = await supertest(app)
-                .post('/auth/api/v1/login')
+                .post('/api/v1/login')
                 .send(loginCredential);
             expect(statusCode).toEqual(200);
             expect(body.data.accessToken).toBeDefined();
@@ -82,10 +82,10 @@ describe('validate token', () => {
             email: userInput.email,
             password: userInput.password,
         };
-        let response = await supertest(app).post('/auth/api/v1/login').send(loginCredential);
+        let response = await supertest(app).post('/api/v1/login').send(loginCredential);
         const accessToken = response.body.data.accessToken;
 
-        const request = supertest(app).post('/auth/api/v1/validate');
+        const request = supertest(app).post('/api/v1/validate');
 
         request.set('Authorization', `Bearer ${accessToken}`);
         request.set('role', 'USER');
