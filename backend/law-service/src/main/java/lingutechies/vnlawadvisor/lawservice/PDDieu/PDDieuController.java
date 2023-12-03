@@ -27,10 +27,10 @@ public class PDDieuController {
 
     @GetMapping("/filter")
     Page<PureDieuProjectionImpl> getDieuByFilter(
-            @RequestParam(name = "pageNo", value = "pageNo", defaultValue = "") Optional<Integer> pageNo,
-            @RequestParam(name = "pageSize", value = "pageSize", defaultValue = "") Optional<Integer> pageSize,
-            @RequestParam(name= "deMucId", value = "deMucId", defaultValue = "") Optional<String> demucId,
-            @RequestParam(name="name", value = "name", defaultValue = "") Optional<String> name
+            @RequestParam(name = "pageNo", value = "pageNo") Optional<Integer> pageNo,
+            @RequestParam(name = "pageSize", value = "pageSize") Optional<Integer> pageSize,
+            @RequestParam(name= "deMucId", value = "deMucId") Optional<String> demucId,
+            @RequestParam(name="name", value = "name") Optional<String> name
     ){
         return pdDieuService.getDieuByFilter(demucId, name, pageNo, pageSize);
     }

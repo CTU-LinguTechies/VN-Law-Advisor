@@ -17,11 +17,11 @@ public interface PDDieuRepository extends JpaRepository<PDDieu, String> {
 
     @Query("SELECT new lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.PureDieuProjectionImpl(d.mapc, d.ten, d.stt, " +
             "d.noidung, d.chimuc, d.vbqppl, d.vbqpplLink) " +
-            "FROM PDDieu d WHERE d.deMuc.id = ?1 AND (d.ten = '' OR d.ten LIKE %?2%) ")
+            "FROM PDDieu d WHERE d.deMuc.id = ?1 AND (?2 = '' OR d.ten LIKE %?2%) ")
     Page<PureDieuProjectionImpl> findAllWithFilterWithDeMuc(String deMucId, String name, Pageable pageable);
 
     @Query("SELECT new lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.PureDieuProjectionImpl(d.mapc, d.ten, d.stt, " +
             "d.noidung, d.chimuc, d.vbqppl, d.vbqpplLink) " +
-            "FROM PDDieu d WHERE d.ten = '' OR d.ten LIKE %?1% ")
+            "FROM PDDieu d WHERE ?1 = '' OR d.ten LIKE %?1% ")
     Page<PureDieuProjectionImpl> queryPureDieuWithFilter(String name, Pageable pageable);
 }

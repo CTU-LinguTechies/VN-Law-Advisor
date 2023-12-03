@@ -29,7 +29,7 @@ export default function FormPage() {
                     </Row>
                 </Fade>
             </div>
-            <div className="max-w-[95%] mx-auto my-5">
+            <div className="max-w-[1440px] w-[95%] mx-auto my-5">
                 <FormListSearch />
             </div>
         </main>

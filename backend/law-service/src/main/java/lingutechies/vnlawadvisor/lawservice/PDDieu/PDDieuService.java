@@ -112,7 +112,7 @@ public class PDDieuService {
 
     public Page<PureDieuProjectionImpl> getDieuByFilter(Optional<String> demucId, Optional<String> name,
                                                         Optional<Integer> pageNo, Optional<Integer> pageSize) {
-        Pageable pageable = PageRequest.of(pageNo.orElse(0), pageSize.orElse(10));
+        Pageable pageable = PageRequest.of(pageNo.orElse(0), pageSize.orElse(4));
         if (demucId.isPresent()){
             return pdDieuRepository.findAllWithFilterWithDeMuc(demucId.get(), name.orElse(""), pageable);
         }
