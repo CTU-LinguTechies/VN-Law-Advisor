@@ -47,19 +47,18 @@ export default function TreeView({ setChuongSelected }: TreeViewProps) {
     const params = useSearchParams();
     const dieu = params.get('id');
 
-    async function fetchAllChuDes() {
-        const pdchude = await pdchudeService.getAll();
-        const data = pdchude.map((item: any) => {
-            return {
-                title: `Chủ đề ${item.stt}: ${item.ten}`,
-                key: `chude_${item.id.toString()}`,
-                children: undefined,
-            } as DataNode;
-        });
-        setTreeData(data);
-    }
-
     useEffect(() => {
+        async function fetchAllChuDes() {
+            const pdchude = await pdchudeService.getAll();
+            const data = pdchude.map((item: any) => {
+                return {
+                    title: `Chủ đề ${item.stt}: ${item.ten}`,
+                    key: `chude_${item.id.toString()}`,
+                    children: undefined,
+                } as DataNode;
+            });
+            setTreeData(data);
+        }
         fetchAllChuDes();
     }, []);
 
@@ -102,6 +101,8 @@ export default function TreeView({ setChuongSelected }: TreeViewProps) {
     }, [dieu]);
 
     const onSelect = async (selectedKeys: React.Key[], info: any) => {
+        if (selectedKeys.length === 0) return;
+        setSelectedKeys(selectedKeys);
         const key = selectedKeys[0].toString().split('_')[1] as string;
         pddieuService.getAllByChuongId(key).then((pddieu: any) => {
             setChuongSelected({ mapc: key, ten: info.node.title, dieus: pddieu.content });
@@ -114,6 +115,8 @@ export default function TreeView({ setChuongSelected }: TreeViewProps) {
                 resolve();
                 return;
             }
+            setExpandedKeys((origin) => [...origin, key]);
+            setSelectedKeys([key]);
 
             if (key.startsWith('chude')) {
                 pddemucService.getAllByChuDeId(key.split('_')[1]).then((pddemuc: any) => {

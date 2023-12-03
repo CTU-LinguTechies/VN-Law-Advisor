@@ -4,11 +4,7 @@ import lingutechies.vnlawadvisor.lawservice.ChuDe.ChuDe;
 import lingutechies.vnlawadvisor.lawservice.ChuDe.ChuDeRepository;
 import lingutechies.vnlawadvisor.lawservice.PDChuong.PDChuong;
 import lingutechies.vnlawadvisor.lawservice.PDDeMuc.DeMucRepository;
-import lingutechies.vnlawadvisor.lawservice.PDDeMuc.PDDeMuc;
-import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.DieuTreeViewDTO;
-import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.ListDieuTreeViewDTO;
-import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.PureDieuProjection;
-import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.PureDieuProjectionImpl;
+import lingutechies.vnlawadvisor.lawservice.PDDieu.DTO.*;
 import lingutechies.vnlawadvisor.lawservice.PDFile.DTO.PureFileProjection;
 import lingutechies.vnlawadvisor.lawservice.PDFile.PDFileRepository;
 import lingutechies.vnlawadvisor.lawservice.PDTable.DTO.PureTableProjection;
@@ -112,5 +108,20 @@ public class PDDieuService {
                 )
                 .dieus(dieuTreeViewDTOS)
                 .build();
+    }
+
+    public Page<PureDieuProjectionImpl> getDieuByFilter(Optional<String> demucId, Optional<String> name,
+                                                        Optional<Integer> pageNo, Optional<Integer> pageSize) {
+        Pageable pageable = PageRequest.of(pageNo.orElse(0), pageSize.orElse(4));
+        if (demucId.isPresent()){
+            return pdDieuRepository.findAllWithFilterWithDeMuc(demucId.get(), name.orElse(""), pageable);
+        }
+        return pdDieuRepository.queryPureDieuWithFilter(name.orElse(""), pageable);
+    }
+
+    public ListTableAndFormDTO getListTableFormByMapc(String mapc) throws CustomException {
+        List<PureFileProjection> files = pdFileRepository.findAllByFileOfDieuMapc(mapc);
+        List<PureTableProjection> bangs = pdTableRepository.findAllByBangOfDieuMapc(mapc);
+        return new ListTableAndFormDTO(bangs, files);
     }
 }

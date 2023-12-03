@@ -18,3 +18,13 @@ export interface PDBangModel {
     id: string;
     html: string;
 }
+
+export interface PureDieuModel {
+    mapc: string;
+    ten: string;
+    stt: number;
+    noidung: string;
+    chimuc: number;
+    vbqppl: string;
+    vbqpplLink: string;
+}

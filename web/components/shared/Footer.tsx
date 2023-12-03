@@ -6,7 +6,7 @@ export default function Footer() {
         <div style={{ overflow: 'hidden' }}>
             <div
                 style={{
-                    backgroundColor: '#EBE3D5',
+                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
                     padding: 10,
                     width: '100%',
                     display: 'flex',

@@ -44,19 +44,23 @@ def get_response():
 
             context = ""
             ciation = []
-            topic_ids = []
             for doc in output:
                 result_string = doc.page_content
-                topic_id = doc.metadata["source"].split("/")[-1].split(".")[0]
                 index = result_string.find("content: ")
-
                 if index != -1:
                     result_string = result_string[index + len("content: "):].strip()
-                if topic_id and topic_id not in topic_ids:
-                    topic_ids.append(topic_id)
-                
+                result_string = result_string.replace("\n", " ")
+                result_string = re.sub(r"\s+", r" ", result_string)
                 context += f"{result_string} "
-                ciation.append(result_string)
+
+                ciation.append({
+                    "mapc": doc.metadata["mapc"],
+                    "_link": doc.metadata["_link"],
+                    "chude_id": doc.metadata["chude_id"],
+                    "demuc_id": doc.metadata["demuc_id"],
+                    "ten": doc.metadata["ten"],
+                    "noidung": result_string
+                })
             
             context = context.strip()
             response = pipeline(question=question, context=context)["answer"]
@@ -66,7 +70,6 @@ def get_response():
                     "question": question,
                     "ciation": ciation,
                     "response": response,
-                    "topic_ids": topic_ids,
                 }, 200
 
 if __name__ == '__main__':
