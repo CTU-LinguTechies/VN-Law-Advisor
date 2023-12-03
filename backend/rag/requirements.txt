@@ -7,3 +7,4 @@ torch
 pyMySql[rsa]
 peewee
 python-dotenv
+redis
