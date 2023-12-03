@@ -6,6 +6,7 @@ from directory import *
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from transformers import pipeline
+import torch
 current_device = "cpu"
 if torch.cuda.is_available():
     current_device="cuda"
@@ -54,7 +55,14 @@ def add_question():
     response = pipeline(question=question, context=context)["answer"]
     data['answer'] = response
     QuestionModel.create(**data)
-    return jsonify(answer=data['answer']), 201
+    return {
+                    "status": "success",
+                    "question": question,
+                    "ciation": ciation,
+                    "response": response,
+                    "topic_ids": topic_ids,
+                }, 200
+
 
 @app.route('/question/<int:question_id>', methods=['PUT'])
 def update_question(question_id):
@@ -94,4 +102,4 @@ def delete_comment(comment_id):
     CommentModel.delete().where(CommentModel.id == comment_id).execute()
     return '', 204
 
-app.run(debug=True)
+app.run(debug=True, port=5001)

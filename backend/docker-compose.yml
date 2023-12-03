@@ -96,6 +96,8 @@ services:
   qna-mysql:
     image: mysql:latest
     restart: always
+    ports:
+        - '3307:3306'
     environment:
         MYSQL_ROOT_PASSWORD: 123456789
         MYSQL_DATABASE: qna

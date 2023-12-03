@@ -10,7 +10,7 @@ db_name = os.getenv("MYSQL_DATABASE")
 db_host = os.getenv("MYSQL_HOST")
 db_password = os.getenv("MYSQL_ROOT_PASSWORD") 
 
-conn = pymysql.connect(host=db_host, user='root', password=db_password)
+conn = pymysql.connect(host=db_host, port=3306, user='root', password=db_password)
 cursor = conn.cursor()
 cursor.execute(f"SHOW DATABASES LIKE '${db_name}'")
 result = cursor.fetchall()
