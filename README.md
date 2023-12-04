@@ -2,6 +2,17 @@
 
 # VN-Law-Advisor
 
+[![Github license](https://img.shields.io/github/license/CTU-LinguTechies/VN-Law-Advisor.svg 'Github license')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/blob/master/LICENSE)
+[![Open issues](https://img.shields.io/github/issues/CTU-LinguTechies/VN-Law-Advisor.svg 'Open issues')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues)
+[![Open Pull Requests](https://img.shields.io/github/issues-pr/CTU-LinguTechies/VN-Law-Advisor.svg 'Open Pull Requests')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/pulls)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/CTU-LinguTechies/VN-Law-Advisor.svg 'Commit activity')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/graphs/commit-activity)
+[![GitHub contributors](https://img.shields.io/github/contributors/CTU-LinguTechies/VN-Law-Advisor.svg 'Github contributors')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/graphs/contributors)
+
+<a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=%F0%9F%90%9B+Bug+Report%3A+">Bug Report ⚠️
+</a>
+
+<a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=%F0%9F%90%9B+Bug+Report%3A+">Request Feature 👩‍💻</a>
+
 Ứng dụng hỗ trợ tra cứu, hỏi đáp tri thức pháp luật dựa trên Bộ pháp điển và CSDL văn bản QPPL Việt Nam.
 
 Mục tiêu là phát triển một hệ thống tra cứu, hỏi đáp tri thức pháp luật Việt Nam. Dựa trên các mô hình ngôn ngữ lớn cùng với kiến trúc microservices.
@@ -10,17 +21,18 @@ Dự án được thực hiện trong cuộc thi [Phần Mềm Nguồn Mở-Olym
 
 Để biết thêm chi tiết về cuộc thi, bạn có thể xem tại [đây](https://vfossa.vn/tin-tuc/de-thi-phan-mem-nguon-mo-olp-2023-688.html).
 
-## Danh Mục 🔎
+## 🔎 Danh Mục
 
 1. [Giới Thiệu](#Giới-Thiệu)
 2. [Chức Năng](#chức-năng-chính)
-3. [Tổng Quan Hệ Thống](#tổng-quan-hệ-thống)
-4. [Cấu Trúc Thư Mục](#tổng-quan-hệ-thống)
+3. [Tổng Quan Hệ Thống](#👩‍💻-tổng-quan-hệ-thống)
+4. [Cấu Trúc Thư Mục](#cấu-trúc-thư-mục)
 5. [Hướng Dẫn Cài Đặt](#hướng-dẫn-cài-đặt)
-    - [Yêu Cầu - Prerequisites](#yêu-cầu)
-    - [Cài Đặt](#installation-steps)
+    - [📋 Yêu Cầu - Prerequisites](#yêu-cầu-📋)
+    - [🔨 Cài Đặt](#🔨-cài-đặt)
 6. [CI/CD](#ci/cd)
-7. [Đóng Góp](#đóng-góp-cho-dự-án)
+7. [🙌 Đóng Góp](#🙌-đóng-góp-cho-dự-án)
+8. [📝 License](#📝-license)
 
 ## Giới Thiệu
 
@@ -37,7 +49,7 @@ Project tập trung vào các chức năng chính như sau:
 -   📖 Tóm tắt văn bản, hỗ trợ người dùng trong lúc tra cứu.
 -   📝 Gợi ý văn bản quy phạm pháp luật theo từ khóa tìm kiếm, nhận đóng góp để cải thiện gợi ý.
 
-## Tổng Quan Hệ Thống 👩‍💻
+## 👩‍💻 Tổng Quan Hệ Thống
 
 Backend của hệ thống được thiết kế theo kiến trúc microservices, với các công nghệ sử dụng như sau:
 
@@ -75,9 +87,9 @@ Backend của hệ thống được thiết kế theo kiến trúc microservices
 -   [Docker-Compose-Installation](https://docs.docker.com/compose/install/)
 -   [NodeJS v18-Installation](https://nodejs.org/en/download/)
 
-> **Lưu ý:** NextJS 14 chỉ tương thích với NodeJS 18 từ 18 trở lên.
+> **Lưu ý:** NextJS 14 chỉ tương thích với NodeJS từ version 18 trở lên.
 
-### Cài Đặt 🔨
+### 🔨 Cài Đặt
 
 Trước hết, hãy clone dự án về máy tính của bạn:
 
@@ -103,8 +115,67 @@ cd law-crawler
 
 Và tiếp tục theo hướng dẫn trong thư mục law-crawler [README.md](./law-crawler/README.md).
 
-## Đóng góp cho dự án 🙌
+### Chạy backend hệ thống
 
-Nếu bạn muốn đóng góp cho dự án, hãy đọc [CONTRIBUTING.md](./CONTRIBUTING.md) để biết thêm chi tiết.
+-   Đầu tiên, cd vào thư mục backend:
+
+```bash
+cd backend
+```
+
+-   Start các services với 1 lệnh docker-compose:
+
+```bash
+docker-compose up -d
+```
+
+### Chạy web-app
+
+-   Đầu tiên, cd vào thư mục web:
+
+```bash
+cd web
+```
+
+-   Cài đặt các thư viện cần thiết:
+
+```bash
+npm install
+```
+
+-   Chạy web-app development mode:
+
+```bash
+npm run dev
+```
+
+Lúc này web-app sẽ chạy ở địa chỉ [http://localhost:3000](http://localhost:3000). Đến đây, bạn đã cài đặt xong. Còn nếu như bạn muốn chạy project ở môi trường production, hãy ngừng development server và chạy các lệnh sau:
+
+-   Build frontend web-app
+
+```bash
+npm run build
+```
+
+-   Chạy web-app production mode:
+
+```bash
+npm run start
+```
+
+Lúc này web-app sẽ chạy ở địa chỉ [http://localhost:3000](http://localhost:3000).
+
+## 🙌 Đóng góp cho dự án
+
+<a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=%F0%9F%90%9B+Bug+Report%3A+">Bug Report ⚠️
+</a>
+
+<a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=%F0%9F%90%9B+Bug+Report%3A+">Request Feature 👩‍💻</a>
+
+Nếu bạn muốn đóng góp cho dự án, hãy đọc [CONTRIBUTING.md](.github/CONTRIBUTING.md) để biết thêm chi tiết.
 
 Mọi đóng góp của các bạn đều được trân trọng, đừng ngần ngại gửi pull request cho dự án.
+
+## 📝 License
+
+This project is licensed under the terms of the [GPL V3](LICENSE) license.
