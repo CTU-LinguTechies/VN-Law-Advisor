@@ -15,5 +15,5 @@ class Cache:
     def set(self, key, value):
         self.redisClient.set(name=key, value=value)
         
-    def get(self, key,): 
+    def get(self, key): 
         return self.redisClient.get(name=key)

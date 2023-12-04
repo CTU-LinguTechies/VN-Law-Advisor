@@ -8,6 +8,9 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from transformers import pipeline
 import torch
+import jwt
+from waitress import serve
+
 current_device = "cpu"
 if torch.cuda.is_available():
     current_device="cuda"
@@ -16,6 +19,7 @@ embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"devi
 vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
 pipeline = pipeline(task="question-answering", model=QA_MODEL_PATH, local_files_only=True)
+
 
 app = Flask(__name__)
 CORS(app)
@@ -33,8 +37,16 @@ def get_question(question_id=None):
         
 @app.route('/question', methods=['POST'])
 def add_question():
+    token = request.headers.get('Authorization')
+
+    if token.startswith('Bearer '):
+        token = token[7:]
+
+    decoded = jwt.decode(token, ACCESS_TOKEN_KEY, algorithms=['HS256'])
+    data['email'] = decoded['email']
     data = request.get_json()
     question = data['question']
+
     if not(Cache.get(question)):
         output = vectordb.similarity_search(question, k=2)
         context = ""
@@ -59,6 +71,7 @@ def add_question():
         Cache.set(question, response)
     else:
         data['answer'] = Cache.get(question)
+        
     QuestionModel.create(**data)
     return {
                     "status": "success",
@@ -80,4 +93,4 @@ def delete_question(question_id):
     QuestionModel.delete().where(QuestionModel.id == question_id).execute()
     return '', 204
 
-app.run(debug=True)
+serve(app, host='0.0.0.0', port=5001, threads=1, url_prefix="/rag/api/v1")
