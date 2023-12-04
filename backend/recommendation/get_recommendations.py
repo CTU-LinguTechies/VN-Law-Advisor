@@ -42,9 +42,13 @@ def get_recommendations():
             except:
                 return {
                     "status": "error",
-                    "response": "Error while retrieving data from get_relevant_texts payload",
+                    "response": "Keyword or num_of_relevant_texts not found in the payload",
                 }, 400
-            
+            if not keyword:
+                return {
+                    "status": "error",
+                    "response": "Keyword can not be empty",
+                }, 400
             output = text_vectordb.similarity_search(keyword, k=num_of_relevant_texts)
 
             text_topics = []
@@ -67,6 +71,11 @@ def get_recommendations():
                 "text_topics": text_topics,
                 "text_ids": text_ids
             }, 200
+        else:
+            return {
+                    "status": "error",
+                    "response": "Error while retrieving data from payload",
+                }, 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='3000')
