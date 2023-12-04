@@ -10,10 +10,7 @@ COPY mvnw pom.xml ./
 
 RUN chmod +x mvnw
 
-# clean up the file
-RUN sed -i 's/\r$//' mvnw
-# run with the SH path
-RUN /bin/sh mvnw dependency:resolve
+RUN ./mvnw dependency:resolve
 
 # Copy the entire project
 COPY src ./src
