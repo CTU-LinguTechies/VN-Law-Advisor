@@ -8,10 +8,13 @@ name: Build docker for github packages
 on:
     push:
         branches: ["main"]
+        paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
         # Publish semver tags as releases.
         tags: ["v*.*.*"]
     pull_request:
         branches: ["main"]
+        paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
+        
 
 env:
     # Use docker.io for Docker Hub if empty
