@@ -3,7 +3,7 @@ from flask_cors import CORS, cross_origin
 from playhouse.shortcuts import model_to_dict
 from models import *
 from directory import *
-from cache import Cache
+from cache import redisClient as redis
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from transformers import pipeline
@@ -11,7 +11,7 @@ import torch
 current_device = "cpu"
 if torch.cuda.is_available():
     current_device="cuda"
-    
+
 embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
 vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
@@ -33,13 +33,14 @@ def get_question(question_id=None):
         
 @app.route('/api/v1/question', methods=['POST'])
 def add_question():
-    data = request.json
+    data = request.get_json()
+    print(data)
     question = data['question']
-    if not(Cache.get(question)):
+    ciation = []
+    topic_ids = []
+    if not(redis.get(question)):
         output = vectordb.similarity_search(question, k=2)
         context = ""
-        ciation = []
-        topic_ids = []
         for doc in output:
             result_string = doc.page_content
             topic_id = doc.metadata["source"].split("/")[-1].split(".")[0]
@@ -56,15 +57,16 @@ def add_question():
         context = context.strip()
         response = pipeline(question=question, context=context)["answer"]
         data['answer'] = response
-        Cache.set(question, response)
+        redis.set(question, response)
     else:
-        data['answer'] = Cache.get(question)
+        data['answer'] = redis.get(question)
     QuestionModel.create(**data)
+    print(data['answer'])
     return {
                     "status": "success",
                     "question": question,
                     "ciation": ciation,
-                    "response": response,
+                    "response": data['answer'],
                     "topic_ids": topic_ids,
                 }, 200
 
@@ -80,4 +82,5 @@ def delete_question(question_id):
     QuestionModel.delete().where(QuestionModel.id == question_id).execute()
     return '', 204
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)
