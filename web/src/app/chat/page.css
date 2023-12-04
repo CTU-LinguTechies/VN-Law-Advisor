@@ -1,0 +1,8 @@
+.border-underline::after {
+    content: '';
+    width: 100%;
+    height: 10px;
+    border-bottom: 1px solid #ccc;
+    display: block;
+    margin: 14px 12px;
+}

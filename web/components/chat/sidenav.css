@@ -1,0 +1,39 @@
+.sidenav-item {
+    padding: 14px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+    justify-content: flex-start;
+    gap: 6px;
+}
+.question-container {
+    padding-right: 12px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    overflow: auto;
+}
+.sidenav-item:hover {
+    background-color: #f1f1f1;
+}
+.sidenav-item.active {
+    background-color: royalblue;
+    color: white;
+}
+
+.sidenav-item h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.time {
+    font-size: 14px;
+    top: 0;
+    padding: 7px 14px;
+    opacity: 0.8;
+}

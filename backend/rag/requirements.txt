@@ -1,0 +1,10 @@
+langchain
+chromadb
+sentence-transformers
+flask
+flask_cors
+torch
+pyMySql[rsa]
+peewee
+python-dotenv
+redis

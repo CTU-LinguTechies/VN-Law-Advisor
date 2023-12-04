@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+$font-family: 'Roboto', sans-serif;
+$font-size-base: 0.925rem;
+$base-color: #776b5d;
+$text-dark: #3c4250;
+$border-color: #eceef3;
+
+// $navbar-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.035);
+// $navbar-shadow: 0 2px 5px 0 #888277;
+$navbar-padding-y: 1rem;
+$navbar-padding-x: 1.15rem;
+
+$navbar-link-hover: $base-color;
+$navbar-link-padding-y: 0.5rem;
+$navbar-link-padding-x: 1rem;
+
+$navbar-dropdown-padding-y: 0.5rem;
+$navbar-dropdown-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+$navbar-dropdown-radius: 0.75rem;
+
+$navbar-dropdown-item-padding-y: 0.25rem;
+$navbar-dropdown-item-padding-x: 1rem;
+
+$navbar-dropdown-separator-margin-y: 9px;
+$navbar-dropdown-separator-color: $border-color;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: $font-family;
+    font-size: $font-size-base;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 1170px;
+    position: relative;
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    padding: {
+        left: 15px;
+        right: 15px;
+    }
+}
+
+// Start navbar
+
+.navbar,
+.navbar > .container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 768px) {
+        display: block;
+    }
+}
+
+.navbar {
+    // box-shadow: $navbar-shadow;
+    background-color: white;
+    padding: $navbar-padding-y $navbar-padding-x;
+    border-bottom: 1px solid $border-color;
+
+    .container {
+        @media (min-width: 576px) {
+            max-width: 540px;
+        }
+        @media (min-width: 768px) {
+            max-width: 720px;
+        }
+        @media (min-width: 992px) {
+            max-width: 960px;
+        }
+        @media (min-width: 1200px) {
+            max-width: 1140px;
+        }
+    }
+
+    /*
+  |-----------------------------------
+  | Start navbar logo or brand etc..
+  |-----------------------------------
+  */
+    .navbar-header {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row-reverse;
+        }
+
+        .navbar-toggler {
+            // border-radius: 5px;
+            // background-color: transparent;
+            cursor: pointer;
+            border: none;
+            display: none;
+            outline: none;
+
+            @media (max-width: 768px) {
+                display: block;
+            }
+
+            span {
+                height: 2px;
+                width: 22px;
+                background-color: lighten($text-dark, 35%);
+                display: block;
+            }
+            span:not(:last-child) {
+                margin-bottom: 0.2rem;
+            }
+        }
+
+        > a {
+            font-weight: 500;
+            color: $text-dark;
+        }
+    }
+
+    /*
+  |-----------------------------------
+  | Start navbar menu
+  |-----------------------------------
+  */
+    .navbar-menu {
+        display: flex;
+        align-items: center;
+        flex-basis: auto;
+        flex-grow: 1;
+
+        @media (max-width: 768px) {
+            display: none;
+            text-align: center;
+        }
+
+        &.active {
+            display: flex !important;
+        }
+
+        // Ul
+        .navbar-nav {
+            margin-left: auto;
+            flex-direction: row;
+            display: flex;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+
+            @media (max-width: 768px) {
+                width: 100%;
+                display: block;
+                border-top: 1px solid #eee;
+                margin-top: 1rem;
+            }
+
+            > li {
+                > a {
+                    color: $text-dark;
+                    text-decoration: none;
+                    display: inline-block;
+                    padding: $navbar-link-padding-y $navbar-link-padding-x;
+                    &:hover {
+                        color: $navbar-link-hover;
+                    }
+                    @media (max-width: 768px) {
+                        border-bottom: 1px solid $border-color;
+                    }
+                }
+                &.active {
+                    a {
+                        color: $base-color;
+                    }
+                }
+            }
+
+            .navbar-dropdown {
+                .dropdown {
+                    list-style: none;
+                    position: absolute;
+                    top: 150%;
+                    left: 0;
+                    background-color: #fff;
+                    padding-top: $navbar-dropdown-padding-y;
+                    padding-bottom: $navbar-dropdown-padding-y;
+                    min-width: 160px;
+                    width: auto;
+                    white-space: nowrap;
+                    box-shadow: $navbar-dropdown-shadow;
+                    z-index: 99999;
+                    border-radius: $navbar-dropdown-radius;
+                    display: none;
+                    @media (max-width: 768px) {
+                        position: relative;
+                        box-shadow: none;
+                    }
+                    li {
+                        a {
+                            color: $text-dark;
+                            padding: $navbar-dropdown-item-padding-y $navbar-dropdown-item-padding-x;
+                            display: block;
+                        }
+                    }
+                    &.show {
+                        display: block !important;
+                    }
+                }
+            }
+
+            .dropdown > .separator {
+                height: 1px;
+                width: 100%;
+                margin: {
+                    top: $navbar-dropdown-separator-margin-y;
+                    bottom: $navbar-dropdown-separator-margin-y;
+                }
+                background-color: $navbar-dropdown-separator-color;
+            }
+        }
+    }
+
+    .navbar-dropdown {
+        position: relative;
+    }
+}
+
+// Custom
+.navbar .navbar-header > a span {
+    color: $base-color;
+}
+.navbar .navbar-header h4 {
+    font-weight: 500;
+    font-size: 1.25rem;
+    @media (max-width: 768px) {
+        font-size: 1.05rem;
+    }
+}
