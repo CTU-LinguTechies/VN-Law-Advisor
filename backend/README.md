@@ -22,7 +22,7 @@ backend
 
 Thiết kế theo kiến trúc microservices như hình vẽ bên dưới:
 
-![Kiến trúc hệ thống](./architecture.png)
+![Kiến trúc hệ thống](../docs/images/system_architecture.svg)
 
 ### KONG API Gateway
 
