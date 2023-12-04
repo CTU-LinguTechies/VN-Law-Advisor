@@ -1,8 +1,7 @@
-name: ci 
+name: build-documentation 
 on:
-  push:
+  pull_request:
     branches:
-      - master 
       - main
 permissions:
   contents: write
