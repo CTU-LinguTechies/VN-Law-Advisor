@@ -1,25 +1,3 @@
-[![Github license](https://img.shields.io/github/license/CTU-LinguTechies/VN-Law-Advisor.svg 'Github license')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/blob/master/LICENSE)
-[![Open issues](https://img.shields.io/github/issues/CTU-LinguTechies/VN-Law-Advisor.svg 'Open issues')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues)
-[![Open Pull Requests](https://img.shields.io/github/issues-pr/CTU-LinguTechies/VN-Law-Advisor.svg 'Open Pull Requests')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/pulls)
-[![Commit activity](https://img.shields.io/github/commit-activity/m/CTU-LinguTechies/VN-Law-Advisor.svg 'Commit activity')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/graphs/commit-activity)
-[![GitHub contributors](https://img.shields.io/github/contributors/CTU-LinguTechies/VN-Law-Advisor.svg 'Github contributors')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/graphs/contributors)
-![](./docs/images/new_banner.png)
-
-# VN-Law-Advisor [![Demo](https://img.shields.io/badge/Demo-2ea44f?style=for-the-badge)](http://vnlaw.japaneast.cloudapp.azure.com) [![Documentation](https://img.shields.io/badge/Documentation-blue?style=for-the-badge)](/README.MD 'Go to project documentation')
-
-<a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=%F0%9F%90%9B+Bug+Report%3A+">Bug Report ⚠️
-</a>
-
-<a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=%F0%9F%90%9B+Bug+Report%3A+">Request Feature 👩‍💻</a>
-
-Ứng dụng hỗ trợ tra cứu, hỏi đáp tri thức pháp luật dựa trên Bộ pháp điển và CSDL văn bản QPPL Việt Nam.
-
-Mục tiêu là phát triển một hệ thống tra cứu, hỏi đáp tri thức pháp luật Việt Nam. Dựa trên các mô hình ngôn ngữ lớn cùng với kiến trúc microservices.
-
-Dự án được thực hiện trong cuộc thi [Phần Mềm Nguồn Mở-Olympic Tin học Sinh viên Việt Nam 2023](https://www.olp.vn/procon-pmmn/ph%E1%BA%A7n-m%E1%BB%81m-ngu%E1%BB%93n-m%E1%BB%9F). Được được open source theo giấy phép [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) bởi đội tác giả CTU-LinguTechnies.
-
-Để biết thêm chi tiết về cuộc thi, bạn có thể xem tại [đây](https://vfossa.vn/tin-tuc/de-thi-phan-mem-nguon-mo-olp-2023-688.html).
-
 ## 🔎 Danh Mục
 
 1. [Giới Thiệu](#Giới-Thiệu)
@@ -67,7 +45,7 @@ Backend của hệ thống được thiết kế theo kiến trúc microservices
 -   [Prometheus](https://prometheus.io/): Monitor các metrics.
 -   [Grafana](https://grafana.com/): WebUI hiển thị metrics.
 
-<img loading="lazy" src="./docs/images/system_architecture.svg" alt="Architecture" width="100%" height=600>
+<img loading="lazy" src="https://raw.githubusercontent.com/CTU-LinguTechies/VN-Law-Advisor/4d118a0e2bf5ae7a3ab8a110427e416cbc700628/docs/images/system_architecture.svg" alt="Architecture" width="100%" height=600>
 
 ## Cấu trúc thư mục
 
@@ -128,55 +106,6 @@ cd backend
 docker-compose up -d
 ```
 
-#### PORT BINDING
-
--   Sau khi chạy xong, các service sẽ được chạy trên các port như sau:
-<table width="100%">
-<thead>
-<th>
-Service
-</th>
-<th>
-PORT
-</th>
-</thead>
-<tbody>
-<tr>
-<td>API Gateway</td>
-<td>
-
-8000:8000
-
-8001:8001
-
-8002:8002
-
-8003:8003
-
-8004:8004
-
-</td>
-
-</tr>
-<tr>
-<td>Auth Service</td>
-<td>5000:5000</td>
-</tr>
-<tr>
-<td>Law Service</td>
-<td>8080:8080</td>
-</tr>
-<tr>
-<td>RAG Service</td>
-<td>5001:5001</td>
-</tr>
-<tr>
-<td>Recommendation Service</td>
-<td>5002:5002</td>
-</tr>
-</tbody>
-</table>
-
 ### Chạy web-app
 
 -   Đầu tiên, cd vào thư mục web:
@@ -226,4 +155,4 @@ Mọi đóng góp của các bạn đều được trân trọng, đừng ngần
 
 ## 📝 License
 
-This project is licensed under the terms of the [GPL V3](LICENSE) license.
+This project is licensed under the terms of the [GPL V3](https://github.com/CTU-LinguTechies/VN-Law-Advisor/blob/main/LICENSE) license.
