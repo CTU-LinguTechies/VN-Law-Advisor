@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/law/api/v1/vbpl")
+@RequestMapping("/api/v1/vbpl")
 @RequiredArgsConstructor
 public class VBPLController {
     private final VBPLService VBPLService;
