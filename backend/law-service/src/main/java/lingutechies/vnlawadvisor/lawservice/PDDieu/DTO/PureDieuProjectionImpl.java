@@ -22,6 +22,19 @@ public class PureDieuProjectionImpl implements PureDieuProjection {
     private List<PureFileProjection> files;
     private List<PureTableProjection> bangs;
 
+
+    public PureDieuProjectionImpl(String mapc, String ten, Integer stt, String noidung, Integer chimuc, String vbqppl, String vbqpplLink) {
+        this.mapc = mapc;
+        this.ten = ten;
+        this.stt = stt;
+        this.noidung = noidung;
+        this.chimuc = chimuc;
+        this.vbqppl = vbqppl;
+        this.vbqpplLink = vbqpplLink;
+        this.files = null;
+        this.bangs = null;
+    }
+
     @Override
     public String getMapc() {
         return mapc;

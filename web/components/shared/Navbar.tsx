@@ -1,9 +1,11 @@
 'use client';
 import Link from 'next/link';
 import './navbar.scss';
+import { UserOutlined } from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { Avatar } from 'antd';
 
 function formatPathname(pathname: string) {
     const parts = pathname.split('/');
@@ -38,14 +40,20 @@ export default function Navbar() {
                         <li className={pathname == 'home' || pathname == '' ? 'active' : ''}>
                             <Link href="/">Trang chủ</Link>
                         </li>
-                        <li className={pathname == 'chat' ? 'active' : ''}>
-                            <Link href="/chat">Chat</Link>
-                        </li>
+                        {user && (
+                            <li className={pathname == 'chat' ? 'active' : ''}>
+                                <Link href="/chat">Chat</Link>
+                            </li>
+                        )}
                         <li className={pathname == 'law' ? 'active' : ''}>
-                            <Link href="/phapdien">Luật</Link>
+                            <Link href="/phapdien">Pháp điển</Link>
+                        </li>
+                        <li className={pathname == 'vbqppl' ? 'active' : ''}>
+                            <Link href="/vbqppl">VBQPPL</Link>
                         </li>
                         {user ? (
                             <li>
+                                <Avatar size={64} icon={<UserOutlined />} />
                                 <a className="active">{user.name}</a>
                             </li>
                         ) : (

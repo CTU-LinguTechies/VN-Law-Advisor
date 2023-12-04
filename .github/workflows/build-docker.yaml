@@ -1,4 +1,4 @@
-name: build-docker
+name: Build docker for dockerhub
 
 on:
   push:
@@ -32,3 +32,9 @@ jobs:
           context: "{{defaultContext}}:backend/law-service"
           push: true
           tags: tghuy2002/vnlaw-law:latest
+      - name: Build and push qna-service
+        uses: docker/build-push-action@v5
+        with:
+          context: "{{defaultContext}}:backend/rag"
+          push: true
+          tags: tghuy2002/vnlaw-qna:latest
