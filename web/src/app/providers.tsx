@@ -6,6 +6,7 @@ import StyledComponentsRegistry from '../lib/AntdRegistry';
 import { ConfigProvider } from 'antd';
 import NotificationProvider from '@/context/notificationContext';
 import AuthProvider from '@/context/authContext';
+import MessageProvider from '@/context/messageContext';
 
 export interface ProvidersProps {
     children: React.ReactNode;
@@ -22,9 +23,11 @@ export default function Providers({ children }: ProvidersProps) {
                         },
                     }}
                 >
-                    <NotificationProvider>
-                        <AuthProvider>{children}</AuthProvider>
-                    </NotificationProvider>
+                    <MessageProvider>
+                        <NotificationProvider>
+                            <AuthProvider>{children}</AuthProvider>
+                        </NotificationProvider>
+                    </MessageProvider>
                 </ConfigProvider>
             </StyledComponentsRegistry>
         </Provider>

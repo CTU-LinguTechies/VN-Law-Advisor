@@ -63,9 +63,6 @@ services:
       - auth-mysql
     ports: 
       - 5000:5000
-    volumes:
-      - ./auth-service:/app
-      - ./auth-service/node_modules:/app/node_modules
     networks:
       - app-network
     environment:
@@ -119,12 +116,10 @@ services:
       MYSQL_ROOT_PASSWORD: 123456789
       MYSQL_DATABASE: qna
       MYSQL_HOST: qna-mysql
-      # ST_MODEL_PATH: keepitreal/vietnamese-sbert
-      # QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
+      ST_MODEL_PATH: keepitreal/vietnamese-sbert
+      QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
       REDIS_HOST: redis
       TOPIC_DB_PATH: ./chroma_db_demuc
-      ST_MODEL_PATH: ./sentence_transformers_model
-      QA_MODEL_PATH: ./qa_model
 
 networks:
     app-network:

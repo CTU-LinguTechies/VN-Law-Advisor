@@ -1,3 +1,4 @@
+import { MessageContext } from '@/context/messageContext';
 import authService, { RegisterRequestDto } from '@/services/auth.service';
 import userSlice, { setUser } from '@/store/userSlice';
 import tokenService from '@/utils/tokenService';
@@ -5,6 +6,7 @@ import { Card, Col, InputNumber, Input, Button } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
 
 import * as Yup from 'yup';
 export interface RegisterCardProps {
@@ -19,6 +21,8 @@ export interface formModel {
 }
 
 export default function RegisterCard({ setKey }: RegisterCardProps) {
+    const messageAPI = useContext(MessageContext);
+
     const validationSchema = Yup.object({
         email: Yup.string().email('Email không hợp lệ').required('Email không được để trống'),
         name: Yup.string().required('Tên không được để trống'),
@@ -38,9 +42,18 @@ export default function RegisterCard({ setKey }: RegisterCardProps) {
             tokenService.accessToken = data.accessToken;
             tokenService.refreshToken = data.refreshToken;
             tokenService.expiratedAt = data.expiredAt;
+            messageAPI?.open({
+                type: 'success',
+                content: 'Đăng ký thành công!',
+            });
             setUser(data);
             router.push('/');
-        } catch (err) {}
+        } catch (err: any) {
+            messageAPI?.open({
+                type: 'error',
+                content: err.message,
+            });
+        }
     };
     return (
         <Col span={14} className="mt-5">
