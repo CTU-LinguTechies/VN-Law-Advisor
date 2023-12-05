@@ -48,8 +48,6 @@ services:
     restart: always
     depends_on:
       - law-mysql
-    volumes:
-      - ./law-service:/app
     networks:
       - app-network
     environment:
@@ -63,9 +61,6 @@ services:
       - auth-mysql
     ports: 
       - 5000:5000
-    volumes:
-      - ./auth-service:/app
-      - ./auth-service/node_modules:/app/node_modules
     networks:
       - app-network
     environment:
@@ -121,6 +116,8 @@ services:
       MYSQL_HOST: qna-mysql
       ST_MODEL_PATH: keepitreal/vietnamese-sbert
       QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
+      REDIS_HOST: redis
+      TOPIC_DB_PATH: ./chroma_db_demuc
 networks:
     app-network:
         driver: bridge
