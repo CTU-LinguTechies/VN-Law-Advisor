@@ -1,40 +1,63 @@
 'use client';
 import { DeMucModel } from '@/models/DeMucModel';
 import pddemucService, { PDDemucGetAllFilter } from '@/services/pddemuc.service';
-import { Col, Row, Select, Input, Divider, Pagination, Card, Button, Carousel } from 'antd';
+import { Col, Row, Select, Input, Pagination, Card, Button, Carousel, MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 import useDelay from '@/hooks/useDelay';
 import pddieuService from '@/services/pddieu.service';
-import { PureDieuModel } from '@/models/DieuModel';
+import { LoginOutlined, MailOutlined } from '@ant-design/icons';
+
+import { PDBangModel, PDFileModel, PureDieuModel } from '@/models/DieuModel';
 import Link from 'next/link';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-const contentStyle: React.CSSProperties = {
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-};
+import MarkdownIt from 'markdown-it';
+import './main.css';
+const md = new MarkdownIt({ html: true });
+const items: MenuProps['items'] = [
+    {
+        label: 'Đăng Nhập',
+        key: 'login',
+        icon: <LoginOutlined />,
+    },
+    {
+        label: 'Đăng Ký',
+        key: 'register',
+        icon: <MailOutlined />,
+    },
+];
+
+interface ListTableFormState {
+    mapc: string;
+    ten: string;
+    bangs: PDBangModel[];
+    files: PDFileModel[];
+}
 export default function FormListSearch() {
     const [demucOptions, setDemucOptions] = useState<DeMucModel[]>([]);
     const [selectedDemuc, setSelectedDemuc] = useState<string | undefined>(undefined);
     const [name, setName] = useState('');
     const [dieuOptions, setDieuOptions] = useState<PureDieuModel[]>([]);
+    const [listTableForm, setListTableForm] = useState<ListTableFormState>();
     const [autoAnimateParent] = useAutoAnimate();
+    const [autoAnimateReader] = useAutoAnimate();
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(0);
 
     const keyword = useDelay({ keyword: name, delay: 500 });
 
     useEffect(() => {
         async function fetchDieuData() {
-            const { content } = await pddieuService.getFilter({
+            const { content, totalElements } = await pddieuService.getFilter({
                 deMucId: selectedDemuc,
                 name: keyword,
+                pageNo: page,
             });
             setDieuOptions(content);
+            setTotal(totalElements);
         }
         fetchDieuData();
-    }, [selectedDemuc, keyword]);
+    }, [selectedDemuc, keyword, page]);
 
     useEffect(() => {
         async function fetchData() {
@@ -43,6 +66,11 @@ export default function FormListSearch() {
         }
         fetchData();
     }, []);
+
+    const chooseChiMuc = async (mapc: string, ten: string) => {
+        const result = await pddieuService.getListTableAndForms(mapc);
+        setListTableForm({ ...result, ten, mapc });
+    };
 
     const onSearch = async (value: string) => {
         const { content } = await pddemucService.getAll({ name: value } as PDDemucGetAllFilter);
@@ -103,7 +131,11 @@ export default function FormListSearch() {
                                 >
                                     {dieuOptions.map((item: PureDieuModel) => (
                                         <Col key={item.mapc} span={10}>
-                                            <Card title={item.ten}>
+                                            <Card
+                                                onClick={() => chooseChiMuc(item.mapc, item.ten)}
+                                                hoverable
+                                                title={item.ten}
+                                            >
                                                 <p
                                                     style={{
                                                         overflow: 'hidden',
@@ -127,26 +159,60 @@ export default function FormListSearch() {
                             )}
                         </Col>
                         <Col className="flex justify-center mt-5" span={24}>
-                            <Pagination defaultCurrent={1} total={50} />
+                            <Pagination
+                                current={page}
+                                onChange={(page) => setPage(page)}
+                                pageSize={2}
+                                total={total}
+                            />
                         </Col>
                     </Row>
                 </Col>
 
-                <Col xs={24} md={12} lg={12} xl={12} span={12}>
-                    <Carousel autoplay>
-                        <div>
-                            <h3 style={contentStyle}>1</h3>
-                        </div>
-                        <div>
-                            <h3 style={contentStyle}>2</h3>
-                        </div>
-                        <div>
-                            <h3 style={contentStyle}>3</h3>
-                        </div>
-                        <div>
-                            <h3 style={contentStyle}>4</h3>
-                        </div>
-                    </Carousel>
+                <Col className="mt-5" xs={24} md={12} lg={12} xl={12} span={12}>
+                    <div>
+                        <Card
+                            title={
+                                <h2 style={{ textAlign: 'center' }} className="text-2xl">
+                                    Điều 12.3 Quy định về an ninh mạng
+                                </h2>
+                            }
+                        >
+                            <div className="mt-3">
+                                <div className="flex justify-center">
+                                    <Button>
+                                        <a>Biểu mẫu 1</a>
+                                    </Button>
+                                    <Button>
+                                        <a>Biểu mẫu 2</a>
+                                    </Button>
+                                    <Button>
+                                        <a>Biểu mẫu 3</a>
+                                    </Button>
+                                </div>
+                                <Carousel>
+                                    <div
+                                        className="markdown-body"
+                                        key={'1111'}
+                                        dangerouslySetInnerHTML={{
+                                            __html: md.render(
+                                                '<table><thead><tr><th>1</th><th>1</th><th>1</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>1</td></tr></tbody></table>',
+                                            ),
+                                        }}
+                                    ></div>
+                                    <div
+                                        className="markdown-body w-full"
+                                        key={'2222'}
+                                        dangerouslySetInnerHTML={{
+                                            __html: md.render(
+                                                '<table><thead><tr><th>1</th><th>1</th><th>1</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>1</td></tr></tbody></table>',
+                                            ),
+                                        }}
+                                    ></div>
+                                </Carousel>
+                            </div>
+                        </Card>
+                    </div>
                 </Col>
             </Row>
         </div>

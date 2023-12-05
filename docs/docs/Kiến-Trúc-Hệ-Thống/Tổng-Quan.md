@@ -1,3 +1,7 @@
+---
+weight: 1
+---
+
 ## Backend
 
 -   Toàn bộ mã nguồn backend sẽ nằm ở thư mục này
@@ -21,8 +25,7 @@ backend
 
 Thiết kế theo kiến trúc microservices như hình vẽ bên dưới:
 
-![Kiến trúc hệ thống](../docs/images/system_architecture.svg)
-
+<img loading="lazy" src="https://raw.githubusercontent.com/CTU-LinguTechies/VN-Law-Advisor/4d118a0e2bf5ae7a3ab8a110427e416cbc700628/docs/images/system_architecture.svg" alt="Architecture" width="100%" height=600>
 ### KONG API Gateway
 
 -   Kong API Gateway: Sử dụng Kong API Gateway làm entrypoint cho hệ thống.

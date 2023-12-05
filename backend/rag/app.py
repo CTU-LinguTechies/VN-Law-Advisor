@@ -26,8 +26,8 @@ app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/question', methods=['GET'])
-@app.route('/question/<int:question_id>', methods=['GET'])
+@app.route('/api/v1/question', methods=['GET'])
+@app.route('/api/v1/question/<int:question_id>', methods=['GET'])
 def get_question(question_id=None):
     if question_id is None:
         question = QuestionModel.select().dicts()
@@ -36,7 +36,7 @@ def get_question(question_id=None):
         question = QuestionModel.get(QuestionModel.id == question_id)
         return jsonify(model_to_dict(question)), 201
         
-@app.route('/question', methods=['POST'])
+@app.route('/api/v1/question', methods=['POST'])
 def add_question():
     token = request.headers.get('Authorization')
 
@@ -87,13 +87,13 @@ def add_question():
                 }, 200
 
 
-@app.route('/question/<int:question_id>', methods=['PUT'])
+@app.route('/api/v1/question/<int:question_id>', methods=['PUT'])
 def update_question(question_id):
     data = request.get_json()
     QuestionModel.update(**data).where(QuestionModel.id == question_id).execute()
     return '', 204
 
-@app.route('/question/<int:question_id>', methods=['DELETE'])
+@app.route('/api/v1/question/<int:question_id>', methods=['DELETE'])
 def delete_question(question_id):
     QuestionModel.delete().where(QuestionModel.id == question_id).execute()
     return '', 204
