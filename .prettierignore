@@ -6,3 +6,6 @@ web/.next/
 backend/rag/
 backend/api-gateway/
 *.yaml
+./web/.next/
+./web/assets/
+./web/out/

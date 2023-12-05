@@ -4,8 +4,10 @@ on:
   push:
     branches:
         - 'main'
+    paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
   pull_request:
     branches: ['main']
+    paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
 
 jobs:
   docker:

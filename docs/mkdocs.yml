@@ -1,0 +1,6 @@
+site_name: VNLawAdvisor Documentation
+theme:
+    name: material
+plugins:
+    - search
+    - mkdocs-nav-weight

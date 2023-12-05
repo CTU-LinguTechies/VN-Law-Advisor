@@ -1,8 +1,14 @@
+---
+weight: 3
+---
+
 # Dịch vụ xác thực và phân quyền
 
 > Dịch vụ xác thực và phân quyền với các chức năng như đăng nhập, đăng ký và kiểm soát truy cập. Có thể phát triển như một ứng dụng đơn giản hay một dịch vụ microservice. Sử dụng các thư viện và framework như Node.js, Express, JWT, Redis, MySQL,...
 
 ## Kiến trúc
+
+![](https://miro.medium.com/max/788/1*XkmnsJ6Joa6EDFVGUw0tfA.png)
 
 ## Các công nghệ sử dụng chính
 
