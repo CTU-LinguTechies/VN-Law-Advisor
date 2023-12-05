@@ -1,7 +1,5 @@
-package lingutechies.vnlawadvisor.lawservice;
+package lingutechies.vnlawadvisor.lawservice.ChiMucVBPL;
 
-import lingutechies.vnlawadvisor.lawservice.ChiMucVBPL.ChiMucVBPL;
-import lingutechies.vnlawadvisor.lawservice.ChiMucVBPL.ChiMucVBPLService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;

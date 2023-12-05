@@ -27,11 +27,11 @@ public class ChiMucVBPL {
     @Column(nullable = false)
     private String ten;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chi_muc_cha")
     private ChiMucVBPL chiMucCha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_vb")
     private VBPL vbpl;
 
