@@ -2,6 +2,8 @@ from flask import *
 from flask_cors import CORS, cross_origin
 from importer import *
 from directory import *
+from waitress import serve
+
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -77,6 +79,6 @@ def get_recommendations():
                     "response": "Error while retrieving data from payload",
                 }, 400
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='3000')
+print('Recommendations server is running. ')
+serve(app, host='0.0.0.0', port=5001, threads=1, url_prefix="/rag/api/v1")
             
