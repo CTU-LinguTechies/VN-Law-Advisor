@@ -3,11 +3,12 @@ from flask_cors import CORS, cross_origin
 from playhouse.shortcuts import model_to_dict
 from models import *
 from directory import *
-from cache import Cache
+from cache import *
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from transformers import pipeline
 import torch
+import json
 import jwt
 from waitress import serve
 
@@ -29,7 +30,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/question/<int:question_id>', methods=['GET'])
 def get_question(question_id=None):
     if question_id is None:
-        question = QuestionModel.select()
+        question = QuestionModel.select().dicts()
         return jsonify(model_to_dict(question)), 201
     else:
         question = QuestionModel.get(QuestionModel.id == question_id)
@@ -41,17 +42,17 @@ def add_question():
 
     if token.startswith('Bearer '):
         token = token[7:]
-
+    data = request.get_json()
+    
     decoded = jwt.decode(token, ACCESS_TOKEN_KEY, algorithms=['HS256'])
     data['email'] = decoded['email']
-    data = request.get_json()
     question = data['question']
 
-    if not(Cache.get(question)):
+    ciation = []
+    topic_ids = []
+    if not(redisClient.get(question)):
         output = vectordb.similarity_search(question, k=2)
         context = ""
-        ciation = []
-        topic_ids = []
         for doc in output:
             result_string = doc.page_content
             topic_id = doc.metadata["source"].split("/")[-1].split(".")[0]
@@ -68,10 +69,14 @@ def add_question():
         context = context.strip()
         response = pipeline(question=question, context=context)["answer"]
         data['answer'] = response
-        Cache.set(question, response)
+        redisClient.set(question, json.dumps({
+                    "ciation": ciation,
+                    "response": response,
+                    "topic_ids": topic_ids
+        }))
     else:
-        data['answer'] = Cache.get(question)
-        
+        return json.loads(redisClient.get(question).decode('utf-8')), 200
+    
     QuestionModel.create(**data)
     return {
                     "status": "success",
@@ -93,4 +98,5 @@ def delete_question(question_id):
     QuestionModel.delete().where(QuestionModel.id == question_id).execute()
     return '', 204
 
+print('Server is running. ')
 serve(app, host='0.0.0.0', port=5001, threads=1, url_prefix="/rag/api/v1")

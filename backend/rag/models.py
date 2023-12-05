@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 db_name = os.getenv("MYSQL_DATABASE")
 db_host = os.getenv("MYSQL_HOST")
-db_password = os.getenv("MYSQL_ROOT_PASSWORD") 
+db_password = os.getenv("MYSQL_ROOT_PASSWORD")
 
 conn = pymysql.connect(host=db_host, port=3306, user='root', password=db_password)
 cursor = conn.cursor()
