@@ -160,7 +160,8 @@ cython_debug/
 .idea/
 
 ## DB and Model
-chroma_db_demuc/
-chroma_db_vbqppl/
 sentence_transformers_model/
+chroma_db/
+chroma_db_demuc/
 qa_model/
+directory.py
