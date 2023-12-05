@@ -1,3 +1,4 @@
+import { MessageContext } from '@/context/messageContext';
 import authService, { LoginRequestDto } from '@/services/auth.service';
 import { setUser } from '@/store/userSlice';
 import tokenService from '@/utils/tokenService';
@@ -5,6 +6,7 @@ import { Card, Col, InputNumber, Input, Button } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
 
 import * as Yup from 'yup';
 
@@ -13,6 +15,7 @@ export interface LoginCardProps {
 }
 
 export default function LoginCard({ setKey }: LoginCardProps) {
+    const messageAPI = useContext(MessageContext);
     const validationSchema = Yup.object({
         email: Yup.string().email('Email không hợp lệ').required('Email không được để trống'),
         password: Yup.string().required('Mật khẩu không được để trống'),
@@ -27,7 +30,16 @@ export default function LoginCard({ setKey }: LoginCardProps) {
             tokenService.expiratedAt = data.expiredAt;
             setUser(data);
             router.push('/');
-        } catch (err) {}
+            messageAPI?.open({
+                type: 'success',
+                content: 'Đăng nhập thành công',
+            });
+        } catch (err: any) {
+            messageAPI?.open({
+                type: 'error',
+                content: err.message,
+            });
+        }
     };
 
     return (

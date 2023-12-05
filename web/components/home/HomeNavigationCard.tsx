@@ -22,7 +22,7 @@ export default function HomeNavigationCard(props: HomeNavigationCardProps) {
                 hoverable
                 onClick={handleNavigation}
                 title={
-                    <h1 style={{ textAlign: 'center' }} className="text-lg">
+                    <h1 style={{ textAlign: 'center', fontSize: 20 }} className="text-lg">
                         {title}
                     </h1>
                 }

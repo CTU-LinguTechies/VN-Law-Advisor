@@ -34,10 +34,10 @@ export default function Home() {
                             Hệ thống hỏi đáp tri thức pháp luật Việt Nam
                         </p>
                         <ul style={{ color: 'white' }} className="mt-3">
-                            <li className="italic text-lg list-disc">
+                            <li className="italic text-xl list-disc">
                                 Dựa trên mô hình ngôn ngữ lớn.
                             </li>
-                            <li className="mt-1 italic text-lg list-disc">
+                            <li className="mt-1 italic text-xl list-disc">
                                 Tri thức từ pháp điển Việt Nam và các VBQPPL.
                             </li>
                         </ul>

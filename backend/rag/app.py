@@ -15,7 +15,7 @@ from waitress import serve
 current_device = "cpu"
 if torch.cuda.is_available():
     current_device="cuda"
-    
+
 embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
 vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
@@ -78,11 +78,12 @@ def add_question():
         return json.loads(redisClient.get(question).decode('utf-8')), 200
     
     QuestionModel.create(**data)
+    print(data['answer'])
     return {
                     "status": "success",
                     "question": question,
                     "ciation": ciation,
-                    "response": response,
+                    "response": data['answer'],
                     "topic_ids": topic_ids,
                 }, 200
 
