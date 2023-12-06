@@ -53,9 +53,9 @@ def get_response():
             ciation = []
             for doc in output:
                 result_string = doc.page_content
-                index = result_string.find("content: ")
+                index = result_string.find("noidung: ")
                 if index != -1:
-                    result_string = result_string[index + len("content: "):].strip()
+                    result_string = result_string[index + len("noidung: "):].strip()
                 result_string = result_string.replace("\n", " ")
                 result_string = re.sub(r"\s+", r" ", result_string)
                 context += f"{result_string} "
@@ -75,7 +75,8 @@ def get_response():
                     "status": "error",
                     "response": "Error while retrieving context from DB",
                 }, 500
-
+            inputs = f"Chỉ dựa vào ngữ cảnh sau để trả lời câu hỏi, {context}. Hãy trả lời câu hỏi: {question}"
+            print(inputs)
             response = pipeline(question=question, context=context)["answer"].strip()
 
             return {
