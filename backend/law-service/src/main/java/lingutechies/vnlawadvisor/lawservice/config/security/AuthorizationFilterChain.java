@@ -36,22 +36,22 @@ public class AuthorizationFilterChain extends OncePerRequestFilter {
             return;
         }
         String token = authorization.substring(7);
-        String checkTokenMessage = jwtService.isTokenValid(token);
-        if (checkTokenMessage != null){
-            sendResponse(response, checkTokenMessage, HttpStatus.FORBIDDEN);
-            return;
-        }
-        Claims decodedToken = jwtService.extractAllClaims(token);
-        String email = decodedToken.get("email").toString();
-        String role = decodedToken.get("role").toString();
-        String id = decodedToken.get("id").toString();
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = new lingutechies.vnlawadvisor.
-                    lawservice.config.security.UserDetails(email, role, id);
-            UsernamePasswordAuthenticationToken authenticationToken = new
-                    UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        }
+        // String checkTokenMessage = jwtService.isTokenValid(token);
+        // if (checkTokenMessage != null){
+        //     sendResponse(response, checkTokenMessage, HttpStatus.FORBIDDEN);
+        //     return;
+        // }
+        // Claims decodedToken = jwtService.extractAllClaims(token);
+        // String email = decodedToken.get("email").toString();
+        // String role = decodedToken.get("role").toString();
+        // String id = decodedToken.get("id").toString();
+        // if (email != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            // UserDetails userDetails = new lingutechies.vnlawadvisor.
+            //         lawservice.config.security.UserDetails(email, role, id);
+            // UsernamePasswordAuthenticationToken authenticationToken = new
+            //         UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            // SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        // }
         filterChain.doFilter(request, response);
     }
 
