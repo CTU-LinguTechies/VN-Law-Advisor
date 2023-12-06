@@ -115,7 +115,7 @@ def add_question():
         }, 500
 
 
-    # inputs = f"Sử dụng thông tin được cung cấp sau đây và những thông tin bạn biết để trả lời cho câu hỏi, Thông tin cung cấp {context}. Hãy trả lời câu hỏi: {question}"
+    # inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
     # payload = {
     #     "inputs": inputs
     # }
@@ -212,7 +212,7 @@ def add_question_with_context():
     
 
 
-    # inputs = f"Sử dụng thông tin được cung cấp sau đây và những thông tin bạn biết để trả lời cho câu hỏi, Thông tin cung cấp {context}. Hãy trả lời câu hỏi: {question}"
+    # inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
     # payload = {
     #     "inputs": inputs
     # }

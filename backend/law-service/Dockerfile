@@ -9,6 +9,8 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
 RUN chmod +x mvnw
+# clean up the file
+RUN sed -i 's/\r$//' mvnw
 
 # clean up the file
 RUN sed -i 's/\r$//' mvnw
