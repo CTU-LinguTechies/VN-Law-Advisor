@@ -27,7 +27,7 @@ class VBQPPLService {
         return (await this.client.get(`/${id}`)) as VBQPPLModel;
     }
     async getReccomended(id: string) {
-        return (await this.recommendationClient.get(`/${id}`)) as VBQPPLModel[];
+        return (await this.client.get(`/recommended/${id}`)) as VBQPPLModel[];
     }
 }
 

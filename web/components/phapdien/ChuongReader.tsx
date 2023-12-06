@@ -34,6 +34,13 @@ export default function ChuongReader({ selectedChuong, setSelectedChuong }: Chuo
     const api = useContext(NotificationContext);
 
     function sendMessage(message: string, status: string) {
+        if (status === 'init') {
+            api?.info({
+                message: message,
+                placement: 'topRight',
+            });
+            return;
+        }
         if (status === 'complete') {
             api?.success({
                 message: message,

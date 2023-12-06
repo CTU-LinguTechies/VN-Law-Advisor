@@ -13,6 +13,9 @@ class PipelineSingleton {
 
     static async getInstance(progress_callback = null) {
         if (this.model === null || this.tokenizer === null) {
+            if (progress_callback) {
+                progress_callback();
+            }
             this.tokenizer = await T5Tokenizer.from_pretrained(this.modelName);
             this.model = await T5ForConditionalGeneration.from_pretrained(this.modelName);
         }
@@ -27,13 +30,13 @@ class PipelineSingleton {
 self.addEventListener('message', async (event) => {
     const { model, tokenizer } = await PipelineSingleton.getInstance(() => {
         self.postMessage({
-            status: 'progress',
+            status: 'init',
             output: 'Đang tải mô hình... (chỉ tải lần đầu tiên)',
         });
     });
     self.postMessage({
         status: 'progress',
-        output: 'Đang tạo tóm tắt...',
+        output: 'Mô hình đã có. Đang tạo tóm tắt...',
     });
 
     const { input_ids } = await tokenizer(event.data.text);
