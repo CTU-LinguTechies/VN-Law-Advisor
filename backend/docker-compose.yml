@@ -77,6 +77,7 @@ services:
       ACCESS_TOKEN_KEY: VN-Law-Advisor
       REFRESH_TOKEN_KEY: auth-service
   redis:
+      restart: always
       image: redis:latest
       ports:
           - '6379:6379'
@@ -106,8 +107,6 @@ services:
     depends_on:
       - qna-mysql
       - redis
-    volumes:
-      - ./rag:/app
     networks:
       - app-network
     environment:

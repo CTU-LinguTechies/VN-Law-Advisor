@@ -9,21 +9,22 @@ load_dotenv()
 db_name = os.getenv("MYSQL_DATABASE")
 db_host = os.getenv("MYSQL_HOST")
 db_password = os.getenv("MYSQL_ROOT_PASSWORD")
+db_port = int(os.getenv("MYSQL_PORT"))
 
-conn = pymysql.connect(host=db_host, port=3306, user='root', password=db_password)
+conn = pymysql.connect(host=db_host, port=db_port, user='root', password=db_password)
 cursor = conn.cursor()
-cursor.execute(f"SHOW DATABASES LIKE '${db_name}'")
+cursor.execute(f"SHOW DATABASES LIKE '{db_name}'")
 result = cursor.fetchall()
 if result:
     print("Database exists")
 else:
     print("Database not exists")
-    cursor.execute(f'CREATE DATABASE ${db_name}')
+    cursor.execute(f'CREATE DATABASE {db_name}')
 conn.close()
 
 myDB = pw.MySQLDatabase(
     host=db_host,
-    port=3306,
+    port=db_port,
     user="root",
     passwd=db_password,
     database=db_name
@@ -46,11 +47,7 @@ class MySQLModel(pw.Model):
 class QuestionModel(MySQLModel):
     email = pw.CharField(50)
     question = pw.TextField()
-    answer = pw.TextField()
-
-class ReferenceModel(MySQLModel):
-    question = pw.ForeignKeyField(QuestionModel, backref='references')
-    dieu_id = pw.TextField()
+    response = pw.TextField()
 
 myDB.connect()
-myDB.create_tables([QuestionModel, ReferenceModel])
+myDB.create_tables([QuestionModel, Reference])
