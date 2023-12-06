@@ -7,8 +7,7 @@ import lombok.Data;
 
 @Data
 public class DecodedToken {
-    private Long id;
+    private String id;
     private String email;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 }

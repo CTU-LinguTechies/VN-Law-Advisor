@@ -14,22 +14,22 @@ export interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
     return (
         <Provider store={store}>
-            <StyledComponentsRegistry>
-                <ConfigProvider
-                    theme={{
-                        token: {
-                            colorPrimary: '#776B5D',
-                            colorLink: '#776B5D',
-                        },
-                    }}
-                >
-                    <MessageProvider>
-                        <NotificationProvider>
-                            <AuthProvider>{children}</AuthProvider>
-                        </NotificationProvider>
-                    </MessageProvider>
-                </ConfigProvider>
-            </StyledComponentsRegistry>
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorPrimary: '#776B5D',
+                        colorLink: '#776B5D',
+                    },
+                }}
+            >
+                <MessageProvider>
+                    <NotificationProvider>
+                        <AuthProvider>
+                            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+                        </AuthProvider>
+                    </NotificationProvider>
+                </MessageProvider>
+            </ConfigProvider>
         </Provider>
     );
 }
