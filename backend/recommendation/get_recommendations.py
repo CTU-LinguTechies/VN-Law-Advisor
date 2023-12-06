@@ -64,7 +64,7 @@ def get_recommendations():
                     "id": doc.metadata["id"],
                     "id_vb": doc.metadata["id_vb"],
                     "chi_muc_cha": doc.metadata["chi_muc_cha"],
-                    "ciation": result_string,
+                    "citation": result_string,
                 })
                 if doc.metadata["id_vb"] and doc.metadata["id_vb"] not in text_ids:
                     text_ids.append(doc.metadata["id_vb"])
