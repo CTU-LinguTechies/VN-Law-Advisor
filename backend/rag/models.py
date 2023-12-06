@@ -49,5 +49,11 @@ class QuestionModel(MySQLModel):
     question = pw.TextField()
     response = pw.TextField()
 
+class Reference(MySQLModel):
+    question_id = pw.ForeignKeyField(QuestionModel)
+    mapc = pw.CharField(255)
+    noidung = pw.TextField()
+    ten = pw.TextField()
+
 myDB.connect()
 myDB.create_tables([QuestionModel, Reference])

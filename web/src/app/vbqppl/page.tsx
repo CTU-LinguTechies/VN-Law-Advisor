@@ -1,11 +1,15 @@
 'use client';
 import { VBQPPLModel } from '@/models/VBQPPLModel';
 import vbqpplService from '@/services/vbqppl.service';
-import { Card, Col, Input, Pagination, Row, Select, Tag } from 'antd';
+import { Button, Card, Col, Input, Pagination, Row, Select, Tag } from 'antd';
 import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it';
 import { Fade } from 'react-awesome-reveal';
+import { DeMucModel } from '@/models/DeMucModel';
+import pddemucService, { PDDemucGetAllFilter } from '@/services/pddemuc.service';
+import useDelay from '@/hooks/useDelay';
+import PhapDienHoa from '@/components/vbqppl/PhapDienHoa';
 const options = [
     {
         value: 'LUẬT',
@@ -73,74 +77,83 @@ export default function Page() {
                     </Row>
                 </Fade>
             </div>
-            <main className="max-w-[1440px] w-[95%] mx-auto my-5">
-                <Row>
-                    <Col span={24}>
-                        <h1>Xem danh sách các văn bản quy phạm pháp luật</h1>
-                    </Col>
-                    <Col xs={24} md={12} lg={12} xl={12} span={12}>
-                        <Row className="mt-5" align="middle" gutter={[16, 16]}>
-                            <Col span={12}>
-                                <Select
-                                    filterOption={false}
-                                    className="w-full"
-                                    placeholder="Tìm kiếm theo loại..."
-                                    optionFilterProp="children"
-                                    onChange={(value: string) => setLoai(value)}
-                                    options={options}
-                                    notFoundContent={
-                                        <Lottie
-                                            animationData={require('@/assets/lottie/empty.json')}
-                                        />
-                                    }
-                                />
-                            </Col>
-                            <Col span={12}>
-                                <Input
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="w-full"
-                                    placeholder="Tìm kiếm theo tên..."
-                                />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]} className="mt-5">
-                    {vanbans.map((item) => (
-                        <Col className="max-h-[300px]" span={6} sm={12} xs={24} md={12} lg={8}>
-                            <Card
-                                className="overflow-hidden h-full"
-                                title={
-                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <div className="flex justify-end">
-                                            <Tag color="blue">{item.loai}</Tag>
-                                        </div>
-                                        <p>{item.ten}</p>
-                                    </div>
-                                }
-                            >
-                                <div dangerouslySetInnerHTML={{ __html: item.noidung }}></div>
-                            </Card>
+            <main className="max-w-[1440px] w-[95%] mx-auto my-6">
+                <Fade>
+                    <Row>
+                        <Col span={24}>
+                            <h1>Xem danh sách các văn bản quy phạm pháp luật</h1>
+                            <em style={{ fontStyle: 'italic' }}>
+                                *Nhiều văn bản pháp luật hiện nay vẫn chưa được pháp điển hóa cụ
+                                thể. Dưới đây là chỉ sự sắp xếp những văn bản đó do hệ thống tự tính
+                                toán, không phải chính thức từ chính phủ.
+                            </em>
                         </Col>
-                    ))}
-                </Row>
-                <Row justify="end">
-                    <Col className="flex justify-end mt-5" span={24}>
-                        <Pagination
-                            defaultCurrent={0}
-                            current={page}
-                            onChange={setPage}
-                            pageSizeOptions={[6, 9]}
-                            pageSize={pageSize}
-                            onShowSizeChange={(current, size) => {
-                                setPageSize(size);
-                                setPage(0);
-                            }}
-                            total={total}
-                        />
-                    </Col>
-                </Row>
+                        <Col xs={24} md={24} lg={24} xl={24} span={24}>
+                            <Row className="mt-5" align="middle" gutter={[16, 16]}>
+                                <Col span={8}>
+                                    <Select
+                                        filterOption={false}
+                                        className="w-full"
+                                        placeholder="Tìm kiếm theo loại..."
+                                        optionFilterProp="children"
+                                        onChange={(value: string) => setLoai(value)}
+                                        options={options}
+                                        notFoundContent={
+                                            <Lottie
+                                                animationData={require('@/assets/lottie/empty.json')}
+                                            />
+                                        }
+                                    />
+                                </Col>
+                                <Col span={8}>
+                                    <Input
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full"
+                                        placeholder="Tìm kiếm theo tên..."
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={[16, 16]} className="mt-5">
+                        {vanbans.map((item) => (
+                            <Col className="max-h-[300px]" span={6} sm={12} xs={24} md={12} lg={8}>
+                                <Card
+                                    className="overflow-hidden h-full"
+                                    title={
+                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <div className="flex justify-end">
+                                                <Tag color="blue">{item.loai}</Tag>
+                                            </div>
+                                            <p>{item.ten}</p>
+                                        </div>
+                                    }
+                                >
+                                    <div dangerouslySetInnerHTML={{ __html: item.noidung }}></div>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>
+                    <Row justify="end">
+                        <Col className="flex justify-end mt-5" span={24}>
+                            <Pagination
+                                defaultCurrent={0}
+                                current={page}
+                                onChange={setPage}
+                                pageSizeOptions={[6, 9]}
+                                pageSize={pageSize}
+                                onShowSizeChange={(current, size) => {
+                                    setPageSize(size);
+                                    setPage(0);
+                                }}
+                                total={total}
+                            />
+                        </Col>
+                    </Row>
+                </Fade>
+                <PhapDienHoa />
             </main>
         </>
     );

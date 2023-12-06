@@ -17,7 +17,6 @@ import requests
 current_device = "cpu"
 if torch.cuda.is_available():
     current_device="cuda"
-
 embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
 vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
@@ -48,7 +47,7 @@ def get_question(email=None):
             answer = []
             query1 = Reference.select().where(row['id'] == Reference.question_id).dicts()
             for r in query1: 
-                answer.append({"mapc": r['mapc'], "noidung": r['noidung']})
+                answer.append({"mapc": r['mapc'], "noidung": r['noidung'], "ten": r['ten']})
             res.append({
                 "id": row['id'],
                 "email": row['email'],
@@ -61,21 +60,15 @@ def get_question(email=None):
     
 @app.route('/api/v1/question', methods=['POST'])
 def add_question():
-    try: 
-        token = request.headers.get('Authorization')
+    token = request.headers.get('Authorization')
 
-        if token.startswith('Bearer '):
-            token = token[7:]
-        data = request.get_json()
-        decoded = jwt.decode(token, ACCESS_TOKEN_KEY, algorithms=['HS256'])
+    if token.startswith('Bearer '):
+        token = token[7:]
+    data = request.get_json()
+    decoded = jwt.decode(token, ACCESS_TOKEN_KEY, algorithms=['HS256'])
 
-        email = decoded['email']
-    except: 
-         return {
-            "status": "error",
-            "response": "Need authencation",
-        }, 400
-         
+    email = decoded['email']
+
     try:
         question = data["question"]
     except:
@@ -94,7 +87,6 @@ def add_question():
         return json.loads(redisClient.get(question).decode('utf-8')), 200
     
     output = vectordb.similarity_search(question, k=2)
-
     context = ""
     citation = []
     for doc in output:
@@ -123,7 +115,7 @@ def add_question():
         }, 500
 
 
-    # inputs = f"Sử dụng thông tin được cung cấp sau đây và những thông tin bạn biết để trả lời cho câu hỏi, Thông tin cung cấp {context}. Hãy trả lời câu hỏi: {question}"
+    # inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
     # payload = {
     #     "inputs": inputs
     # }
@@ -147,7 +139,7 @@ def add_question():
 
     query = QuestionModel.create(**{"email": email, "question": question ,"response": response})
     for c in citation: 
-        Reference.create(**{'question_id': query.id, 'mapc': c['mapc'], 'noidung': c['noidung']})
+        Reference.create(**{'question_id': query.id, 'mapc': c['mapc'], 'noidung': c['noidung'], 'ten': c['ten']})
     res = {
         "status": "success",
         "question": question,
@@ -220,7 +212,7 @@ def add_question_with_context():
     
 
 
-    # inputs = f"Sử dụng thông tin được cung cấp sau đây và những thông tin bạn biết để trả lời cho câu hỏi, Thông tin cung cấp {context}. Hãy trả lời câu hỏi: {question}"
+    # inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
     # payload = {
     #     "inputs": inputs
     # }
@@ -244,7 +236,7 @@ def add_question_with_context():
 
     query = QuestionModel.create(**{"email": email, "question": question ,"response": response})
     for c in citation: 
-        Reference.create(**{'question_id': query.id, 'mapc': c['mapc'], 'noidung': c['noidung']})
+        Reference.create(**{'question_id': query.id, 'mapc': c['mapc'], 'noidung': c['noidung'], 'ten': c['ten']})
     res = {
         "status": "success",
         "question": question,
@@ -267,4 +259,4 @@ def delete_question(question_id):
     return '', 204
 
 print('QNA server is running. ')
-serve(app, host='0.0.0.0', port=5001, threads=1, url_prefix="/rag/api/v1")
+serve(app, host='0.0.0.0', port=5001, threads=1)
