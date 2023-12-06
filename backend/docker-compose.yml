@@ -25,6 +25,8 @@ services:
   law-mysql:
     image: mysql:latest
     restart: always
+    volumes:
+      - ~/data/law-sql:/var/lib/mysql
     environment:
         MYSQL_ROOT_PASSWORD: 123456789
         MYSQL_DATABASE: law
@@ -85,6 +87,8 @@ services:
           - app-network
   auth-mysql:
       image: mysql:latest
+      volumes:
+      - ~/data/auth-sql:/var/lib/mysql
       restart: always
       environment:
           MYSQL_ROOT_PASSWORD: root
@@ -94,6 +98,8 @@ services:
   qna-mysql:
     image: mysql:latest
     restart: always
+    volumes:
+      - ~/data/qna-sql:/var/lib/mysql
     ports:
         - '3307:3306'
     environment:
