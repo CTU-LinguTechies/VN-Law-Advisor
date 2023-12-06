@@ -118,6 +118,8 @@ services:
       QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
       REDIS_HOST: redis
       TOPIC_DB_PATH: ./chroma_db_demuc
+      ACCESS_TOKEN_KEY: VN-Law-Advisor
+      REFRESH_TOKEN_KEY: auth-service
 networks:
     app-network:
         driver: bridge

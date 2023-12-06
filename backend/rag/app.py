@@ -26,15 +26,26 @@ app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/api/v1/question', methods=['GET'])
 @app.route('/api/v1/question/<int:question_id>', methods=['GET'])
 def get_question(question_id=None):
     if question_id is None:
         question = QuestionModel.select().dicts()
-        return jsonify(model_to_dict(question)), 201
+        return json.dumps(question), 201
     else:
         question = QuestionModel.get(QuestionModel.id == question_id)
-        return jsonify(model_to_dict(question)), 201
+        return json.dumps(question), 201
+
+@app.route('/api/v1/question/email', methods=['GET'])
+def get_questions_by_email():
+    token = request.headers.get('Authorization')
+
+    if token.startswith('Bearer '):
+        token = token[7:]
+    decoded = jwt.decode(token, ACCESS_TOKEN_KEY, algorithms=['HS256'])
+    email = decoded['email']
+
+    questions = QuestionModel.select().where(QuestionModel.email == email).dicts()
+    return json.dumps(list(questions)), 201
         
 @app.route('/api/v1/question', methods=['POST'])
 def add_question():
@@ -61,6 +72,7 @@ def add_question():
             if index != -1:
                 result_string = result_string[index + len("content: "):].strip()
             if topic_id and topic_id not in topic_ids:
+                ReferenceModel.create(question=question, dieu_id=topic_id)
                 topic_ids.append(topic_id)
             
             context += f"{result_string} "
@@ -78,7 +90,6 @@ def add_question():
         return json.loads(redisClient.get(question).decode('utf-8')), 200
     
     QuestionModel.create(**data)
-    print(data['answer'])
     return {
                     "status": "success",
                     "question": question,

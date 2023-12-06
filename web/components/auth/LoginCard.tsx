@@ -7,6 +7,7 @@ import FormItem from 'antd/es/form/FormItem';
 import { Formik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
 import * as Yup from 'yup';
 
@@ -21,14 +22,14 @@ export default function LoginCard({ setKey }: LoginCardProps) {
         password: Yup.string().required('Mật khẩu không được để trống'),
     });
     const router = useRouter();
-
+    const dispatch = useDispatch();
     const submit = async (values: LoginRequestDto) => {
         try {
             const { data } = await authService.login(values);
             tokenService.accessToken = data.accessToken;
             tokenService.refreshToken = data.refreshToken;
             tokenService.expiratedAt = data.expiredAt;
-            setUser(data);
+            dispatch(setUser(data));
             router.push('/');
             messageAPI?.open({
                 type: 'success',

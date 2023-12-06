@@ -5,10 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import lingutechies.vnlawadvisor.lawservice.config.security.DTO.DecodedToken;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+import io.jsonwebtoken.Claims;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthorizationFilterChain extends OncePerRequestFilter {
     private final RestTemplate restTemplate = new RestTemplate();
+    private final JWTService jwtService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader("Authorization");
@@ -38,27 +36,18 @@ public class AuthorizationFilterChain extends OncePerRequestFilter {
             return;
         }
         String token = authorization.substring(7);
-        DecodedToken decodedToken = null;
-        try{
-            HttpHeaders headers = new HttpHeaders();
-            headers.setBearerAuth(token);
-            HttpEntity<String> entity = new HttpEntity<>("body", headers);
-            decodedToken = restTemplate.postForObject(
-                    "http://auth-service/auth/validate",
-                    entity,
-                    DecodedToken.class
-            );
+        String checkTokenMessage = jwtService.isTokenValid(token);
+        if (checkTokenMessage != null){
+            sendResponse(response, checkTokenMessage, HttpStatus.FORBIDDEN);
+            return;
         }
-        catch (Exception exception){
-            System.out.println(exception.getMessage());
-            sendResponse(response, "You are not authenticated", HttpStatus.UNAUTHORIZED);
-        }
-        if (decodedToken != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = new lingutechies.vnlawadvisor.lawservice.config.security.UserDetails(
-                    decodedToken.getEmail(),
-                    decodedToken.getRole(),
-                    decodedToken.getId()
-            );
+        Claims decodedToken = jwtService.extractAllClaims(token);
+        String email = decodedToken.get("email").toString();
+        String role = decodedToken.get("role").toString();
+        String id = decodedToken.get("id").toString();
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            UserDetails userDetails = new lingutechies.vnlawadvisor.
+                    lawservice.config.security.UserDetails(email, role, id);
             UsernamePasswordAuthenticationToken authenticationToken = new
                     UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);

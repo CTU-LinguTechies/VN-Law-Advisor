@@ -69,6 +69,32 @@ Backend của hệ thống được thiết kế theo kiến trúc microservices
 
 <img loading="lazy" src="./docs/images/system_architecture.svg" alt="Architecture" width="100%" height=600>
 
+### RAG
+
+Sử dụng mô hình [Vietnamese SBERT](https://huggingface.co/keepitreal/vietnamese-sbert) để tạo embedding cho các tri thức pháp luật. Các embedding được lưu vào Chroma - một loại vector database.
+
+Sau đó, xây dựng hệ thống RAG với framework [LangChain](https://www.langchain.com/) để truy vấn các context là các điều từ pháp điển, sau đó đưa context cho mô hình LLM để sinh ra các câu trả lời.
+
+Mô hình LLM chọn sử dụng là [phoGPT](./https://github.com/VinAIResearch/PhoGPT), kết hợp context và câu hỏi để sinh câu trả lời.
+
+Thiết kế Hệ thống hỏi đáp như hình vẽ bên dưới:
+![Kiến trúc hệ thống hỏi đáp](backend/rag/qa.png)
+
+### CI/CD
+
+Project CI/CD sử dụng Github và [Github Actions](https://docs.github.com/en/actions) để tự động hóa quá trình build và deploy. Quy trình như hình vẽ sau:
+
+![CI/CD](./docs/images/ci_cd.svg)
+
+Các workflows của project được lưu tại: [.github/workflows](.github/workflows), với các workflow như sau:
+
+-   [build-docker.yaml](.github/workflows/build-docker.yaml): Build docker image cho các service và push lên docker hub
+-   [build-docker-github.yaml](.github/workflows/build-docker-github.yaml): Build docker image cho các service và push lên github packages
+-   [build-documentation.yaml](.github/workflows/build-documentation.yaml): Build documentation và push lên github pages
+-   [commitlint.yaml](.github/workflows/deploy-docker-compose.yaml): Lint các commit message của các nhánh
+-   [test-auth-service.yaml](.github/workflows/test-auth-service.yaml): Build và test kiểm thử auth service
+-   [test-law-service.yaml](.github/workflows/test-law-service.yaml): Build và test kiểm thử law service
+
 ## Cấu trúc thư mục
 
 -   [Crawler](./law-crawler) - Crawl vào CSDL từ nguồn pháp điển Việt Nam.

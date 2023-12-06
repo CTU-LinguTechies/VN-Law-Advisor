@@ -2,7 +2,7 @@
 
 Đây sẽ là hướng dẫn để giúp bạn khởi chạy Service nằm trong thư mục `/rag/`.
 
-## Các chức năng của Serivce 
+## Các chức năng của Service 
 - Nhúng các văn bản pháp luật thành các Véc-tơ và lưu trữ chúng vào một CSDL:
     - Sử dụng mô hình Sentence - Transformers để nhúng các văn bản pháp luật từ HuggingFace🤗.
     - Sử dụng ChromaDB để lưu trữ các véc-tơ từ các văn bản pháp luật đã được nhúng.
@@ -43,11 +43,11 @@ Thêm địa chỉ đến Cơ sở dữ liệu Vector vào `TOPIC_DB_PATH` trong
 Khởi động dịch vụ với câu lệnh sau:
 
 ```bash
-python get_response.py
+python app.py
 ```
 hoặc
 ```bash
-python3 get_response.py
+python3 app.py
 ```
 ### Hướng dẫn nhúng các văn bản pháp luật
 Do cần đảm bảo tính chất toàn vẹn của các thông tin về pháp luật, các văn bản đầu vào nên được chia thành các khối theo điểm hoặc điều hoàn chỉnh lưu vào tập tin dạng `CSV`.

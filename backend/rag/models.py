@@ -48,5 +48,9 @@ class QuestionModel(MySQLModel):
     question = pw.TextField()
     answer = pw.TextField()
 
+class ReferenceModel(MySQLModel):
+    question = pw.ForeignKeyField(QuestionModel, backref='references')
+    dieu_id = pw.TextField()
+
 myDB.connect()
-myDB.create_tables([QuestionModel])
+myDB.create_tables([QuestionModel, ReferenceModel])
