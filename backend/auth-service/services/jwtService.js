@@ -7,7 +7,7 @@ class TokenUtil {
     refreshKey = config.security.refreshKey;
     generateAccessToken(user) {
         return jwt.sign(user, this.accessKey, {
-            expiresIn: '15m',
+            expiresIn: '2d',
             algorithm: 'HS256',
         });
     }
