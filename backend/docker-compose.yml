@@ -26,7 +26,7 @@ services:
     image: mysql:latest
     restart: always
     volumes:
-      - ~/data/auth-sql:/var/lib/mysql
+      - ~/data/law-sql:/var/lib/mysql
     environment:
         MYSQL_ROOT_PASSWORD: 123456789
         MYSQL_DATABASE: law
