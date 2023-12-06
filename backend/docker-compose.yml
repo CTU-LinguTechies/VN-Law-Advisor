@@ -77,6 +77,7 @@ services:
       ACCESS_TOKEN_KEY: VN-Law-Advisor
       REFRESH_TOKEN_KEY: auth-service
   redis:
+      restart: always
       image: redis:latest
       ports:
           - '6379:6379'
@@ -106,8 +107,6 @@ services:
     depends_on:
       - qna-mysql
       - redis
-    volumes:
-      - ./rag:/app
     networks:
       - app-network
     environment:
@@ -117,6 +116,17 @@ services:
       ST_MODEL_PATH: keepitreal/vietnamese-sbert
       QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
       REDIS_HOST: redis
+      TOPIC_DB_PATH: ./chroma_db_demuc
+      ACCESS_TOKEN_KEY: VN-Law-Advisor
+      MYSQL_PORT: 3307
+  recommendation-service:
+    build: ./recommendation
+    restart: always
+    networks:
+      - app-network
+    environment:
+      ST_MODEL_PATH: keepitreal/vietnamese-sbert
+      QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
       TOPIC_DB_PATH: ./chroma_db_demuc
 networks:
     app-network:

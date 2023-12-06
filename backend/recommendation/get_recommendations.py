@@ -80,5 +80,5 @@ def get_recommendations():
                 }, 400
 
 print('Recommendations server is running. ')
-serve(app, host='0.0.0.0', port=5001, threads=1, url_prefix="/rag/api/v1")
+serve(app, host='0.0.0.0', port=5002, threads=1, url_prefix="/recommend/api/v1")
             
