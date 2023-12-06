@@ -37,7 +37,7 @@ export default function PhapDienHoa() {
                 await vbqpplChuaPhapDienService.getAllVBQPPLChuaPhapDien({
                     pageNo: page,
                     pageSize,
-                    deMudId: selectedDemuc,
+                    deMucId: selectedDemuc,
                 });
             setDieus(content);
             setTotal(Math.ceil(totalElements / size));

@@ -5,7 +5,7 @@ import createHttpClient from '@/utils/createHttpClient';
 import { AxiosInstance } from 'axios';
 
 export interface VBQPPLGetAllFilter extends BaseFilterPagination {
-    deMudId?: string;
+    deMucId?: string;
 }
 
 class VBQPPLService {

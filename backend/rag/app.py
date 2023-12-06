@@ -20,7 +20,7 @@ if torch.cuda.is_available():
 embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
 vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
-pipeline = pipeline(task="question-answering", model=QA_MODEL_PATH, local_files_only=True)
+# pipeline = pipeline(task="question-answering", model=QA_MODEL_PATH, local_files_only=True)
 HF_API_URL = "https://iofuyi0iny87dl65.us-east-1.aws.endpoints.huggingface.cloud"
 headers = {
 	"Authorization": "Bearer XXXXXX",
@@ -115,27 +115,27 @@ def add_question():
         }, 500
 
 
-    # inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
-    # payload = {
-    #     "inputs": inputs
-    # }
-    # output = requests.post(HF_API_URL, headers=headers, json=payload)
-    # response =  output.json()
-    # if len(response) < 0:
-    #     return {
-    #         "status": "error",
-    #         "response": "Error while generating answer",
-    #     }, 500
-    # response =  response[0]
-    # if not response:
-    #     return {
-    #         "status": "error",
-    #         "response": "Error while generating answer",
-    #     }, 500
-    # response =  response["response"]
+    inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
+    payload = {
+        "inputs": inputs
+    }
+    output = requests.post(HF_API_URL, headers=headers, json=payload)
+    response =  output.json()
+    if len(response) < 0:
+        return {
+            "status": "error",
+            "response": "Error while generating answer",
+        }, 500
+    response =  response[0]
+    if not response:
+        return {
+            "status": "error",
+            "response": "Error while generating answer",
+        }, 500
+    response =  response["response"]
 
 
-    response = pipeline(question=question, context=context)["answer"].strip()
+    # response = pipeline(question=question, context=context)["answer"].strip()
 
     query = QuestionModel.create(**{"email": email, "question": question ,"response": response})
     for c in citation: 
@@ -212,27 +212,27 @@ def add_question_with_context():
     
 
 
-    # inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
-    # payload = {
-    #     "inputs": inputs
-    # }
-    # output = requests.post(HF_API_URL, headers=headers, json=payload)
-    # response =  output.json()
-    # if len(response) < 0:
-    #     return {
-    #         "status": "error",
-    #         "response": "Error while generating answer",
-    #     }, 500
-    # response =  response[0]
-    # if not response:
-    #     return {
-    #         "status": "error",
-    #         "response": "Error while generating answer",
-    #     }, 500
-    # response =  response["response"]
+    inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
+    payload = {
+        "inputs": inputs
+    }
+    output = requests.post(HF_API_URL, headers=headers, json=payload)
+    response =  output.json()
+    if len(response) < 0:
+        return {
+            "status": "error",
+            "response": "Error while generating answer",
+        }, 500
+    response =  response[0]
+    if not response:
+        return {
+            "status": "error",
+            "response": "Error while generating answer",
+        }, 500
+    response =  response["response"]
 
 
-    response = pipeline(question=question, context=context)["answer"].strip()
+    # response = pipeline(question=question, context=context)["answer"].strip()
 
     query = QuestionModel.create(**{"email": email, "question": question ,"response": response})
     for c in citation: 

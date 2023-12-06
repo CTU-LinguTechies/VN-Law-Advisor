@@ -1,12 +1,15 @@
 'use client';
 import law from '@/assets/lottie/law.json';
 import HomeNavigationCard from '@/components/home/HomeNavigationCard';
-import { Col, Row, Spin } from 'antd';
+import { Col, Input, Row, Spin } from 'antd';
+const { Search } = Input;
 import { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 import { Fade } from 'react-awesome-reveal';
+import vbqpplService from '@/services/vbqppl.service';
 export default function Home() {
     const [animationData, setAnimationData] = useState<any>(null);
+    const [searchResult, setSearchResult] = useState<any[]>([]);
     useEffect(() => {
         import(`@/assets/lottie/law.json`).then((data) => {
             setAnimationData(data.default);
@@ -19,6 +22,20 @@ export default function Home() {
             </div>
         );
     }
+
+    const search = async (value: string) => {
+        const result: any = await vbqpplService.getReccomended({
+            keyword: value,
+            num_of_relevant_texts: 7,
+        });
+
+        for (const id of result.ids) {
+            const vb = await vbqpplService.getOne(id);
+            console.log(vb);
+        }
+
+        setSearchResult(result);
+    };
     return (
         <>
             <Fade>
@@ -45,6 +62,20 @@ export default function Home() {
                 </Row>
             </Fade>
             <main className="flex flex-col items-center justify-between my-5 p-x-24">
+                <div>
+                    <Row justify="start">
+                        <Col span={24}>
+                            <h1 style={{ margin: '16px 0' }}>Tìm văn bản pháp luật bằng từ khóa</h1>
+
+                            <Search
+                                placeholder="Tìm một từ khóa..."
+                                onSearch={search}
+                                enterButton
+                            />
+                        </Col>
+                        <Col span={24}></Col>
+                    </Row>
+                </div>
                 <h1 className="text-3xl my-5">Nổi Bật</h1>
                 <div className="">
                     <Row justify="center" gutter={[16, 16]}>

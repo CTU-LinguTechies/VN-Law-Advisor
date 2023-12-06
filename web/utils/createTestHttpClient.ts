@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const createTestHttpClient = (baseUrl: string = '') => {
     const client = axios.create({
-        baseURL: `http://localhost:5001/${baseUrl}`,
+        baseURL: `http://localhost:5002/${baseUrl}`,
     });
 
     client.interceptors.request.use(async (config) => {
