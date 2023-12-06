@@ -118,16 +118,7 @@ services:
       REDIS_HOST: redis
       TOPIC_DB_PATH: ./chroma_db_demuc
       ACCESS_TOKEN_KEY: VN-Law-Advisor
-      MYSQL_PORT: 3307
-  recommendation-service:
-    build: ./recommendation
-    restart: always
-    networks:
-      - app-network
-    environment:
-      ST_MODEL_PATH: keepitreal/vietnamese-sbert
-      QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
-      TOPIC_DB_PATH: ./chroma_db_demuc
+      REFRESH_TOKEN_KEY: auth-service
 networks:
     app-network:
         driver: bridge

@@ -19,7 +19,7 @@ embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"devi
 text_vectordb = Chroma(embedding_function=embeddings, persist_directory=TEXT_DB_PATH)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/api/v1/', methods=['GET'])
 def init():
     if request.method == 'GET':
       
@@ -28,7 +28,7 @@ def init():
         }, 200
         
         return result
-@app.route('/get-recommendations', methods=['POST'])
+@app.route('/api/v1/get-recommendations', methods=['POST'])
 def get_recommendations():
     if request.method == 'POST':
         req = request.get_json()

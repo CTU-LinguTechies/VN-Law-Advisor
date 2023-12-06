@@ -11,15 +11,23 @@ export interface VBQPPLGetAllFilter extends BaseFilterPagination {
 
 class VBQPPLService {
     private client: AxiosInstance;
+    private recommendationClient: AxiosInstance;
 
     constructor() {
         this.client = createHttpClient('law/api/v1/vbpl');
+        this.recommendationClient = createHttpClient('reccomedation/api/v1/get_recommendations');
     }
 
     async getAllVBQPPL(filter: VBQPPLGetAllFilter) {
         return (await this.client.get(``, {
             params: filter,
         })) as PaginationResponse<VBQPPLModel>;
+    }
+    async getOne(id: string) {
+        return (await this.client.get(`/${id}`)) as VBQPPLModel;
+    }
+    async getReccomended(id: string) {
+        return (await this.recommendationClient.get(`/${id}`)) as VBQPPLModel[];
     }
 }
 

@@ -13,8 +13,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
     private String email;
-    private Role role;
-    private Long id;
+    private String role;
+    private String id;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.toString()));

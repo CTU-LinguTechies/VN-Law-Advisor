@@ -56,8 +56,8 @@ public class SecurityConfig {
                         requests->
                                 requests
                                         .requestMatchers("/","/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                        .requestMatchers(new AntPathRequestMatcher("/law/api/v1/user/**")).hasAnyAuthority("USER", "ADMIN")
-                                        .requestMatchers(new AntPathRequestMatcher("/law/api/v1/admin/**")).hasAuthority("ADMIN")
+//                                        .requestMatchers(new AntPathRequestMatcher("/law/api/v1/user/**")).hasAnyAuthority("USER", "ADMIN")
+//                                        .requestMatchers(new AntPathRequestMatcher("/law/api/v1/admin/**")).hasAuthority("ADMIN")
                                         .anyRequest().permitAll()
                 )
                 .userDetailsService(userDetailsService)

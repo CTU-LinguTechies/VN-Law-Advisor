@@ -3,7 +3,7 @@ import Link from 'next/link';
 import './navbar.scss';
 import { UserOutlined } from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { Avatar, Button, Dropdown, MenuProps } from 'antd';
 import tokenService from '@/utils/tokenService';
@@ -17,9 +17,10 @@ function formatPathname(pathname: string) {
 export default function Navbar() {
     const pathname = formatPathname(usePathname());
     const user = useSelector((state: RootState) => state.user);
+    const dispatch = useDispatch();
     const logOut = () => {
         tokenService.clear();
-        deleteUser();
+        dispatch(deleteUser());
     };
     const items: MenuProps['items'] = [
         {

@@ -55,6 +55,11 @@ Thiết kế theo kiến trúc microservices như hình vẽ bên dưới:
 
 ### Recommendation Service
 
+-   Recommendation Service: Thực hiện việc gợi ý các văn bản pháp luật có liên quan, cấu trúc hóa vbqppl và search theo từ khóa.
+    -   Sử dụng Flask để xây dựng API.
+    -   Sử dụng LangChain để truy vấn các context là tri thức luật.
+    -   Sử dụng ChromaDB để truy vấn các context là embedding.
+
 ## Pre-requisites - Yêu cầu
 
 -   Cần có các công cụ sau để cài đặt và chạy một local server:
