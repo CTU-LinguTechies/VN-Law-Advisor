@@ -9,4 +9,5 @@ peewee
 python-dotenv
 redis
 jwt
+PyJWT
 waitress

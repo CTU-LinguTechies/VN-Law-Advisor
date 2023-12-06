@@ -6,12 +6,6 @@ Lấy dữ liệu từ [Pháp Điển Việt Nam](https://phapdien.moj.gov.vn/),
 
 ### Cào dữ liệu pháp điển
 
--   Đầu tiên, cd vào thư mục này:
-
-```bash
-cd law-crawler
-```
-
 -   Tạo 2 file json từ file jsonData.json gốc:
     -   chude.json: chứa các chủ đề
     -   demuc.json: chứa các đề mục

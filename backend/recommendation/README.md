@@ -11,10 +11,12 @@
     - Đưa ra các điều trong Văn bản Quy phạm Pháp luật và các Văn bản Quy phạm Pháp luật đầy đủ có liên quan đến từ khóa.
 
 ## Hệ thống lưu trữ các văn bản Pháp luật
+
 Thiết kế Hệ thống lưu trữ các văn bản Pháp luật như hình vẽ bên dưới:
 ![Kiến trúc hệ thống lưu trữ các văn bản Pháp luật](./rag_flow.png)
 
 ## Hệ thống Gợi ý các văn bản pháp luật
+
 Thiết kế Hệ thống Gợi ý các văn bản pháp luật như hình vẽ bên dưới:
 ![Kiến trúc hệ thống Gợi ý các văn bản pháp luật](./recommendations.png)
 

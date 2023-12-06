@@ -3,12 +3,14 @@ from flask_cors import CORS, cross_origin
 from playhouse.shortcuts import model_to_dict
 from models import *
 from directory import *
-from cache import Cache
+from cache import *
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from transformers import pipeline
 import torch
+import json
 import jwt
+import  re
 from waitress import serve
 
 current_device = "cpu"
@@ -25,72 +27,121 @@ app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/question', methods=['GET'])
-@app.route('/question/<int:question_id>', methods=['GET'])
-def get_question(question_id=None):
-    if question_id is None:
-        question = QuestionModel.select()
-        return jsonify(model_to_dict(question)), 201
-    else:
-        question = QuestionModel.get(QuestionModel.id == question_id)
-        return jsonify(model_to_dict(question)), 201
-        
-@app.route('/question', methods=['POST'])
-def add_question():
+@app.route('/api/v1/question', methods=['GET'])
+def get_question(email=None):
     token = request.headers.get('Authorization')
 
     if token.startswith('Bearer '):
         token = token[7:]
-
+        
     decoded = jwt.decode(token, ACCESS_TOKEN_KEY, algorithms=['HS256'])
-    data['email'] = decoded['email']
-    data = request.get_json()
-    question = data['question']
+    email = decoded['email']
+    if email:
+        query = QuestionModel.select().where(email == QuestionModel.email).dicts()
+        res = []
+        for row in query:
+            answer = []
+            query1 = Reference.select().where(row['id'] == Reference.question_id).dicts()
+            for r in query1: 
+                answer.append({"mapc": r['mapc'], "noidung": r['noidung']})
+            res.append({
+                "id": row['id'],
+                "email": row['email'],
+                "question": row['question'],
+                "updatedAt": row['updatedAt'].strftime("%m/%d/%Y"),
+                "response": row['response'],
+                "answer": answer
+            })
+        return res, 201
+    
+@app.route('/api/v1/question', methods=['POST'])
+def add_question():
+    try: 
+        token = request.headers.get('Authorization')
 
-    if not(Cache.get(question)):
-        output = vectordb.similarity_search(question, k=2)
-        context = ""
-        ciation = []
-        topic_ids = []
-        for doc in output:
-            result_string = doc.page_content
-            topic_id = doc.metadata["source"].split("/")[-1].split(".")[0]
-            index = result_string.find("content: ")
+        if token.startswith('Bearer '):
+            token = token[7:]
+        data = request.get_json()
+        decoded = jwt.decode(token, ACCESS_TOKEN_KEY, algorithms=['HS256'])
 
-            if index != -1:
-                result_string = result_string[index + len("content: "):].strip()
-            if topic_id and topic_id not in topic_ids:
-                topic_ids.append(topic_id)
-            
-            context += f"{result_string} "
-            ciation.append(result_string)
-        
-        context = context.strip()
-        response = pipeline(question=question, context=context)["answer"]
-        data['answer'] = response
-        Cache.set(question, response)
-    else:
-        data['answer'] = Cache.get(question)
-        
-    QuestionModel.create(**data)
-    return {
-                    "status": "success",
-                    "question": question,
-                    "ciation": ciation,
-                    "response": response,
-                    "topic_ids": topic_ids,
-                }, 200
+        email = decoded['email']
+    except: 
+         return {
+            "status": "error",
+            "response": "Need authencation",
+        }, 400
+         
+    try:
+        question = data["question"]
+    except:
+        return {
+            "status": "error",
+            "response": "No question in payload",
+        }, 400
+    
+    if not question:
+        return {
+            "status": "error",
+            "response": "Question can not be empty",
+        }, 400
+
+    if (redisClient.get(question)): 
+        return json.loads(redisClient.get(question).decode('utf-8')), 200
+    
+    output = vectordb.similarity_search(question, k=2)
+
+    context = ""
+    ciation = []
+    for doc in output:
+        result_string = doc.page_content
+        index = result_string.find("content: ")
+        if index != -1:
+            result_string = result_string[index + len("content: "):].strip()
+        result_string = result_string.replace("\n", " ")
+        result_string = re.sub(r"\s+", r" ", result_string)
+        context += f"{result_string} "
+
+        ciation.append({
+            "mapc": doc.metadata["mapc"],
+            "_link": doc.metadata["_link"],
+            "chude_id": doc.metadata["chude_id"],
+            "demuc_id": doc.metadata["demuc_id"],
+            "ten": doc.metadata["ten"],
+            "noidung": result_string
+        })
+    
+    context = context.strip()
+    if not context:
+        return {
+            "status": "error",
+            "response": "Error while retrieving context from DB",
+        }, 500
+
+    response = pipeline(question=question, context=context)["answer"].strip()
+
+    query = QuestionModel.create(**{"email": email, "question": question ,"response": response})
+    for c in ciation: 
+        Reference.create(**{'question_id': query.id, 'mapc': c['mapc'], 'noidung': c['noidung']})
+    res = {
+        "status": "success",
+        "question": question,
+        "ciation": ciation,
+        "response": response,
+    }
+    redisClient.set(question, json.dumps(res))
+    return res, 200
 
 
-@app.route('/question/<int:question_id>', methods=['PUT'])
+@app.route('/api/v1/question/<int:question_id>', methods=['PUT'])
 def update_question(question_id):
     data = request.get_json()
     QuestionModel.update(**data).where(QuestionModel.id == question_id).execute()
     return '', 204
 
-@app.route('/question/<int:question_id>', methods=['DELETE'])
+@app.route('/api/v1/question/<int:question_id>', methods=['DELETE'])
 def delete_question(question_id):
     QuestionModel.delete().where(QuestionModel.id == question_id).execute()
     return '', 204
 
+print('QNA server is running. ')
 serve(app, host='0.0.0.0', port=5001, threads=1, url_prefix="/rag/api/v1")

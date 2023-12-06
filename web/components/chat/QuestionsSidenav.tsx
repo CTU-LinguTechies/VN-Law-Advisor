@@ -28,8 +28,17 @@ export default function QuestionSideNav() {
                     zIndex: 1,
                 }}
             >
+                <img
+                    style={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: '50%',
+                    }}
+                    src="/LinguTechies.svg"
+                    alt="logo"
+                />
                 <h1 style={{ fontSize: 28, fontWeight: 500, paddingTop: 12 }}>Câu Hỏi Mới</h1>
-                <EditOutlined />
+                <EditOutlined style={{ color: '#5073f3' }} />
             </div>
             <div className="question-container mt-5">
                 <div className="group-container mt-2">

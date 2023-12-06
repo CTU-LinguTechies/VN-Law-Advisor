@@ -1,4 +1,4 @@
-name: Docker
+name: Build docker for github packages
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,10 +8,13 @@ name: Docker
 on:
     push:
         branches: ["main"]
+        paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
         # Publish semver tags as releases.
         tags: ["v*.*.*"]
     pull_request:
         branches: ["main"]
+        paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
+        
 
 env:
     # Use docker.io for Docker Hub if empty
@@ -86,13 +89,24 @@ jobs:
                   labels: ${{ steps.meta.outputs.labels }}
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
+            
+            - name: Build and push Docker image for qna-service
+              id: build-and-push-qna
+              uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
+              with:
+                  context: ./backend/rag
+                  push: ${{ github.event_name != 'pull_request' }}
+                  tags: ${{ steps.meta.outputs.tags }}
+                  labels: ${{ steps.meta.outputs.labels }}
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
 
             # Sign the resulting Docker image digest except on PRs.
             # This will only write to the public Rekor transparency log when the Docker
             # repository is public to avoid leaking data.  If you would like to publish
             # transparency data even for private images, pass --force to cosign below.
             # https://github.com/sigstore/cosign
-            - name: Sign the published Docker image
+            - name: Sign the published Docker image for auth-service
               if: ${{ github.event_name != 'pull_request' }}
               env:
                   # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
@@ -102,12 +116,21 @@ jobs:
               # against the sigstore community Fulcio instance.
               run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
             
-            - name: Sign the published Docker image
+            - name: Sign the published Docker image for law-service
               if: ${{ github.event_name != 'pull_request' }}
               env:
                   # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
                   TAGS: ${{ steps.meta.outputs.tags }}
                   DIGEST: ${{ steps.build-and-push-law.outputs.digest }}
+              # This step uses the identity token to provision an ephemeral certificate
+              # against the sigstore community Fulcio instance.
+              run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+            - name: Sign the published Docker image for qna-service
+              if: ${{ github.event_name != 'pull_request' }}
+              env:
+                  # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+                  TAGS: ${{ steps.meta.outputs.tags }}
+                  DIGEST: ${{ steps.build-and-push-qna.outputs.digest }}
               # This step uses the identity token to provision an ephemeral certificate
               # against the sigstore community Fulcio instance.
               run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
