@@ -5,3 +5,4 @@ flask
 flask_cors
 torch
 python-dotenv
+waitress
