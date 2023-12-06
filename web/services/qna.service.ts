@@ -1,5 +1,6 @@
+import { QuestionModel } from '@/models/ChatAnswerModel';
 import createHttpClient from '@/utils/createHttpClient';
-import tokenService from '@/utils/tokenService';
+import createTestHttpClient from '@/utils/createTestHttpClient';
 import { AxiosInstance } from 'axios';
 
 export interface QnARequestDto {
@@ -7,11 +8,16 @@ export interface QnARequestDto {
 }
 
 export interface QnAResponseDto {
-    citation: string[];
+    citation: CitationModel[];
     question: string;
     response: string;
     status: string;
-    topic_ids: string[];
+}
+
+export interface CitationModel {
+    mapc: string;
+    noidung: string;
+    ten: string;
 }
 
 class QnAService {
@@ -19,13 +25,14 @@ class QnAService {
 
     constructor() {
         this.client = createHttpClient('qna/api/v1');
+        // this.client = createTestHttpClient('/api/v1');
     }
 
     async answer(body: any) {
         return (await this.client.post('/question', body)) as any;
     }
-    async getAllQuestions() {
-        const accessToken = tokenService.accessToken;
+    async getQuestions() {
+        return (await this.client.get('/question')) as QuestionModel[];
     }
 }
 
