@@ -2,9 +2,17 @@ from flask import *
 from flask_cors import CORS, cross_origin
 from importer import *
 from directory import *
+import requests
+
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+API_URL = "https://iofuyi0iny87dl65.us-east-1.aws.endpoints.huggingface.cloud"
+headers = {
+	"Authorization": "Bearer XXXXXX",
+	"Content-Type": "application/json"
+}
 
 
 current_device = "cpu"
@@ -50,7 +58,7 @@ def get_response():
             output = topic_vectordb.similarity_search(question, k=2)
 
             context = ""
-            ciation = []
+            citation = []
             for doc in output:
                 result_string = doc.page_content
                 index = result_string.find("noidung: ")
@@ -60,7 +68,7 @@ def get_response():
                 result_string = re.sub(r"\s+", r" ", result_string)
                 context += f"{result_string} "
 
-                ciation.append({
+                citation.append({
                     "mapc": doc.metadata["mapc"],
                     "_link": doc.metadata["_link"],
                     "chude_id": doc.metadata["chude_id"],
@@ -75,14 +83,33 @@ def get_response():
                     "status": "error",
                     "response": "Error while retrieving context from DB",
                 }, 500
-            inputs = f"Chỉ dựa vào ngữ cảnh sau để trả lời câu hỏi, {context}. Hãy trả lời câu hỏi: {question}"
-            print(inputs)
+
+
+            # inputs = f"Sử dụng thông tin được cung cấp sau đây và những thông tin bạn biết để trả lời cho câu hỏi, Thông tin cung cấp {context}. Hãy trả lời câu hỏi: {question}"
+            # payload = {
+            #     "inputs": inputs
+            # }
+            # output = requests.post(API_URL, headers=headers, json=payload)
+            # response =  output.json()
+            # if len(response) < 0:
+            #     return {
+            #         "status": "error",
+            #         "response": "Error while generating answer",
+            #     }, 500
+            # response =  response[0]
+            # if not response:
+            #     return {
+            #         "status": "error",
+            #         "response": "Error while generating answer",
+            #     }, 500
+            # response =  response["response"]
+
             response = pipeline(question=question, context=context)["answer"].strip()
 
             return {
                     "status": "success",
                     "question": question,
-                    "ciation": ciation,
+                    "citation": citation,
                     "response": response,
                 }, 200
         else:
@@ -116,17 +143,17 @@ def get_response_with_context():
             output = topic_vectordb.similarity_search(question, k=2)
 
             
-            ciation = []
+            citation = []
             for doc in output:
                 result_string = doc.page_content
-                index = result_string.find("content: ")
+                index = result_string.find("noidung: ")
                 if index != -1:
-                    result_string = result_string[index + len("content: "):].strip()
+                    result_string = result_string[index + len("noidung: "):].strip()
                 result_string = result_string.replace("\n", " ")
                 result_string = re.sub(r"\s+", r" ", result_string)
                 
 
-                ciation.append({
+                citation.append({
                     "mapc": doc.metadata["mapc"],
                     "_link": doc.metadata["_link"],
                     "chude_id": doc.metadata["chude_id"],
@@ -134,13 +161,34 @@ def get_response_with_context():
                     "ten": doc.metadata["ten"],
                     "noidung": result_string
                 })
-            
+
+
+            # inputs = f"Sử dụng thông tin được cung cấp sau đây và những thông tin bạn biết để trả lời cho câu hỏi, Thông tin cung cấp {context}. Hãy trả lời câu hỏi: {question}"
+            # payload = {
+            #     "inputs": inputs
+            # }
+            # output = requests.post(API_URL, headers=headers, json=payload)
+            # response =  output.json()
+            # if len(response) < 0:
+            #     return {
+            #         "status": "error",
+            #         "response": "Error while generating answer",
+            #     }, 500
+            # response =  response[0]
+            # if not response:
+            #     return {
+            #         "status": "error",
+            #         "response": "Error while generating answer",
+            #     }, 500
+            # response =  response["response"]
+
+
             response = pipeline(question=question, context=context)["answer"].strip()
 
             return {
                     "status": "success",
                     "question": question,
-                    "ciation": ciation,
+                    "citation": citation,
                     "response": response,
                 }, 200
         else:
