@@ -20,6 +20,12 @@ services:
   - name: qna-route
     paths:
       - /qna
+- name: recommend-service
+  url: http://recommend-service:5002
+  routes:
+  - name: recommend-route
+    paths:
+      - /recommend
 plugins:
 - name: cors
   config:

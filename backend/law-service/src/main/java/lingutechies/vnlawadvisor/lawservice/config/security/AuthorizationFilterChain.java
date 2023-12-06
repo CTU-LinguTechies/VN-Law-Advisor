@@ -37,10 +37,10 @@ public class AuthorizationFilterChain extends OncePerRequestFilter {
         }
         String token = authorization.substring(7);
         String checkTokenMessage = jwtService.isTokenValid(token);
-        if (checkTokenMessage != null){
-            sendResponse(response, checkTokenMessage, HttpStatus.FORBIDDEN);
-            return;
-        }
+//        if (checkTokenMessage != null){
+//            sendResponse(response, checkTokenMessage, HttpStatus.FORBIDDEN);
+//            return;
+//        }
         Claims decodedToken = jwtService.extractAllClaims(token);
         String email = decodedToken.get("email").toString();
         String role = decodedToken.get("role").toString();
