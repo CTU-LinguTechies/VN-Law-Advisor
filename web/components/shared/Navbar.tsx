@@ -5,7 +5,9 @@ import { UserOutlined } from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { Avatar } from 'antd';
+import { Avatar, Button, Dropdown, MenuProps } from 'antd';
+import tokenService from '@/utils/tokenService';
+import { deleteUser, setUser } from '@/store/userSlice';
 
 function formatPathname(pathname: string) {
     const parts = pathname.split('/');
@@ -15,6 +17,16 @@ function formatPathname(pathname: string) {
 export default function Navbar() {
     const pathname = formatPathname(usePathname());
     const user = useSelector((state: RootState) => state.user);
+    const logOut = () => {
+        tokenService.clear();
+        deleteUser();
+    };
+    const items: MenuProps['items'] = [
+        {
+            key: '1',
+            label: <a onClick={logOut}>Đăng xuất</a>,
+        },
+    ];
     return (
         <nav className="navbar">
             <div className="container">
@@ -26,7 +38,6 @@ export default function Navbar() {
                         <span>
                             <Link href="/phapdien">Luật</Link>
                         </span>
-                        <span></span>
                     </button>
                     <a href="#">
                         <h4>
@@ -36,7 +47,7 @@ export default function Navbar() {
                 </div>
 
                 <div className="navbar-menu" id="open-navbar1">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav" style={{ alignItems: 'center' }}>
                         <li className={pathname == 'home' || pathname == '' ? 'active' : ''}>
                             <Link href="/">Trang chủ</Link>
                         </li>
@@ -53,8 +64,9 @@ export default function Navbar() {
                         </li>
                         {user ? (
                             <li>
-                                <Avatar size={64} icon={<UserOutlined />} />
-                                <a className="active">{user.name}</a>
+                                <Dropdown menu={{ items }}>
+                                    <Button>{user.name}</Button>
+                                </Dropdown>
                             </li>
                         ) : (
                             <li

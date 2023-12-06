@@ -16,7 +16,7 @@ from waitress import serve
 current_device = "cpu"
 if torch.cuda.is_available():
     current_device="cuda"
-    
+
 embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"device": current_device})
 vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
