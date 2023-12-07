@@ -3,11 +3,16 @@ from flask_cors import CORS, cross_origin
 from importer import *
 from directory import *
 from waitress import serve
+from crontab import CronTab
 
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+cron = CronTab(user='tranhuy')
+job = cron.new(command='/usr/bin/python classification.py')
+job.month.every(1)
+cron.write()
 
 current_device = "cpu"
 if torch.cuda.is_available():
@@ -22,7 +27,6 @@ text_vectordb = Chroma(embedding_function=embeddings, persist_directory=TEXT_DB_
 @app.route('/api/v1/', methods=['GET'])
 def init():
     if request.method == 'GET':
-      
         result = {
             "status": "success"
         }, 200

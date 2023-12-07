@@ -90,7 +90,6 @@ export default function PhapDienHoa() {
                 {dieus.length > 0 ? (
                     <Row ref={autoAnimateParentDieu}>
                         {dieus.map((item: any) => {
-                            console.log(item);
                             return (
                                 <Col span={8} key={item.id}>
                                     <Card title={item.vbpl.ten}>{item.noi_dung}</Card>
