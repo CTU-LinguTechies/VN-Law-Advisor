@@ -20,6 +20,8 @@ Dự án được thực hiện trong cuộc thi [Phần Mềm Nguồn Mở-Olym
 
 Để biết thêm chi tiết về cuộc thi, bạn có thể xem tại [đây](https://vfossa.vn/tin-tuc/de-thi-phan-mem-nguon-mo-olp-2023-688.html).
 
+Link thuyết trình Canva tại cuộc thi [link](https://www.canva.com/design/DAF2LR6LJIs/NFyCiN8JIVlDoRa33GSp1Q/edit?utm_content=DAF2LR6LJIs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ## 🔎 Danh Mục
 
 1. [Giới Thiệu](#Giới-Thiệu)
