@@ -20,6 +20,8 @@ Dự án được thực hiện trong cuộc thi [Phần Mềm Nguồn Mở-Olym
 
 Để biết thêm chi tiết về cuộc thi, bạn có thể xem tại [đây](https://vfossa.vn/tin-tuc/de-thi-phan-mem-nguon-mo-olp-2023-688.html).
 
+Slide bài thuyết trình tại cuộc thi dưới dạng PDF có thể được truy cập tại đây: [Slide](./docs/pdf/Phần%20mềm%20nguồn%20mở%202023.pdf)
+
 ## 🔎 Danh Mục
 
 1. [Giới Thiệu](#Giới-Thiệu)
@@ -66,6 +68,7 @@ Backend của hệ thống được thiết kế theo kiến trúc microservices
 -   [Docker Compose](https://docs.docker.com/compose/): Quản lý các container.
 -   [Prometheus](https://prometheus.io/): Monitor các metrics.
 -   [Grafana](https://grafana.com/): WebUI hiển thị metrics.
+-   [Transformer.js](https://github.com/xenova/transformers.js/): Thư viện transformer cho JS, load trực tiếp trên trình duyệt web.
 
 <img loading="lazy" src="./docs/images/system_architecture.svg" alt="Architecture" width="100%" height=600>
 
