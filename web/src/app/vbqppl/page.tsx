@@ -10,6 +10,7 @@ import { DeMucModel } from '@/models/DeMucModel';
 import pddemucService, { PDDemucGetAllFilter } from '@/services/pddemuc.service';
 import useDelay from '@/hooks/useDelay';
 import PhapDienHoa from '@/components/vbqppl/PhapDienHoa';
+import { useRouter } from 'next/navigation';
 const options = [
     {
         value: 'LUẬT',
@@ -37,6 +38,7 @@ export default function Page() {
     const [pageSize, setPageSize] = useState(6);
     const [total, setTotal] = useState(0);
     const [vanbans, setVanBans] = useState<VBQPPLModel[]>([]);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,6 +53,10 @@ export default function Page() {
         };
         fetchData();
     }, [page, pageSize, loai, name]);
+
+    const onclick = (id: number) => {
+        router.push(`/vbqppl/${id}`);
+    };
 
     return (
         <>
@@ -121,6 +127,8 @@ export default function Page() {
                         {vanbans.map((item) => (
                             <Col className="max-h-[300px]" span={6} sm={12} xs={24} md={12} lg={8}>
                                 <Card
+                                    hoverable
+                                    onClick={() => onclick(item.id)}
                                     className="overflow-hidden h-full"
                                     title={
                                         <div style={{ display: 'flex', flexDirection: 'column' }}>

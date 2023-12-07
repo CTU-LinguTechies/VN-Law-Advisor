@@ -33,12 +33,12 @@ export default function Navbar() {
             <div className="container">
                 <div className="navbar-header">
                     <button className="navbar-toggler" data-toggle="open-navbar1">
-                        <span>
+                        <div>
                             <Link href="/">Trang chủ</Link>
-                        </span>
-                        <span>
+                        </div>
+                        <div>
                             <Link href="/phapdien">Luật</Link>
-                        </span>
+                        </div>
                     </button>
                     <a href="#">
                         <h4>

@@ -79,7 +79,7 @@ export default function Home() {
                 <h1 className="text-3xl my-5">Nổi Bật</h1>
                 <div className="">
                     <Row justify="center" gutter={[16, 16]}>
-                        <Col span={4}>
+                        <Col span={4} lg={4} md={6} sm={8} xs={24}>
                             <HomeNavigationCard
                                 link="/chat"
                                 title="Hỏi đáp Pháp Luật"
@@ -87,7 +87,7 @@ export default function Home() {
                                 icon="chatbot"
                             />
                         </Col>
-                        <Col span={4}>
+                        <Col span={4} lg={4} md={6} sm={8} xs={24}>
                             <HomeNavigationCard
                                 link="/phapdien"
                                 title="Tra cứu Pháp Điển"
@@ -95,7 +95,7 @@ export default function Home() {
                                 icon="law2"
                             />
                         </Col>
-                        <Col span={4}>
+                        <Col span={4} lg={4} md={6} sm={8} xs={24}>
                             <HomeNavigationCard
                                 link="/vbqppl"
                                 title="Tra cứu các VBQPPL"
@@ -103,7 +103,7 @@ export default function Home() {
                                 icon="law"
                             />
                         </Col>
-                        <Col span={4}>
+                        <Col span={4} lg={4} md={6} sm={8} xs={24}>
                             <HomeNavigationCard
                                 link="/form"
                                 title="Các bảng, biểu mẫu"
@@ -111,7 +111,7 @@ export default function Home() {
                                 icon="form"
                             />
                         </Col>
-                        <Col span={4}>
+                        <Col span={4} lg={4} md={6} sm={8} xs={24}>
                             <HomeNavigationCard
                                 link="/chat"
                                 title="Đánh giá, góp ý"
