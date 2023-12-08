@@ -6,9 +6,6 @@ import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it';
 import { Fade } from 'react-awesome-reveal';
-import { DeMucModel } from '@/models/DeMucModel';
-import pddemucService, { PDDemucGetAllFilter } from '@/services/pddemuc.service';
-import useDelay from '@/hooks/useDelay';
 import PhapDienHoa from '@/components/vbqppl/PhapDienHoa';
 import { useRouter } from 'next/navigation';
 const options = [
@@ -76,14 +73,18 @@ export default function Page() {
                             >
                                 Danh Sách Văn Bản Quy Phạm Pháp Luật
                             </h1>
+
                             <p style={{ color: 'white' }} className="text-2xl italic mt-5">
-                                Tập hợp các văn bản quy phạm pháp luật Việt Nam
+                                Pháp điển hóa các văn bản quy phạm pháp luật Việt Nam hiện hành theo
+                                các đề mục pháp điển
                             </p>
                         </Col>
                     </Row>
                 </Fade>
             </div>
             <main className="max-w-[1440px] w-[95%] mx-auto my-6">
+                <PhapDienHoa />
+
                 <Fade>
                     <Row>
                         <Col span={24}>
@@ -161,7 +162,6 @@ export default function Page() {
                         </Col>
                     </Row>
                 </Fade>
-                <PhapDienHoa />
             </main>
         </>
     );
