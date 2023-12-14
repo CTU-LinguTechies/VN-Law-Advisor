@@ -46,7 +46,7 @@ services:
       PMA_HOST: law-mysql
       UPLOAD_LIMIT: 300M
   law-service:
-    build: ./law-service
+    image: tghuy2002/vnlaw-law:latest
     restart: always
     depends_on:
       - law-mysql
@@ -57,7 +57,7 @@ services:
       SPRING_DATASOURCE_USERNAME: law
       SPRING_DATASOURCE_PASSWORD: 123456789
   auth-service:
-    build: ./auth-service
+    image: tghuy2002/vnlaw-auth:latest
     restart: always
     depends_on:
       - auth-mysql
@@ -76,8 +76,9 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: root
-      ACCESS_TOKEN_KEY: VN-Law-Advisor
-      REFRESH_TOKEN_KEY: auth-service
+    secrets:
+      - access_token_key
+      - refresh_token_key
   redis:
       restart: always
       image: redis:latest
@@ -108,13 +109,15 @@ services:
     networks:
         - app-network
   qna-service:
-    build: ./rag
+    image: tghuy2002/vnlaw-qna:latest
     restart: always
     depends_on:
       - qna-mysql
       - redis
     networks:
       - app-network
+    secrets:
+      - access_token_key
     environment:
       MYSQL_ROOT_PASSWORD: 123456789
       MYSQL_DATABASE: qna
@@ -123,7 +126,6 @@ services:
       QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
       REDIS_HOST: redis
       TOPIC_DB_PATH: ./chroma_db_demuc
-      ACCESS_TOKEN_KEY: VN-Law-Advisor
       MYSQL_PORT: 3306
       HF_INFERENCE_API: 
   recommendation-service:
@@ -139,3 +141,8 @@ services:
 networks:
     app-network:
         driver: bridge
+secrets:
+  access_token_key:
+    file: ./access_token_key.txt
+  refresh_token_key:
+    file: ./refresh_token_key.txt

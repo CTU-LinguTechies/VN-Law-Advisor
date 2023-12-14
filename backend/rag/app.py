@@ -13,6 +13,11 @@ import jwt
 import  re
 from waitress import serve
 import requests
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 current_device = "cpu"
 if torch.cuda.is_available():
@@ -21,7 +26,7 @@ embeddings = HuggingFaceEmbeddings(model_name=ST_MODEL_PATH, model_kwargs={"devi
 vectordb = Chroma(embedding_function=embeddings,
                   persist_directory=TOPIC_DB_PATH)
 # pipeline = pipeline(task="question-answering", model=QA_MODEL_PATH, local_files_only=True)
-HF_API_URL = "https://iofuyi0iny87dl65.us-east-1.aws.endpoints.huggingface.cloud"
+HF_API_URL = os.getenv("HF_INFERENCE_API")
 headers = {
 	"Authorization": "Bearer XXXXXX",
 	"Content-Type": "application/json"
