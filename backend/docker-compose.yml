@@ -99,7 +99,7 @@ services:
     image: mysql:latest
     restart: always
     volumes:
-      - ~/data/qna-sql:/var/lib/mysql
+      - ./rag/qna-sql:/var/lib/mysql
     ports:
         - '3307:3306'
     environment:
@@ -125,7 +125,7 @@ services:
       TOPIC_DB_PATH: ./chroma_db_demuc
       ACCESS_TOKEN_KEY: VN-Law-Advisor
       MYSQL_PORT: 3306
-      HF_INFERENCE_API: 
+      HF_INFERENCE_API: https://hm78d3nz1mmn6cjr.us-east-1.aws.endpoints.huggingface.cloud
   recommendation-service:
     build: ./recommendation
     restart: always
