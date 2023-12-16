@@ -11,9 +11,6 @@ on:
         paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
         # Publish semver tags as releases.
         tags: ["v*.*.*"]
-    pull_request:
-        branches: ["main"]
-        paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
         
 
 env:
