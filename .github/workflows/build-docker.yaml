@@ -55,3 +55,9 @@ jobs:
           context: "{{defaultContext}}:backend/rag"
           push: true
           tags: tghuy2002/vnlaw-qna:latest
+      - name: Build and push recommendation-service
+        uses: docker/build-push-action@v5
+        with:
+          context: "{{defaultContext}}:backend/recommendation"
+          push: true
+          tags: tghuy2002/vnlaw-recommendation:latest

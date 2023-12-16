@@ -1,3 +1,13 @@
+const fs = require('fs');
+const environment = process.env.ENVIRONMENT || 'development';
+let accessKey = process.env.ACCESS_TOKEN_KEY || 'super_secret_access_key';
+let refreshKey = process.env.REFRESH_TOKEN_KEY || 'super_secret_refresh_key';
+
+if (environment === 'production') {
+    accessKey = fs.readFileSync('/run/secrets/access_token_key');
+    refreshKey = fs.readFileSync('/run/secrets/refresh_token_key');
+}
+
 module.exports = {
     development: {
         dialect: process.env.DB_DIALECT || 'mysql',
@@ -9,7 +19,7 @@ module.exports = {
         redisHost: process.env.REDIS_HOST || 'localhost',
     },
     security: {
-        accessKey: process.env.ACCESS_TOKEN_KEY || 'super_secret_access_key',
-        refreshKey: process.env.REFRESH_TOKEN_KEY || 'super_secret_refresh_key',
+        accessKey,
+        refreshKey,
     },
 };
