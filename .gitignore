@@ -4,3 +4,6 @@ node_modules/
 ./backend/law-service/.gitignore
 ./backend/auth-service/.gitignore
 ./backend/rag/.gitignore
+auth-sql/
+law-sql/
+qna-sql/

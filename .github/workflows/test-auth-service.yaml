@@ -9,6 +9,7 @@ on:
         paths: ['backend/auth-service/**']
     pull_request:
         branches: ['main']
+        paths: ['backend/auth-service/**']
 
 jobs:
     build:
