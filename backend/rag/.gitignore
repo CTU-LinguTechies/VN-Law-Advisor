@@ -165,3 +165,4 @@ chroma_db/
 chroma_db_demuc/
 qa_model/
 directory.py
+qna-sql/
