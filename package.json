@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "format": "prettier --write .",
+        "format": "prettier --write . --check '!**/backend/**/{auth,law,qna}-sql'",
         "prepare": "husky install"
     },
     "author": "",

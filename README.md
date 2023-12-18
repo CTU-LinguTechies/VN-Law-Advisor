@@ -113,6 +113,8 @@ Các workflows của project được lưu tại: [.github/workflows](.github/wo
 
 ## Hướng Dẫn Cài Đặt
 
+Tất cả các images build từ services backend bạn có thể tìm thấy tại [Docker Hub](https://hub.docker.com/repositories/tghuy2002?search=vnlaw).
+
 ### Yêu Cầu 📋
 
 Để cài đặt và chạy được dự án, trước tiên bạn cần phải cài đặt các công cụ bên dưới. Hãy thực hiện theo các hướng dẫn cài đặt sau, lưu ý chọn hệ điều hành phù hợp với máy tính của bạn:
