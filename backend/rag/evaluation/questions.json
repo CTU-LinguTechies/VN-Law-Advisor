@@ -1,5 +1,4 @@
-{
-    "question_list": [
+[
         "Tình huống: Anh Trung là một người dân sống tại thành phố Hồ Chí Minh. Trong quá trình mở rộng đường, nhà của anh Trung bị chính quyền địa phương thu hồi và anh Trung nhận được một khoản tiền bồi thường. Tuy nhiên, anh Trung cho rằng số tiền bồi thường không đủ để mua một căn nhà mới có diện tích tương đương.Câu hỏi: Anh Trung có quyền khiếu nại về quyết định bồi thường của chính quyền địa phương không?",
         "Tình huống: Chị Lan là một giáo viên tại một trường học công lập. Trong một lần đi công tác, chị Lan bị tai nạn giao thông và phải nghỉ làm trong một thời gian dài để điều trị.Câu hỏi: Chị Lan có quyền yêu cầu nhà nước bồi thường cho khoản lương mà chị không nhận được trong thời gian nghỉ làm để điều trị không?",
         "Tình huống: Anh Tú là một người lao động tại một công ty nhà nước. Trong quá trình làm việc, anh Tú bị một tai nạn lao động do lỗi của người quản lý và phải nhập viện điều trị.Câu hỏi: Anh Tú có quyền yêu cầu nhà nước bồi thường cho những chi phí điều trị do tai nạn lao động gây ra không?",
@@ -101,4 +100,3 @@
         "Một công ty xây dựng đã không tuân thủ các quy định về an toàn lao động, dẫn đến một tai nạn lao động nghiêm trọng. Hậu quả của việc vi phạm này là gì theo luật pháp?",
         "Một công ty vận tải đã không tuân thủ các quy định về kiểm định xe, dẫn đến một tai nạn giao thông nghiêm trọng. Hậu quả của việc vi phạm này là gì theo luật pháp?"
     ]
-}
