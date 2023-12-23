@@ -29,4 +29,9 @@ public class PDDemucController {
         return pdDeMucService.getAllDeMuc(name, pageNo, pageSize);
     }
 
+    @GetMapping("/all")
+    public List<PDDeMuc> getAllDeMuc(){
+        return pdDeMucService.getAllDeMuc();
+    }
+
 }

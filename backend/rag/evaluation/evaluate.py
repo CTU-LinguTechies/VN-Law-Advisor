@@ -13,7 +13,6 @@ import re
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores.chroma import Chroma
 import requests
-import time
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 from os import getenv
