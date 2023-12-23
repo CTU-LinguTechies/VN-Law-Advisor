@@ -1,0 +1,973 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../License/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+    
+    
+      
+        <title>Getting Started - VNLawAdvisor Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#danh-muc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="VNLawAdvisor Documentation" class="md-header__button md-logo" aria-label="VNLawAdvisor Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VNLawAdvisor Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting Started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="VNLawAdvisor Documentation" class="md-nav__button md-logo" aria-label="VNLawAdvisor Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    VNLawAdvisor Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#danh-muc" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔎 Danh Mục
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gioi-thieu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Giới Thiệu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuc-nang-chinh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chức Năng Chính
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tong-quan-he-thong" class="md-nav__link">
+    <span class="md-ellipsis">
+      👩‍💻 Tổng Quan Hệ Thống
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cau-truc-thu-muc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cấu trúc thư mục
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#huong-dan-cai-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hướng Dẫn Cài Đặt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hướng Dẫn Cài Đặt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yeu-cau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yêu Cầu 📋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cai-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔨 Cài Đặt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔨 Cài Đặt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chay-crawler-lay-du-lieu-phap-ien-va-cac-van-ban-quy-pham-phap-luat-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chạy crawler lấy dữ liệu pháp điển và các van bản quy phạm pháp luật (optional):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chay-backend-he-thong" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chạy backend hệ thống
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chay-web-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chạy web-app
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ong-gop-cho-du-an" class="md-nav__link">
+    <span class="md-ellipsis">
+      🙌 Đóng góp cho dự án
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../License/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RAG/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RAG (Retrival Augmented Generation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Web/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Contributing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Contributing/Contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kiến Trúc Hệ Thống
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Kiến Trúc Hệ Thống
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ki%E1%BA%BFn-Tr%C3%BAc-H%E1%BB%87-Th%E1%BB%91ng/T%E1%BB%95ng-Quan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tổng Quan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ki%E1%BA%BFn-Tr%C3%BAc-H%E1%BB%87-Th%E1%BB%91ng/API-Gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ki%E1%BA%BFn-Tr%C3%BAc-H%E1%BB%87-Th%E1%BB%91ng/Auth-Service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dịch vụ xác thực và phân quyền
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#danh-muc" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔎 Danh Mục
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gioi-thieu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Giới Thiệu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuc-nang-chinh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chức Năng Chính
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tong-quan-he-thong" class="md-nav__link">
+    <span class="md-ellipsis">
+      👩‍💻 Tổng Quan Hệ Thống
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cau-truc-thu-muc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cấu trúc thư mục
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#huong-dan-cai-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hướng Dẫn Cài Đặt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hướng Dẫn Cài Đặt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yeu-cau" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yêu Cầu 📋
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cai-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔨 Cài Đặt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔨 Cài Đặt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chay-crawler-lay-du-lieu-phap-ien-va-cac-van-ban-quy-pham-phap-luat-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chạy crawler lấy dữ liệu pháp điển và các van bản quy phạm pháp luật (optional):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chay-backend-he-thong" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chạy backend hệ thống
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chay-web-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chạy web-app
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ong-gop-cho-du-an" class="md-nav__link">
+    <span class="md-ellipsis">
+      🙌 Đóng góp cho dự án
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Getting Started</h1>
+
+<h2 id="danh-muc">🔎 Danh Mục</h2>
+<ol>
+<li><a href="#Giới-Thiệu">Giới Thiệu</a></li>
+<li><a href="#chức-năng-chính">Chức Năng</a></li>
+<li><a href="#👩‍💻-tổng-quan-hệ-thống">Tổng Quan Hệ Thống</a></li>
+<li><a href="#cấu-trúc-thư-mục">Cấu Trúc Thư Mục</a></li>
+<li><a href="#hướng-dẫn-cài-đặt">Hướng Dẫn Cài Đặt</a><ul>
+<li><a href="#yêu-cầu-📋">📋 Yêu Cầu - Prerequisites</a></li>
+<li><a href="#🔨-cài-đặt">🔨 Cài Đặt</a></li>
+</ul>
+</li>
+<li><a href="#ci/cd">CI/CD</a></li>
+<li><a href="#🙌-đóng-góp-cho-dự-án">🙌 Đóng Góp</a></li>
+<li><a href="#📝-license">📝 License</a></li>
+</ol>
+<h2 id="gioi-thieu">Giới Thiệu</h2>
+<ul>
+<li><a href="https://vi.wikipedia.org/wiki/Ph%C3%A1p_%C4%91i%E1%BB%83n">Pháp điển</a> là tập hợp các quy phạm pháp luật đang còn hiệu lực của các văn bản quy phạm pháp luật do cơ quan nhà nước ở trung ương ban hành, từ Thông tư trở lên và trừ Hiến pháp.</li>
+<li><a href="https://quochoi.vn/csdlth/vanbanphapluat/Pages/Home.aspx">Cơ sở dữ liệu văn bản quy phạm pháp luật Việt Nam</a> được xây dựng từ năm 2000, bao gồm các văn bản quy phạm pháp luật từ năm 1990 đến nay. Cơ sở dữ liệu này được cập nhật thường xuyên, đảm bảo tính toàn vẹn, đầy đủ và chính xác của các văn bản quy phạm pháp luật.</li>
+<li>Tuy nhiên, do việc cập nhật không thường xuyên của pháp điển so với các văn bản quy phạm pháp luật, nên pháp điển hiện tại không đảm bảo tính toàn vẹn, đầy đủ và chính xác của các văn bản quy phạm pháp luật.</li>
+</ul>
+<h2 id="chuc-nang-chinh">Chức Năng Chính</h2>
+<p>Project tập trung vào các chức năng chính như sau:</p>
+<ul>
+<li>🤖 Trả lời các câu hỏi về pháp luật của người dùng.</li>
+<li>🔍 Hệ thống tra cứu các pháp điển, văn bản quy phạm pháp luật: chỉ mục, liên kết các điều mục, các bảng và biểu mẫu.</li>
+<li>📖 Tóm tắt văn bản, hỗ trợ người dùng trong lúc tra cứu.</li>
+<li>📝 Gợi ý văn bản quy phạm pháp luật theo từ khóa tìm kiếm, nhận đóng góp để cải thiện gợi ý.</li>
+</ul>
+<h2 id="tong-quan-he-thong">👩‍💻 Tổng Quan Hệ Thống</h2>
+<p>Backend của hệ thống được thiết kế theo kiến trúc microservices, với các công nghệ sử dụng như sau:</p>
+<ul>
+<li><a href="https://nextjs.org/">NextJS 14</a>: Xây dựng web-app, hỗ trợ SEO, SSR, SSG.</li>
+<li><a href="https://konghq.com/kong/">Kong API Gateway</a>: API Gateway cho hệ thống.</li>
+<li><a href="https://expressjs.com/">ExpressJS</a>: Dựng API cho Auth Service.</li>
+<li><a href="https://spring.io/projects/spring-boot">SpringBoot</a>: Dựng API cho Law Service.</li>
+<li><a href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a>: Dựng API cho Q&amp;A - RAG Service.</li>
+<li><a href="https://www.langchain.com/">LangChain</a>: Sử dụng để truy vấn các context là tri thức luật.</li>
+<li><a href="https://www.mysql.com/">MySQL</a>: Cơ sở dữ liệu quan hệ.</li>
+<li><a href="https://redis.io/">Redis</a>: Cơ sở dữ liệu NoSQL in-memory dạng key-value.</li>
+<li><a href="https://www.trychroma.com/">ChromaDB</a>: Cơ sở dữ liệu embedding dạng vector.</li>
+<li><a href="https://www.rabbitmq.com/">RabbitMQ</a>: Message broker cho hệ thống.</li>
+<li><a href="https://www.docker.com/">Docker</a>: Containerize các service.</li>
+<li><a href="https://docs.docker.com/compose/">Docker Compose</a>: Quản lý các container.</li>
+<li><a href="https://prometheus.io/">Prometheus</a>: Monitor các metrics.</li>
+<li><a href="https://grafana.com/">Grafana</a>: WebUI hiển thị metrics.</li>
+</ul>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/CTU-LinguTechies/VN-Law-Advisor/4d118a0e2bf5ae7a3ab8a110427e416cbc700628/docs/images/system_architecture.svg" alt="Architecture" width="100%" height=600></p>
+<h2 id="cau-truc-thu-muc">Cấu trúc thư mục</h2>
+<ul>
+<li><a href="./law-crawler">Crawler</a> - Crawl vào CSDL từ nguồn pháp điển Việt Nam.</li>
+<li><a href="./backend">Backend</a> - Chứa các mô hình, services, kiến trúc của hệ thống.</li>
+<li><a href="./web">Web</a> - Giao diện người dùng.</li>
+<li><a href="./docs/">Documents</a> - Tài liệu về dự án.</li>
+</ul>
+<h2 id="huong-dan-cai-at">Hướng Dẫn Cài Đặt</h2>
+<h3 id="yeu-cau">Yêu Cầu 📋</h3>
+<p>Để cài đặt và chạy được dự án, trước tiên bạn cần phải cài đặt các công cụ bên dưới. Hãy thực hiện theo các hướng dẫn cài đặt sau, lưu ý chọn hệ điều hành phù hợp với máy tính của bạn:</p>
+<ul>
+<li><a href="https://docs.docker.com/get-docker/">Docker-Installation</a></li>
+<li><a href="https://docs.docker.com/compose/install/">Docker-Compose-Installation</a></li>
+<li><a href="https://nodejs.org/en/download/">NodeJS v18-Installation</a></li>
+</ul>
+<blockquote>
+<p><strong>Lưu ý:</strong> NextJS 14 chỉ tương thích với NodeJS từ version 18 trở lên.</p>
+</blockquote>
+<h3 id="cai-at">🔨 Cài Đặt</h3>
+<p>Trước hết, hãy clone dự án về máy tính của bạn:</p>
+<pre><code class="language-bash">git clone https://github.com/CTU-LinguTechies/VN-Law-Advisor.git vnlawadvisor
+</code></pre>
+<p>cd vào thư mục vnlawadvisor:</p>
+<pre><code class="language-bash">cd vnlawadvisor
+</code></pre>
+<h4 id="chay-crawler-lay-du-lieu-phap-ien-va-cac-van-ban-quy-pham-phap-luat-optional">Chạy crawler lấy dữ liệu pháp điển và các van bản quy phạm pháp luật (optional):</h4>
+<p>Bước này chỉ cần chạy một lần duy nhất để lấy dữ liệu pháp điển và các văn bản quy phạm pháp luật vào cơ sở dữ liệu MySQL. Nếu bạn đã có dữ liệu, bạn có thể bỏ qua bước này và tự import vào hệ thống với hướng dẫn phía dưới.</p>
+<p>Để cào dữ liệu, hãy:</p>
+<pre><code class="language-bash">cd law-crawler
+</code></pre>
+<p>Và tiếp tục theo hướng dẫn trong thư mục law-crawler <a href="./law-crawler/README.md">README.md</a>.</p>
+<h3 id="chay-backend-he-thong">Chạy backend hệ thống</h3>
+<ul>
+<li>Đầu tiên, cd vào thư mục backend:</li>
+</ul>
+<pre><code class="language-bash">cd backend
+</code></pre>
+<ul>
+<li>Start các services với 1 lệnh docker-compose:</li>
+</ul>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+<h3 id="chay-web-app">Chạy web-app</h3>
+<ul>
+<li>Đầu tiên, cd vào thư mục web:</li>
+</ul>
+<pre><code class="language-bash">cd web
+</code></pre>
+<ul>
+<li>Cài đặt các thư viện cần thiết:</li>
+</ul>
+<pre><code class="language-bash">npm install
+</code></pre>
+<ul>
+<li>Chạy web-app development mode:</li>
+</ul>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<p>Lúc này web-app sẽ chạy ở địa chỉ <a href="http://localhost:3000">http://localhost:3000</a>. Đến đây, bạn đã cài đặt xong. Còn nếu như bạn muốn chạy project ở môi trường production, hãy ngừng development server và chạy các lệnh sau:</p>
+<ul>
+<li>Build frontend web-app</li>
+</ul>
+<pre><code class="language-bash">npm run build
+</code></pre>
+<ul>
+<li>Chạy web-app production mode:</li>
+</ul>
+<pre><code class="language-bash">npm run start
+</code></pre>
+<p>Lúc này web-app sẽ chạy ở địa chỉ <a href="http://localhost:3000">http://localhost:3000</a>.</p>
+<h2 id="ong-gop-cho-du-an">🙌 Đóng góp cho dự án</h2>
+<p><a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=%F0%9F%90%9B+Bug+Report%3A+">Bug Report ⚠️
+</a></p>
+<p><a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=%F0%9F%90%9B+Bug+Report%3A+">Request Feature 👩‍💻</a></p>
+<p>Nếu bạn muốn đóng góp cho dự án, hãy đọc <a href=".github/CONTRIBUTING.md">CONTRIBUTING.md</a> để biết thêm chi tiết.</p>
+<p>Mọi đóng góp của các bạn đều được trân trọng, đừng ngần ngại gửi pull request cho dự án.</p>
+<h2 id="license">📝 License</h2>
+<p>This project is licensed under the terms of the <a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/blob/main/LICENSE">GPL V3</a> license.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>
