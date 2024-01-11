@@ -81,10 +81,12 @@ def main():
         demuc_score = {
             "demuc_id": demuc["id"],
             "demuc_ten": demuc["ten"],
+            "chude_id": demuc["chude"]["id"],
+            "chude_ten": demuc["chude"]["ten"],
             "demuc_rating": sum(vbqpql_of_demuc_scores) / len(vbqpql_of_demuc_scores)
         }
         df = pd.DataFrame([demuc_score])
-        df.to_csv("evaluation/demuc_scores.csv", mode='a', header=False, index=False)
+        df.to_csv("evaluation/demuc_scores.csv", mode='a', index=False)
         with open("evaluation/evaluate-codification-checkpoint", "w") as f:
             f.write(str(demuc["id"]))        
     print(f"Total evaluated: {count}")

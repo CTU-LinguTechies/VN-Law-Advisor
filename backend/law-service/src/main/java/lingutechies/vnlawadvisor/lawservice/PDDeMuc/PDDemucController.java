@@ -15,7 +15,7 @@ import java.util.Optional;
 public class PDDemucController {
     private final PDDeMucService pdDeMucService;
 
-    @GetMapping("/{chudeId}")
+    @GetMapping("/chude/{chudeId}")
     public List<PureDeMuc> getDeMucByChuDe(@PathVariable String chudeId){
         return pdDeMucService.getDeMucByChuDe(chudeId);
     }
@@ -32,6 +32,10 @@ public class PDDemucController {
     @GetMapping("/all")
     public List<PDDeMuc> getAllDeMuc(){
         return pdDeMucService.getAllDeMuc();
+    }
+    @GetMapping("{id}")
+    public PDDeMuc getDeMucById(@PathVariable String id){
+        return pdDeMucService.getDeMucById(id);
     }
 
 }
