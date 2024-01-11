@@ -17,10 +17,10 @@ export default function PhapDien() {
     return (
         <div>
             <Row gutter={[16, 16]} className="my-5">
-                <Col span={6}>
+                <Col sm={24} md={24} lg={8} span={6}>
                     <TreeView setChuongSelected={setChuongSelected} />
                 </Col>
-                <Col span={18}>
+                <Col sm={24} md={24} lg={16} span={18}>
                     <ChuongReader
                         selectedChuong={chuongSelected}
                         setSelectedChuong={setChuongSelected}

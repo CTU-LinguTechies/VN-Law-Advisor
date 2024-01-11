@@ -1,0 +1,82 @@
+name: vnlawadvisor-backend-dev
+services:
+  kong:
+    image: kong:latest
+    restart: always
+    ports:
+        - '8000:8000'
+        - '8001:8001'
+        - '8002:8002'
+        - '8003:8003'
+        - '8004:8004'
+    environment:
+        KONG_DATABASE: off
+        KONG_PROXY_ACCESS_LOG: /dev/stdout
+        KONG_ADMIN_ACCESS_LOG: /dev/stdout
+        KONG_PROXY_ERROR_LOG: /dev/stderr
+        KONG_ADMIN_ERROR_LOG: /dev/stderr
+        KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+        KONG_ADMIN_LISTEN: '0.0.0.0:8001, 0.0.0.0:8444 ssl'
+    volumes:
+      - ./api-gateway/kong.dev.yml:/usr/local/kong/declarative/kong.yml
+    networks:
+        - app-network
+  law-mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+        - '3306:3306'
+    volumes:
+      - ./law-service/law-sql:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456789
+        MYSQL_DATABASE: law
+        MYSQL_PASSWORD: 123456789
+        MYSQL_USER: law
+    networks:
+        - app-network
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8081:80
+    depends_on:
+      - law-mysql
+    networks:
+      - app-network
+    environment:
+      PMA_HOST: law-mysql
+      UPLOAD_LIMIT: 300M
+  redis:
+      restart: always
+      image: redis:latest
+      ports:
+          - '6379:6379'
+      networks:
+          - app-network
+  auth-mysql:
+      image: mysql:latest
+      ports:
+        - '3308:3306'
+      volumes:
+        - ./auth-service/auth-sql:/var/lib/mysql
+      restart: always
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: auth
+      networks:
+          - app-network
+  qna-mysql:
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ./rag/qna-sql:/var/lib/mysql
+    ports:
+        - '3307:3306'
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456789
+        MYSQL_DATABASE: qna
+    networks:
+        - app-network
+networks:
+    app-network:
+        driver: bridge

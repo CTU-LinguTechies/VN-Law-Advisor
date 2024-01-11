@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="vb_chimuc")
+@Table(name="vbplchimuc")
 @NoArgsConstructor
 public class ChiMucVBPL {
     @Id

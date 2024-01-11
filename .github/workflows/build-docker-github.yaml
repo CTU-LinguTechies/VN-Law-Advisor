@@ -11,9 +11,6 @@ on:
         paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
         # Publish semver tags as releases.
         tags: ["v*.*.*"]
-    pull_request:
-        branches: ["main"]
-        paths: ['backend/law-service/**', 'backend/auth-service/**', 'backend/rag/**']
         
 
 env:
@@ -100,6 +97,16 @@ jobs:
                   labels: ${{ steps.meta.outputs.labels }}
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
+            - name: Build and push Docker image for recommendation-service
+              id: build-and-push-recommendation
+              uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
+              with:
+                  context: ./backend/recommendation
+                  push: ${{ github.event_name != 'pull_request' }}
+                  tags: ${{ steps.meta.outputs.tags }}
+                  labels: ${{ steps.meta.outputs.labels }}
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
 
             # Sign the resulting Docker image digest except on PRs.
             # This will only write to the public Rekor transparency log when the Docker
@@ -131,6 +138,15 @@ jobs:
                   # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
                   TAGS: ${{ steps.meta.outputs.tags }}
                   DIGEST: ${{ steps.build-and-push-qna.outputs.digest }}
+              # This step uses the identity token to provision an ephemeral certificate
+              # against the sigstore community Fulcio instance.
+              run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+            - name: Sign the published Docker image for recommendation-service
+              if: ${{ github.event_name != 'pull_request' }}
+              env:
+                  # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+                  TAGS: ${{ steps.meta.outputs.tags }}
+                  DIGEST: ${{ steps.build-and-push-recommendation.outputs.digest }}
               # This step uses the identity token to provision an ephemeral certificate
               # against the sigstore community Fulcio instance.
               run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}

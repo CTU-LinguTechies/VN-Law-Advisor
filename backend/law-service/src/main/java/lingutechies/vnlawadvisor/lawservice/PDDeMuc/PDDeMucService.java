@@ -22,4 +22,10 @@ public class PDDeMucService {
         Pageable pageable = PageRequest.of(pageNo.orElse(0), pageSize.orElse(5));
         return pdDeMucRepository.findAll(name.orElse(""), pageable);
     }
+    public List<PDDeMuc> getAllDeMuc(){
+        return pdDeMucRepository.findAll();
+    }
+    public PDDeMuc getDeMucById(String id){
+        return pdDeMucRepository.findById(id).orElse(null);
+    }
 }

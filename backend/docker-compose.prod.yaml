@@ -1,0 +1,147 @@
+name: vnlawadvisor-backend-production
+services:
+  kong:
+    image: kong:latest
+    restart: always
+    ports:
+        - '8000:8000'
+        - '8001:8001'
+        - '8002:8002'
+        - '8003:8003'
+        - '8004:8004'
+    environment:
+        KONG_DATABASE: off
+        KONG_PROXY_ACCESS_LOG: /dev/stdout
+        KONG_ADMIN_ACCESS_LOG: /dev/stdout
+        KONG_PROXY_ERROR_LOG: /dev/stderr
+        KONG_ADMIN_ERROR_LOG: /dev/stderr
+        KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+        KONG_ADMIN_LISTEN: '0.0.0.0:8001, 0.0.0.0:8444 ssl'
+    volumes:
+      - ./api-gateway/kong.yml:/usr/local/kong/declarative/kong.yml
+    networks:
+        - app-network
+  law-mysql:
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ./law-service/law-sql:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456789
+        MYSQL_DATABASE: law
+        MYSQL_PASSWORD: 123456789
+        MYSQL_USER: law
+    networks:
+        - app-network
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8081:80
+    depends_on:
+      - law-mysql
+    networks:
+      - app-network
+    environment:
+      PMA_HOST: law-mysql
+      UPLOAD_LIMIT: 300M
+  law-service:
+    image: tghuy2002/vnlaw-law:latest
+    restart: always
+    depends_on:
+      - law-mysql
+    networks:
+      - app-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://law-mysql:3306/law?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: law
+      SPRING_DATASOURCE_PASSWORD: 123456789
+  auth-service:
+    image: tghuy2002/vnlaw-auth:latest
+    restart: always
+    depends_on:
+      - auth-mysql
+    ports: 
+      - 5000:5000
+    networks:
+      - app-network
+    environment:
+      ENVIRONMENT: development
+      PORT: 5000
+      DB_HOST: auth-mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: auth
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: root
+    secrets:
+      - access_token_key
+      - refresh_token_key
+  redis:
+      restart: always
+      image: redis:latest
+      ports:
+          - '6379:6379'
+      networks:
+          - app-network
+  auth-mysql:
+      image: mysql:latest
+      volumes:
+        - ./auth-service/auth-sql:/var/lib/mysql
+      restart: always
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: auth
+      networks:
+          - app-network
+  qna-mysql:
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ~/data/qna-sql:/var/lib/mysql
+    ports:
+        - '3307:3306'
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456789
+        MYSQL_DATABASE: qna
+    networks:
+        - app-network
+  qna-service:
+    image: tghuy2002/vnlaw-qna:latest
+    restart: always
+    depends_on:
+      - qna-mysql
+      - redis
+    networks:
+      - app-network
+    secrets:
+      - access_token_key
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_DATABASE: qna
+      MYSQL_HOST: qna-mysql
+      ST_MODEL_PATH: keepitreal/vietnamese-sbert
+      QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
+      REDIS_HOST: redis
+      TOPIC_DB_PATH: ./chroma_db_demuc
+      MYSQL_PORT: 3306
+      HF_INFERENCE_API: https://hm78d3nz1mmn6cjr.us-east-1.aws.endpoints.huggingface.cloud
+  recommendation-service:
+    build: ./recommendation
+    restart: always
+    networks:
+      - app-network
+    environment:
+      ST_MODEL_PATH: keepitreal/vietnamese-sbert
+      QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
+      TOPIC_DB_PATH: ./chroma_db_demuc
+      REFRESH_TOKEN_KEY: auth-service
+networks:
+    app-network:
+        driver: bridge
+secrets:
+  access_token_key:
+    file: ./access_token_key.txt
+  refresh_token_key:
+    file: ./refresh_token_key.txt

@@ -25,8 +25,8 @@ services:
   law-mysql:
     image: mysql:latest
     restart: always
-    ports:
-      - '3306:3306'
+    volumes:
+      - ~/data/law-sql:/var/lib/mysql
     environment:
         MYSQL_ROOT_PASSWORD: 123456789
         MYSQL_DATABASE: law
@@ -87,6 +87,8 @@ services:
           - app-network
   auth-mysql:
       image: mysql:latest
+      volumes:
+        - ~/data/auth-sql:/var/lib/mysql
       restart: always
       environment:
           MYSQL_ROOT_PASSWORD: root
@@ -96,6 +98,8 @@ services:
   qna-mysql:
     image: mysql:latest
     restart: always
+    volumes:
+      - ./rag/qna-sql:/var/lib/mysql
     ports:
         - '3307:3306'
     environment:
@@ -120,6 +124,17 @@ services:
       REDIS_HOST: redis
       TOPIC_DB_PATH: ./chroma_db_demuc
       ACCESS_TOKEN_KEY: VN-Law-Advisor
+      MYSQL_PORT: 3306
+      HF_INFERENCE_API: https://hm78d3nz1mmn6cjr.us-east-1.aws.endpoints.huggingface.cloud
+  recommendation-service:
+    build: ./recommendation
+    restart: always
+    networks:
+      - app-network
+    environment:
+      ST_MODEL_PATH: keepitreal/vietnamese-sbert
+      QA_MODEL_PATH: namngo/videberta-xsmall-finetuned-squad
+      TOPIC_DB_PATH: ./chroma_db_demuc
       REFRESH_TOKEN_KEY: auth-service
   recommendation-service:
     build: ./recommendation

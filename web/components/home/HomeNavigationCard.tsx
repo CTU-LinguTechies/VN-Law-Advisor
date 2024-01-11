@@ -28,10 +28,10 @@ export default function HomeNavigationCard(props: HomeNavigationCardProps) {
                 }
             >
                 <Lottie
-                    style={{ width: 200, height: 150 }}
+                    style={{ width: 200, height: 150, margin: 'auto' }}
                     animationData={require(`@/assets/lottie/${icon}.json`)}
                 />
-                <p style={{ height: 50 }}>{description}</p>
+                <p style={{ height: 50, textAlign: 'center' }}>{description}</p>
                 <div style={{ justifyContent: 'center' }} className="flex">
                     <Button className="mt-2" type="primary">
                         Truy Cập

@@ -5,6 +5,10 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/CTU-LinguTechies/VN-Law-Advisor.svg 'Github contributors')](https://github.com/CTU-LinguTechies/VN-Law-Advisor/graphs/contributors)
 ![](./docs/images/new_banner.png)
 
+![](./docs/images/vbqppl.png)
+
+![](./docs/images/qna.png)
+
 # VN-Law-Advisor [![Demo](https://img.shields.io/badge/Demo-2ea44f?style=for-the-badge)](http://vnlaw.japaneast.cloudapp.azure.com) [![Documentation](https://img.shields.io/badge/Documentation-blue?style=for-the-badge)](https://ctu-lingutechies.github.io/VN-Law-Advisor/)
 
 <a href="https://github.com/CTU-LinguTechies/VN-Law-Advisor/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=%F0%9F%90%9B+Bug+Report%3A+">Bug Report ⚠️
@@ -16,9 +20,13 @@
 
 Mục tiêu là phát triển một hệ thống tra cứu, hỏi đáp tri thức pháp luật Việt Nam. Dựa trên các mô hình ngôn ngữ lớn cùng với kiến trúc microservices.
 
-Dự án được thực hiện trong cuộc thi [Phần Mềm Nguồn Mở-Olympic Tin học Sinh viên Việt Nam 2023](https://www.olp.vn/procon-pmmn/ph%E1%BA%A7n-m%E1%BB%81m-ngu%E1%BB%93n-m%E1%BB%9F). Được được open source theo giấy phép [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) bởi đội tác giả CTU-LinguTechnies.
+Dự án được thực hiện trong cuộc thi [Phần Mềm Nguồn Mở-Olympic Tin học Sinh viên Việt Nam 2023](https://www.olp.vn/procon-pmmn/ph%E1%BA%A7n-m%E1%BB%81m-ngu%E1%BB%93n-m%E1%BB%9F). Được được open source theo giấy phép [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) bởi đội tác giả CTU-LinguTechnies.
 
 Để biết thêm chi tiết về cuộc thi, bạn có thể xem tại [đây](https://vfossa.vn/tin-tuc/de-thi-phan-mem-nguon-mo-olp-2023-688.html).
+
+Link thuyết trình Canva tại cuộc thi [link](https://www.canva.com/design/DAF2LR6LJIs/NFyCiN8JIVlDoRa33GSp1Q/edit?utm_content=DAF2LR6LJIs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+Slide bài thuyết trình tại cuộc thi dưới dạng PDF có thể được truy cập tại đây: [Slide](./docs/pdf/Phần%20mềm%20nguồn%20mở%202023.pdf)
 
 ## 🔎 Danh Mục
 
@@ -66,6 +74,7 @@ Backend của hệ thống được thiết kế theo kiến trúc microservices
 -   [Docker Compose](https://docs.docker.com/compose/): Quản lý các container.
 -   [Prometheus](https://prometheus.io/): Monitor các metrics.
 -   [Grafana](https://grafana.com/): WebUI hiển thị metrics.
+-   [Transformer.js](https://github.com/xenova/transformers.js/): Thư viện transformer cho JS, load trực tiếp trên trình duyệt web.
 
 <img loading="lazy" src="./docs/images/system_architecture.svg" alt="Architecture" width="100%" height=600>
 
@@ -103,6 +112,8 @@ Các workflows của project được lưu tại: [.github/workflows](.github/wo
 -   [Documents](./docs/) - Tài liệu về dự án.
 
 ## Hướng Dẫn Cài Đặt
+
+Tất cả các images build từ services backend bạn có thể tìm thấy tại [Docker Hub](https://hub.docker.com/repositories/tghuy2002?search=vnlaw).
 
 ### Yêu Cầu 📋
 
@@ -252,7 +263,7 @@ Mọi đóng góp của các bạn đều được trân trọng, đừng ngần
 
 ## Liên hệ
 
--   Trần Gia Huy: giahuytran200@gmail.com
+-   Trần Gia Huy: giahuytran2002@gmail.com
 -   Lê Nguyễn Bảo Đăng: lnbdang@gmail.com
 -   Vũ Thái Hà: hab2016960@student.ctu.edu.vn
 

@@ -9,3 +9,4 @@ backend/api-gateway/
 ./web/.next/
 ./web/assets/
 ./web/out/
+**/backend/auth-service/auth-sql/

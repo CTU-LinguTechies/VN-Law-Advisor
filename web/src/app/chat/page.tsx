@@ -7,11 +7,12 @@ import { SendOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import MarkdownIt from 'markdown-it';
-interface SelectedQuestion {
+import qnaService, { CitationModel } from '@/services/qna.service';
+import { useRouter } from 'next/navigation';
+export interface SelectedQuestion {
     isNew: boolean;
     question?: string;
     answer?: string;
-    topic_ids?: number[];
 }
 interface MessageBox {
     isUser: boolean;
@@ -37,10 +38,13 @@ export default function Page() {
         isNew: true,
     });
     const [messageBoxes, setMessageBoxes] = useState<MessageBox[]>([]);
-    const [citations, setCitations] = useState<string[]>([]);
+    const [citations, setCitations] = useState<CitationModel[]>([]);
     const [search, setSearch] = useState<string>();
+    const [loading, setLoading] = useState<boolean>(false);
     const [autoAnimateParent] = useAutoAnimate();
+    const router = useRouter();
     const send = async () => {
+        setCitations([]);
         if (!search) return;
         const newMessageBox = {
             isUser: true,
@@ -49,11 +53,17 @@ export default function Page() {
         };
         setMessageBoxes([newMessageBox]);
         setSearch('');
-        const response = (await new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(mockedData);
-            }, 1000);
-        })) as any;
+
+        // const response = (await new Promise((resolve) => {
+        //     setTimeout(() => {
+        //         resolve(mockedData);
+        //     }, 1000);
+        // })) as any;
+
+        const response = await qnaService.answer({
+            question: search,
+        });
+
         setCitations(response.citation);
         const newMessageBox2 = {
             isUser: false,
@@ -62,11 +72,20 @@ export default function Page() {
         };
         setMessageBoxes([newMessageBox, newMessageBox2]);
     };
+    const goToCitation = (mapc: string) => {
+        router.push(`/phapdien?id=${mapc}`);
+    };
     return (
         <main>
             <Row>
                 <Col xs={24} sm={16} md={10} lg={6} xl={5}>
-                    <QuestionSideNav />
+                    <QuestionSideNav
+                        messageBoxes={messageBoxes}
+                        selectedQuestion={selectedQuestion}
+                        setMessageBoxes={setMessageBoxes}
+                        setCitations={setCitations}
+                        setSelectedQuestion={setSelectedQuestion}
+                    />
                 </Col>
                 <Col
                     style={{
@@ -89,22 +108,28 @@ export default function Page() {
                                     time={messageBox.time}
                                 />
                             ))}
-                            <h4 key="ref-text" style={{ color: '#ccc' }} className="text-2xl">
-                                Trích dẫn
-                            </h4>
+                            {citations?.length > 0 && (
+                                <h4 key="ref-text" style={{ color: '#ccc' }} className="text-2xl">
+                                    Trích dẫn
+                                </h4>
+                            )}
                             <Row ref={autoAnimateParent} gutter={[16, 16]}>
-                                {citations?.map((item) => (
-                                    <Col key={item} xs={24} sm={12} md={12} lg={8} xl={5}>
+                                {citations?.map((item: CitationModel) => (
+                                    <Col key={item.mapc} xs={24} sm={12} md={12} lg={8} xl={5}>
                                         <Card
-                                            className="h-[400px] overflow-hidden text-ellipsis"
+                                            style={{ padding: '12px 0' }}
+                                            onClick={() => goToCitation(item.mapc)}
+                                            className="max-h-[300px] overflow-hidden text-ellipsis py-5"
                                             hoverable
-                                            title="Điều: An ninh quốc phòng"
+                                            title={item.ten}
                                         >
                                             <p
-                                                style={{ whiteSpace: 'pre-line' }}
+                                                style={{
+                                                    whiteSpace: 'pre-line',
+                                                }}
                                                 className="h-full"
                                             >
-                                                {item}
+                                                {item.noidung}
                                             </p>
                                         </Card>
                                     </Col>

@@ -1,5 +1,14 @@
-export interface ChatAnswerModel {
-    answer: string;
+export interface QuestionModel {
+    email: string;
+    id: number;
     question: string;
-    dieuIds: [string];
+    response: string;
+    updatedAt: Date;
+    answer: AnswerModel[];
+}
+
+export interface AnswerModel {
+    mapc: string;
+    noidung: string;
+    ten: string;
 }

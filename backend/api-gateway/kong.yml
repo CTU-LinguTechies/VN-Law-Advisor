@@ -20,8 +20,8 @@ services:
   - name: qna-route
     paths:
       - /qna
-- name: recommend-service
-  url: http://recommend-service:5002
+- name: recommendation-service
+  url: http://recommendation-service:5002
   routes:
   - name: recommend-route
     paths:
