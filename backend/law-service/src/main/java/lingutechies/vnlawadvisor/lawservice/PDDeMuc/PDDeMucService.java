@@ -25,4 +25,7 @@ public class PDDeMucService {
     public List<PDDeMuc> getAllDeMuc(){
         return pdDeMucRepository.findAll();
     }
+    public PDDeMuc getDeMucById(String id){
+        return pdDeMucRepository.findById(id).orElse(null);
+    }
 }
