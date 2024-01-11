@@ -7,6 +7,7 @@ import 'animate.css';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
 import Providers from './providers';
+import React, { useEffect, useRef } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
