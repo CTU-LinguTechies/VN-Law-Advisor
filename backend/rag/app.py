@@ -15,12 +15,10 @@ from waitress import serve
 import requests
 from dotenv import load_dotenv
 import os
-import google.generativeai as genai
 
+from openai import OpenAI
+client = OpenAI()
 
-GOOGLE_API_KEY=getenv('GOOGLE_API_KEY')
-genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel('gemini-pro')
 load_dotenv()
 
 current_device = "cpu"
@@ -126,17 +124,22 @@ def add_question():
 
 
 
-    inputs = f"Đây là văn bản chứa thông tin, bạn có thể dùng nếu cần:\n{context}\nCâu hỏi là: {question}. Hãy trả lời câu hỏi, nếu không có thông tin trong văn bản, hãy trả lời theo kiến thức của bạn về pháp luật Việt Nam"
+    inputs = f"Đây là văn bản chứa thông tin, bạn có thể dùng nếu cần:\n{context}.Hãy trả lời câu hỏi, nếu không có thông tin trong văn bản, hãy trả lời theo kiến thức của bạn về pháp luật Việt Nam"
 
-    response = model.generate_content(inputs).text
-    # response = pipeline(question=question, context=context)["answer"].strip()
-
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "Bạn là một người tư vấn luật Việt Nam, hãy trả lời lịch sự."},
+        {"role": "system", "content": inputs},
+        {"role": "user", "content": question}
+    ]
+    )
     
     res = {
         "status": "success",
         "question": question,
         "citation": citation,
-        "response": response,
+        "response": completion.choices[0].message.content,
     }
     # redisClient.set(question, json.dumps(res))
     return res, 200
