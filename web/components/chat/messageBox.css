@@ -18,6 +18,18 @@
         rgba(47, 140, 243, 1) 64%
     );
 }
+
+.message.bot p {
+    background: rgb(96, 168, 246);
+    background: linear-gradient(
+        90deg,
+        rgba(96, 168, 246, 1) 17%,
+        rgba(94, 167, 246, 1) 19%,
+        rgba(47, 140, 243, 1) 64%
+    );
+    color: white;
+}
+
 .message.user {
     background-color: white;
 }
