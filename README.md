@@ -263,7 +263,7 @@ Mọi đóng góp của các bạn đều được trân trọng, đừng ngần
 
 ## Liên hệ
 
--   Trần Gia Huy: giahuytran200@gmail.com
+-   Trần Gia Huy: giahuytran2002@gmail.com
 -   Lê Nguyễn Bảo Đăng: lnbdang@gmail.com
 -   Vũ Thái Hà: hab2016960@student.ctu.edu.vn
 
