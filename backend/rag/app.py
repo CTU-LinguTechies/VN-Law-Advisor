@@ -15,8 +15,12 @@ from waitress import serve
 import requests
 from dotenv import load_dotenv
 import os
+import google.generativeai as genai
 
 
+GOOGLE_API_KEY=getenv('GOOGLE_API_KEY')
+genai.configure(api_key=GOOGLE_API_KEY)
+model = genai.GenerativeModel('gemini-pro')
 load_dotenv()
 
 current_device = "cpu"
@@ -118,40 +122,23 @@ def add_question():
             "status": "error",
             "response": "Error while retrieving context from DB",
         }, 500
+    
 
 
-    inputs = f"Dựa vào văn bản sau đây:\n{context}\nHãy trả lời câu hỏi: {question}"
-    payload = {
-        "inputs": inputs
-    }
-    output = requests.post(HF_API_URL, headers=headers, json=payload)
-    response =  output.json()
-    if len(response) < 0:
-        return {
-            "status": "error",
-            "response": "Error while generating answer",
-        }, 500
-    response =  response[0]
-    if not response:
-        return {
-            "status": "error",
-            "response": "Error while generating answer",
-        }, 500
-    response =  response["response"]
 
+    inputs = f"Đây là văn bản chứa thông tin, bạn có thể dùng nếu cần:\n{context}\nCâu hỏi là: {question}. Hãy trả lời câu hỏi, nếu không có thông tin trong văn bản, hãy trả lời theo kiến thức của bạn về pháp luật Việt Nam"
 
+    response = model.generate_content(inputs).text
     # response = pipeline(question=question, context=context)["answer"].strip()
 
-    query = QuestionModel.create(**{"email": email, "question": question ,"response": response})
-    for c in citation: 
-        Reference.create(**{'question_id': query.id, 'mapc': c['mapc'], 'noidung': c['noidung'], 'ten': c['ten']})
+    
     res = {
         "status": "success",
         "question": question,
         "citation": citation,
         "response": response,
     }
-    redisClient.set(question, json.dumps(res))
+    # redisClient.set(question, json.dumps(res))
     return res, 200
 
 @app.route('/api/v1/question-with-context', methods=['POST'])
@@ -264,4 +251,4 @@ def delete_question(question_id):
     return '', 204
 
 print('QNA server is running. ')
-serve(app, host='0.0.0.0', port=5001, threads=1)
+serve(app, host='0.0.0.0', port=5001, threads=200)

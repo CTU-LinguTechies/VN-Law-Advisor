@@ -15,7 +15,7 @@ class PDDemucService {
     }
 
     async getAllByChuDeId(chudeId: string) {
-        return (await this.client.get(`/demuc/${chudeId}`)) as any;
+        return (await this.client.get(`/demuc/chude/${chudeId}`)) as any;
     }
     async getAll(filters?: PDDemucGetAllFilter) {
         return (await this.client.get('/demuc', {

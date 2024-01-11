@@ -56,4 +56,5 @@ class Reference(MySQLModel):
     ten = pw.TextField()
 
 myDB.connect()
+myDB.drop_tables([QuestionModel, Reference])
 myDB.create_tables([QuestionModel, Reference])
