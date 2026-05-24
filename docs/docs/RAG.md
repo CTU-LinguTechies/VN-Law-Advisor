@@ -1,4 +1,4 @@
-# RAG (Retrival Augmented Generation)
+# RAG (Retrieval Augmented Generation)
 
 ## Hệ thống lưu trữ các văn bản Pháp luật
 
